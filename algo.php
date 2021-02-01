@@ -3,32 +3,24 @@
 include './index.php';
 $string = strtolower('Mistranslate');
 
-foreach ($fa as $s) {
-    if (strpos($s, '.') === 0) {
-        $starts[] = $s;
-    } else if (strpos($s, '.', 1)) {
-        $ends[] = $s;
-    } else if (strpos($s, 2)) {
-        $middle[] = $s;
-    }
+$newString = implode(" ", str_split($string, 1));
+$newString = str_split($newString);
+print_r($newString);
+foreach ($fa as $value) {
 
-}
-;
-
-foreach ($starts as $start) {
-
-    $haystack = preg_replace('/[0-9]+/', '', $start);
-
+    $haystack = preg_replace('/[0-9]+/', '', $value);
     $haystack = trim($haystack, '.');
     $haystack = trim($haystack);
-    // var_dump($start);
-    if (str_starts_with($string, $haystack)) {
-        echo $start;
-    }
-    $diff = (array_diff(str_split($string), str_split($start)));
-    $a[] = (implode($diff));
+    $value = trim($value);
 
+    if (strpos($value, '.') === 0 && str_starts_with($string, $haystack)) {
+        echo strpos($string, $haystack);
+
+    } else if (strpos($string, $haystack) !== false && strpos($value, '.') !== 0) {
+        echo strpos($string, $haystack);
+
+        $abc[] = $value;
+    }if (strpos($value, '.', 1) && str_ends_with($string, substr($haystack, 0, -1))) {
+
+    }
 }
-$b[] = $a;
-$key = (array_search($string, $b[0]));
-// echo $b[0][$key];
