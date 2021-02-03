@@ -1,9 +1,9 @@
 <?php
-
+$start_time = microtime(true);
 include './index.php';
-$string = strtolower('Mistranslate');
+$string = strtolower('driving');
 $numbersArray = [];
-
+$position = 0;
 foreach ($fa as $value) {
 
     $haystack = preg_replace('/[0-9]+/', '', $value);
@@ -56,33 +56,23 @@ function getPositionOfPattern($string, $allValues)
 function populateNumbersArray($numbersArray, $position, $allValues)
 {
 
-    //iteruoji per kiekviena patterno chara,
-
     for ($i = 0; $i < strlen($allValues); $i++) {
-        //jeigu skaiciumi prasideda tai $numbersArray[$position] = $tasSkaicius
-        if (is_numeric($allValues[0])) {
-            $numbersArray[$position] = $allValues[0];
-            break;
-        }
-        // //jeigu ne tai position+1
-
-        else { $position = $position + 1;}
-
-        //ir checkini kai yra skaiciu imeti ji i $numbersArray[$position] (tik pries mesdamas patikrini ar didesnis skaicius negu dabar yra, jeigu mazesnis tai nelieti ir judi toliau)
-
-        if (is_numeric($allValues[$i]) && !is_numeric($allValues[0])) {
-
-            if ($numbersArray[$position] < $allValues[$i]) {
+        if (is_numeric($allValues[$i])) {
+            if (isset($numbersArray[$position])) {
+                if ($numbersArray[$position] < $allValues[$i]) {
+                    $numbersArray[$position] = $allValues[$i];
+                }
+            } else {
                 $numbersArray[$position] = $allValues[$i];
-                break;
             }
-
+        } else {
+            $position = $position + 1;
         }
     }
-    //pabaigoje grazini ta array su skaiciais
     return ($numbersArray);
 
 }
+
 foreach ($allValues as $pattern) {
     $position = getPositionOfPattern($string, $pattern);
     if ($position > -1) {
@@ -91,21 +81,33 @@ foreach ($allValues as $pattern) {
 }
 function mergeNumbersWithWord($numbersArray, $string)
 {
-    $newString = str_split($string);
+    $newString = implode(" ", str_split($string, 1));
+    $newString = str_split($newString);
+
     for ($i = 0; $i < strlen($string); $i++) {
         if (is_numeric($numbersArray[$i])) {
-            $newString[$i * 2] = $numbersArray[$i];
-
+            $newString[$i * 2 - 1] = $numbersArray[$i];
         }
     }
-    return $newString;
+
+    return ($newString);
 
 }
-
-print_r(mergeNumbersWithWord($numbersArray, $string));
 
 function getResult($numbersArray, $string)
 {
 
-    return implode(' ', mergeNumbersWithWord($numbersArray, $string));
+    $string = implode('', mergeNumbersWithWord($numbersArray, $string));
+    $string = str_replace(' ', '', $string);
+    if (is_numeric(substr($string, -1, 1))) {
+        $string = substr($string, 0, -1);
+    }
+    $string = preg_replace('/[1,3,5]+/', '-', $string);
+    return $string = preg_replace('/[0-9]+/', '', $string);
+
 }
+echo getResult($numbersArray, $string);
+
+$end_time = microtime(true);
+echo " time: ", bcsub($end_time, $start_time, 4) . PHP_EOL;
+echo " memory (byte): ", memory_get_peak_usage(true) . PHP_EOL;
