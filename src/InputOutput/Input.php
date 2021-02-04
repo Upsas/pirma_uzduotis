@@ -1,6 +1,8 @@
 <?php
+
 namespace InputOutput;
-class Input
+
+class Input 
 {
     public $string;
 

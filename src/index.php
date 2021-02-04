@@ -2,22 +2,20 @@
 
 use InputOutput\Input;
 use InputOutput\Output;
-use Pattern\Algo;
+use Pattern\Hyphenator;
+use Pattern\PatternReader;
 
-include './Pattern/Algo.php';
+include './Pattern/Hyphenator.php';
 include './InputOutput/Output.php';
 include './InputOutput/Input.php';
+include './Pattern/PatternReader.php';
 
 $Input = new Input();
-
 $string = $Input->getUserInput();
+$PatternReader = new PatternReader($string);
+$pattern = $PatternReader->populatePositionWithNumber();
 
-$Pattern = new Algo($string);
-
-$Output = new Output($string);
-
-$pattern = $Pattern->getPattern($string);
-
-$numbersArray = ($Pattern->populatePositionWithNumber($pattern));
-
-$Output->getResult($numbersArray);
+$Hyphenator = new Hyphenator($pattern);
+$string = $Hyphenator->hyphenate($string);
+$Output = new Output();
+$Output->outputResult($string);

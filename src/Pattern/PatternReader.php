@@ -1,11 +1,11 @@
-<?php
+<?php 
 
 namespace Pattern;
 
-class Algo
+class PatternReader  
 {
-    public $start_time;
     public $string;
+    public $start_time;
     public $numbersArray = [];
     public $position = 0;
     private $file = "./Assets/tex-hyphenation-patterns.txt";
@@ -27,9 +27,9 @@ class Algo
         }
     }
 
-    public function getPattern($string)
+    public function getPatterns()
     {
-
+        $string = $this->string;
         $fa = $this->getDataFromFile();
 
         foreach ($fa as $value) {
@@ -38,7 +38,6 @@ class Algo
             $haystack = trim($haystack, '.');
             $haystack = trim($haystack);
             $value = trim($value);
-
             if (strpos($value, '.') === 0 && strpos($string, $haystack) === 0) {
 
                 $pattern[] = $value;
@@ -47,10 +46,10 @@ class Algo
 
                 $pattern[] = $value;
             }
-
+            
             if (strpos($value, '.') > 0 && strpos($string, substr($haystack, 0, -1) === -1)) {
 
-                $pattern[] = $value;
+                  $pattern[] = $value;
 
             }
         }
@@ -88,7 +87,7 @@ class Algo
 
     }
 
-    private function populateNumbersArray($numbersArray, $position, $pattern)
+    public function populateNumbersArray($numbersArray, $position, $pattern)
     {
         for ($i = 0; $i < strlen($pattern); $i++) {
 
@@ -112,35 +111,17 @@ class Algo
         return $numbersArray;
     }
 
-    public function populatePositionWithNumber($pattern)
+    public function populatePositionWithNumber()
     {
-        foreach ($pattern as $test) {
+        
+        foreach ($this->getPatterns($this->string) as $test) {
 
             $position = $this->getPositionOfPattern($this->string, $test);
 
             if ($position > -1) {
-
                 $this->numbersArray = $this->populateNumbersArray($this->numbersArray, $position, $test);
             }
         }
         return $this->numbersArray;
     }
-    protected function mergeNumbersWithWord($numbersArray)
-    {
-        $newString = implode(" ", str_split($this->string, 1));
-        $newString = str_split($newString);
-        for ($i = 0; $i < strlen($this->string); $i++) {
-
-            if (!empty($numbersArray[$i])) {
-
-                if (is_numeric($numbersArray[$i])) {
-
-                    $newString[$i * 2 - 1] = $numbersArray[$i];
-
-                }
-            }
-        }
-        return ($newString);
-    }
-
 }
