@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 namespace Pattern;
 
-class PatternReader  
+class PatternReader
 {
     public $string;
     public $start_time;
@@ -18,11 +18,8 @@ class PatternReader
     private function getDataFromFile()
     {
         if (file_exists($this->file)) {
-
             return file($this->file);
-
         } else {
-
             return false;
         }
     }
@@ -46,11 +43,9 @@ class PatternReader
 
                 $pattern[] = $value;
             }
-            
-            if (strpos($value, '.') > 0 && strpos($string, substr($haystack, 0, -1) === -1)) {
 
-                  $pattern[] = $value;
-
+            if (strpos($value, '.') > 0 && strpos($string, trim($haystack, '.'), 3)) {
+                $pattern[] = $value;
             }
         }
         $pattern = array_values(array_unique($pattern));
@@ -113,7 +108,7 @@ class PatternReader
 
     public function populatePositionWithNumber()
     {
-        
+
         foreach ($this->getPatterns($this->string) as $test) {
 
             $position = $this->getPositionOfPattern($this->string, $test);

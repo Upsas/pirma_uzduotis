@@ -2,10 +2,10 @@
 
 namespace InputOutput;
 
-
-class Output 
+class Output
 {
-    public function outputResult($string) {
+    public function outputResult($string)
+    {
         echo $string . PHP_EOL;
     }
 }

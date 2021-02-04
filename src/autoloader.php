@@ -1,11 +1,11 @@
 <?php
 spl_autoload_register('classLoader');
-echo __DIR__;
 function classLoader($class)
 {
-    $path = "./Pattern/" . ($class) . ".php";
-    if (!file_exists($path)) {
+    $file = str_replace("\\", '/', $class) . '.php';
+    if (!file_exists($file)) {
         return false;
+    } else {
+        include_once $file;
     }
-    include_once $path;
 }
