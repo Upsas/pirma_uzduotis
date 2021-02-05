@@ -2,21 +2,48 @@
 
 namespace Pattern;
 
+use Helpers\RunTime;
+
 class PatternReader
 {
-    public $string;
-    public $start_time;
-    public $numbersArray = [];
-    public $position = 0;
-    private $file = "./Assets/tex-hyphenation-patterns.txt";
 
-    public function __construct($string)
+    /**
+     * A list of numbers
+     *
+     * @var array
+     */
+
+    protected $numbersArray = [];
+
+    /**
+     * File with all patterns
+     *
+     * @var url
+     */
+
+    protected $file = "./Assets/tex-hyphenation-patterns.txt";
+
+    public function __construct($word)
     {
-        $this->string = $string;
+        /**
+         * Create a new word instance.
+         *
+         * @param string $word
+         * @return void
+         */
+
+        $this->word = $word;
     }
 
-    private function getDataFromFile()
+    public function getDataFromFile()
     {
+        /**
+         * Checks if file exists
+         *
+         * @param $this->file
+         * @return array $this->file
+         */
+
         if (file_exists($this->file)) {
             return file($this->file);
         } else {
@@ -26,25 +53,31 @@ class PatternReader
 
     public function getPatterns()
     {
-        $string = $this->string;
-        $fa = $this->getDataFromFile();
+        /**
+         * Get specific patterns using word
+         *
+         * @param string $word
+         * @param array $file
+         * @return array $pattern
+         */
 
-        foreach ($fa as $value) {
+        $word = $this->word;
+        $file = $this->getDataFromFile();
 
-            $haystack = preg_replace('/[0-9]+/', '', $value);
-            $haystack = trim($haystack, '.');
-            $haystack = trim($haystack);
+        foreach ($file as $value) {
+
+            $needle = preg_replace('/[0-9]+/', '', $value);
+            $needle = trim($needle, '.');
+            $needle = trim($needle);
             $value = trim($value);
-            if (strpos($value, '.') === 0 && strpos($string, $haystack) === 0) {
+            if (strpos($value, '.') === 0 && strpos($word, $needle) === 0) {
 
                 $pattern[] = $value;
 
-            } else if (strpos($string, $haystack) !== false && strpos($value, '.') !== 0) {
+            } else if (strpos($word, $needle) !== false && strpos($value, '.') !== 0) {
 
                 $pattern[] = $value;
-            }
-
-            if (strpos($value, '.') > 0 && strpos($string, trim($haystack, '.'), 3)) {
+            } else if (strpos($value, '.') > 0 && strpos($word, trim($needle, '.'), 3)) {
                 $pattern[] = $value;
             }
         }
@@ -54,28 +87,42 @@ class PatternReader
 
     public function stripNumbers($pattern)
     {
+        /**
+         * Strip all numbers from pattern
+         *
+         * @param array $pattern
+         * @return array $pattern
+         */
 
         return preg_replace('/[0-9]+/', '', $pattern);
 
     }
 
-    private function getPositionOfPattern($string, $pattern)
+    private function getPositionOfPattern($word, $pattern)
     {
+        /**
+         * Checks if pattern sub-string mathces word
+         *
+         * @param string $word
+         * @param array $pattern
+         * @return int $position
+         */
+
         $strippedPattern = $this->stripNumbers($pattern);
 
         if (strpos($strippedPattern, '.') === 0) {
 
-            return intval(strpos($string, trim($strippedPattern . ' ')));
+            return intval(strpos($word, trim($strippedPattern . ' ')));
 
         } elseif ((substr($strippedPattern, -1) === '.')) {
 
-            return intval(strpos($string, trim($strippedPattern, '.')));
+            return intval(strpos($word, trim($strippedPattern, '.')));
 
         } else {
 
-            return intval(strpos($string, $strippedPattern));
+            return intval(strpos($word, $strippedPattern));
         }
-        if (!strpos($string, $strippedPattern)) {
+        if (!strpos($word, $strippedPattern)) {
 
             return -1;
         }
@@ -84,8 +131,18 @@ class PatternReader
 
     public function populateNumbersArray($numbersArray, $position, $pattern)
     {
-        for ($i = 0; $i < strlen($pattern); $i++) {
 
+        /**
+         * Get array of numbers
+         *
+         * @param array $numbersArray
+         * @param array $pattern
+         * @param int $position
+         * @return $numbersArray
+         */
+
+        for ($i = 0; $i < strlen($pattern); $i++) {
+            $newI = $i;
             if (is_numeric($pattern[$i])) {
 
                 if (isset($numbersArray[$position])) {
@@ -103,20 +160,34 @@ class PatternReader
                 $position = $position + 1;
             }
         }
+
         return $numbersArray;
     }
 
     public function populatePositionWithNumber()
     {
+        RunTime::timeStart();
+        /**
+         * Get array [position] => number
+         *
+         * @param array $numbersArray
+         * @param string $word
+         * @param array $pattern
+         * @param int $position
+         * @return $this->numbersArray
+         */
 
-        foreach ($this->getPatterns($this->string) as $test) {
+        foreach ($this->getPatterns($this->word) as $test) {
 
-            $position = $this->getPositionOfPattern($this->string, $test);
+            $position = $this->getPositionOfPattern($this->word, $test);
 
             if ($position > -1) {
+
                 $this->numbersArray = $this->populateNumbersArray($this->numbersArray, $position, $test);
             }
         }
-        return $this->numbersArray;
+        RunTime::timeEnd();
+        RunTime::getRunTime();
+        return ($this->numbersArray);
     }
 }
