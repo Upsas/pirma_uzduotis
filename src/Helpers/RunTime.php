@@ -24,7 +24,7 @@ class RunTime
 
     public static function getRunTime()
     {
-        return ('It took ' . intval(self::timeCalc() * 1000) . ' miliseconds to run a code block') . PHP_EOL;
+        return ('It took ' . number_format(self::timeCalc(), 2) . ' seconds to run a code block') . PHP_EOL;
     }
 
 }

@@ -39,6 +39,7 @@ class Hyphenator
                 }
             }
         }
+
         return $newWord;
     }
 

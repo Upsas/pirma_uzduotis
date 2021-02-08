@@ -1,30 +1,18 @@
 
 info:  PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra
-info:  RunTime: It took 1886 miliseconds to run a code block
-
-date: 2021 08:46:19 
-word: mistranslate 
-patterns: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-hypernatedWord: mis-trans-late 
-runTime: It took 1886 miliseconds to run a code block
-
-
-info:  PatternsFromFile: .te4 2st.
-info:  RunTime: It took 2038 miliseconds to run a code block
-
-date: 2021 08:46:53 
-word: test 
-patterns: .te4 2st. 
-hypernatedWord: test 
-runTime: It took 2038 miliseconds to run a code block
-
+info:  RunTime: It took 2.37 seconds to run a code block
 
 info:  PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra
-info:  RunTime: It took 1919.5261001587 miliseconds to run a code block
+info:  RunTime: It took 1.71 seconds to run a code block
 
-date: 2021 08:46:57 
-word: mistranslate 
-patterns: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-hypernatedWord: mis-trans-late 
-runTime: It took 1919.5621013641 miliseconds to run a code block
+info:  PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra
+info:  RunTime: It took 1.77 seconds to run a code block
 
+info:  PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra
+info:  RunTime: It took 2.03 seconds to run a code block
+
+info:  PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra
+info:  RunTime: It took 3.34 seconds to run a code block
+
+info:  PatternsFromFile: .te4 2st.
+info:  RunTime: It took 1.01 seconds to run a code block

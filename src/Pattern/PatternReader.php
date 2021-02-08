@@ -59,22 +59,35 @@ class PatternReader
 
         foreach ($file as $value) {
 
-            $needle = preg_replace('/[0-9]+/', '', $value);
-            $needle = trim($needle, '.');
-            $needle = trim($needle);
+            $needle = preg_replace('/[0-9\s.]+/', '', $value);
+
             $value = trim($value);
+            // if (preg_match('/^\.\w+/', $value)) {
+            //     echo $needle;
+            // }
+            if (preg_match('/^' . $needle . '/', $word) && preg_match('/^\./', $value)) {
+                $test2[] = $value;
+                // echo $value . ' ';
+            };
 
             if (strpos($value, '.') === 0 && strpos($word, $needle) === 0) {
+                echo $needle . ' ';
+                $pattern[] = $value;
+                $test1[] = $value;
+
+            } else if (strpos($word, $needle) !== false && strpos($value, '.') !== 0 && !strpos($value, '.')) {
 
                 $pattern[] = $value;
-            } else if (strpos($word, $needle) !== false && strpos($value, '.') !== 0) {
 
-                $pattern[] = $value;
-                // strpos($value, '.') > 0 && strpos($word, trim($needle, '.'), 3)
-            } else if (strpos(strrev($value), '.') === 0 && strpos(strrev($word), strrev(trim($needle, '.'))) === 0) {
+            } else if (strpos(strrev($value), '.') === 0 && strpos(strrev($word), strrev($needle)) === 0) {
+
                 $pattern[] = $value;
             }
         }
+
+        print_r($test1);
+        print_r($test2);
+
         $pattern = array_values(array_unique($pattern));
 
         $patternsFromFile['patternsFromFile'] = implode(' ', $pattern);

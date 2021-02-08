@@ -44,14 +44,13 @@ class Pattern
     {
 
         $strippedPattern = $this->stripNumbers($pattern);
-
         if (strpos($strippedPattern, ' .') === 0) {
 
-            return intval(strpos($word, trim($strippedPattern . ' ')));
+            return intval(strpos($word, trim($strippedPattern)) + 1);
 
         } elseif ((substr($strippedPattern, -1) === '.')) {
 
-            return intval(strpos($word, trim($strippedPattern, ' .')));
+            return intval(strpos($word, trim($strippedPattern, '.')));
 
         } else {
 

@@ -1,46 +1,25 @@
 <?php
 
-use Helpers\RunTime;
 use InputOutput\Input;
 use InputOutput\Output;
 use Log\Log;
-use Log\NullLogger;
 use Pattern\Hyphenator;
 use Pattern\Pattern;
 use Pattern\PatternReader;
 
 require_once './autoloader.php';
 
-RunTime::timeStart();
-
 $input = new Input();
 $word = $input->getUserInput();
 
-$patternReader = new PatternReader($word, new NullLogger());
+$patternReader = new PatternReader($word, new Log());
 $patternsFromFile = ($patternReader->getPatterns());
 
-$pattern = new Pattern(new NullLogger());
+$pattern = new Pattern(new Log());
 $patterns = $pattern->populatePositionWithNumber($word, $patternsFromFile);
 
 $hyphenator = new Hyphenator($patterns);
 $hyphenatedWord = $hyphenator->hyphenate($word);
 
-$output = new Output(new NullLogger());
+$output = new Output(new Log());
 $output->outputResult($hyphenatedWord);
-
-RunTime::timeEnd();
-
-$file = new SplFileObject('./Log/log.txt', 'a+');
-
-$dataLogs['date'] = date('Y H:i:s', $file->getATime());
-$dataLogs['word'] = $word;
-$dataLogs['patterns'] = implode(' ', $patternsFromFile);
-$dataLogs['hypernatedWord'] = $hyphenatedWord;
-$dataLogs['runTime'] = RunTime::getRunTime();
-
-$log = new Log();
-
-foreach ($dataLogs as $key => $dataLog) {
-    $data[] = PHP_EOL . $key . ': ' . $log->interpolate('{' . $key . '}', $dataLogs);
-}
-$file->fwrite(implode(' ', $data) . PHP_EOL);
