@@ -2,6 +2,8 @@
 
 namespace InputOutput;
 
+use Helpers\RunTime;
+
 class Input
 {
     /**
@@ -15,13 +17,15 @@ class Input
 
     public function getUserInput()
     {
+        RunTime::timeStart();
         $word = strtolower(readline('Enter a word: '));
         $word = strval($word);
 
         if (preg_match_all('/[a-z]+/', $word) && !empty($word)) {
             return $word;
         } else {
-            echo 'wrong input';
+            echo 'wrong input' . PHP_EOL;
+            exit;
         }
 
     }

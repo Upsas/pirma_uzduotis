@@ -39,7 +39,7 @@ class Hyphenator
                 }
             }
         }
-        return ($newWord);
+        return $newWord;
     }
 
     public function hyphenate($word)
