@@ -5,6 +5,7 @@ namespace Log;
 /**
  * Describes log levels.
  */
+
 class LogLevel
 {
     const EMERGENCY = 'emergency';

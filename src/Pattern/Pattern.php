@@ -46,7 +46,7 @@ class Pattern
         $strippedPattern = $this->stripNumbers($pattern);
         if (strpos($strippedPattern, ' .') === 0) {
 
-            return intval(strpos($word, trim($strippedPattern)) + 1);
+            return intval(strpos($word, trim($strippedPattern)));
 
         } elseif ((substr($strippedPattern, -1) === '.')) {
 
@@ -74,11 +74,9 @@ class Pattern
     public function populateNumbersArray($numbersArray, $position, $pattern)
     {
         for ($i = 0; $i < strlen($pattern); $i++) {
-
             if (is_numeric($pattern[$i])) {
 
                 if (isset($numbersArray[$position])) {
-
                     if ($numbersArray[$position] < $pattern[$i]) {
 
                         $numbersArray[$position] = $pattern[$i];
@@ -92,7 +90,6 @@ class Pattern
                 $position = $position + 1;
             }
         }
-
         return $numbersArray;
     }
 
@@ -108,16 +105,24 @@ class Pattern
 
     public function populatePositionWithNumber($word, $patterns)
     {
+        // $t = array();
+        // if (!empty($patterns)) {
+        // $words = explode(' ', $word);
+        // foreach ($words as $word) {
+        // foreach ($patterns[$word] as $v) {
         foreach ($patterns as $pattern) {
-
             $position = $this->getPositionOfPattern($word, $pattern);
 
             if ($position > -1) {
-
+                // $t[$word] = $this->populateNumbersArray($t[$word], $position, $v);
                 $this->numbersArray = $this->populateNumbersArray($this->numbersArray, $position, $pattern);
             }
         }
-        // $this->logger->info('Patterns {patterns}: ', $this->numbersArray);
+
+        // }
+        // }
+        // }
+        // $this->numbersArray = $t;
         return $this->numbersArray;
     }
 }

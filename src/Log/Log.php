@@ -8,7 +8,7 @@ use SplFileObject;
 
 class Log implements LoggerInterface
 {
-    public function interpolate($message, array $context = array())
+    private function interpolate($message, array $context = array())
     {
         $replace = array();
         foreach ($context as $key => $val) {
@@ -29,6 +29,7 @@ class Log implements LoggerInterface
      */
     public function emergency($message, array $context = array())
     {
+        $this->log(LogLevel::INFO, $message, $context);
 
     }
 
@@ -45,7 +46,7 @@ class Log implements LoggerInterface
      */
     public function alert($message, array $context = array())
     {
-
+        $this->log(LogLevel::INFO, $message, $context);
     }
 
     /**
@@ -60,7 +61,7 @@ class Log implements LoggerInterface
      */
     public function critical($message, array $context = array())
     {
-
+        $this->log(LogLevel::INFO, $message, $context);
     }
 
     /**
@@ -74,7 +75,7 @@ class Log implements LoggerInterface
      */
     public function error($message, array $context = array())
     {
-
+        $this->log(LogLevel::INFO, $message, $context);
     }
 
     /**
@@ -90,7 +91,7 @@ class Log implements LoggerInterface
      */
     public function warning($message, array $context = array())
     {
-
+        $this->log(LogLevel::INFO, $message, $context);
     }
 
     /**
@@ -103,6 +104,7 @@ class Log implements LoggerInterface
      */
     public function notice($message, array $context = array())
     {
+        $this->log(LogLevel::INFO, $message, $context);
 
     }
 
@@ -118,10 +120,7 @@ class Log implements LoggerInterface
      */
     public function info($message, array $context = array())
     {
-        $infoData[LogLevel::INFO] = PHP_EOL . LogLevel::INFO . ': ';
-        $data = $context;
-        $infoData['log'] = $this->interpolate($message, $data);
-        $this->addLogsToFile($infoData);
+        $this->log(LogLevel::INFO, $message, $context);
     }
 
     /**
@@ -136,6 +135,7 @@ class Log implements LoggerInterface
     public function debug($message, array $context = array())
     {
 
+        $this->log(LogLevel::INFO, $message, $context);
     }
 
     /**
@@ -151,12 +151,9 @@ class Log implements LoggerInterface
      */
     public function log($level, $message, array $context = array())
     {
-
-    }
-
-    public function addLogsToFile($data)
-    {
         $file = new SplFileObject('./Log/log.txt', 'a+');
-        $file->fwrite(implode(' ', $data));
+        $string = "%s %s \n";
+        $file->fwrite(sprintf($string, $level, $this->interpolate($message, $context)));
     }
+
 }

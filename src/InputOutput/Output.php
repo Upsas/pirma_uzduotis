@@ -3,14 +3,14 @@
 namespace InputOutput;
 
 use Helpers\RunTime;
-use Log\LoggerInterface;
+use Log\Log;
 
 class Output
 {
 
     private $logger;
 
-    public function __construct(LoggerInterface $logger)
+    public function __construct(Log $logger)
     {
         $this->logger = $logger;
     }
@@ -25,6 +25,8 @@ class Output
     {
         RunTime::timeEnd();
         $runTime['runTime'] = RunTime::getRunTime();
+        $context['word'] = $word;
+        $this->logger->info('HyphenatedWord: {word}', $context);
         $this->logger->info('RunTime: {runTime}', $runTime);
         echo $word . PHP_EOL;
     }

@@ -3,9 +3,18 @@
 namespace InputOutput;
 
 use Helpers\RunTime;
+use Log\Log;
 
 class Input
 {
+
+    private $log;
+
+    public function __construct(Log $log)
+    {
+        $this->logger = $log;
+    }
+
     /**
      * Getting data from user
      *
@@ -19,10 +28,14 @@ class Input
     {
         RunTime::timeStart();
         $word = strtolower(readline('Enter a word: '));
-        $word = strval($word);
+        $word = strval(trim($word));
 
         if (preg_match_all('/[a-z]+/', $word) && !empty($word)) {
+
+            $context['word'] = $word;
+            $this->logger->info('Word: {word}', $context);
             return $word;
+
         } else {
             echo 'wrong input' . PHP_EOL;
             exit;

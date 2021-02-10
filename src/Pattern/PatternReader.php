@@ -2,9 +2,10 @@
 
 namespace Pattern;
 
-use Log\LoggerInterface;
+use Database\DatabaseConnection;
+use Log\Log;
 
-class PatternReader
+class PatternReader extends DatabaseConnection
 {
     /**
      * File with all patterns
@@ -21,7 +22,7 @@ class PatternReader
      * @return void
      */
 
-    public function __construct($word, LoggerInterface $logger)
+    public function __construct($word, Log $logger)
     {
         $this->word = $word;
         $this->logger = $logger;
@@ -56,43 +57,137 @@ class PatternReader
     {
         $word = $this->word;
         $file = $this->getDataFromFile();
+        // if (count(explode(' ', $word)) > 1) {
+        //     $array = (explode(' ', $word));
+        //     $array = array_filter($array);
+        //     foreach ($array as $a) {
 
+        //         foreach ($file as $v) {
+        //             $needle = preg_replace('/[0-9\s.]+/', '', $v);
+        //             $v = trim($v);
+
+        //             if (preg_match('/^' . $needle . '/', $a) && preg_match('/^\./', $v)) {
+
+        //                 $t[$a][] = $v;
+
+        //             } else if (preg_match('/' . $needle . '$/', $a) && preg_match('/\.$/', $v)) {
+
+        //                 $t[$a][] = $v;
+
+        //             } else if (preg_match('/' . $needle . '/', $a) && !preg_match('/\./', $v)) {
+
+        //                 $t[$a][] = $v;
+
+        //             }
+        //         }}} else {
         foreach ($file as $value) {
 
             $needle = preg_replace('/[0-9\s.]+/', '', $value);
 
             $value = trim($value);
-            // if (preg_match('/^\.\w+/', $value)) {
-            //     echo $needle;
-            // }
+
             if (preg_match('/^' . $needle . '/', $word) && preg_match('/^\./', $value)) {
-                $test2[] = $value;
-                // echo $value . ' ';
-            };
-
-            if (strpos($value, '.') === 0 && strpos($word, $needle) === 0) {
-                echo $needle . ' ';
-                $pattern[] = $value;
-                $test1[] = $value;
-
-            } else if (strpos($word, $needle) !== false && strpos($value, '.') !== 0 && !strpos($value, '.')) {
 
                 $pattern[] = $value;
 
-            } else if (strpos(strrev($value), '.') === 0 && strpos(strrev($word), strrev($needle)) === 0) {
+            } else if (preg_match('/' . $needle . '$/', $word) && preg_match('/\.$/', $value)) {
 
                 $pattern[] = $value;
+
+            } else if (preg_match('/' . $needle . '/', $word) && !preg_match('/\./', $value)) {
+
+                $pattern[] = $value;
+
             }
         }
+        // }
+        // if (!empty($t)) {
+        //     return ($t);
+        // }
+        if (!empty($pattern)) {
 
-        print_r($test1);
-        print_r($test2);
+            $pattern = array_values(array_unique($pattern));
+            $patternsFromFile['patternsFromFile'] = implode(' ', $pattern);
+            $this->logger->info('PatternsFromFile: {patternsFromFile}', $patternsFromFile);
+            return $pattern;
+        }
+    }
+    public function getPatternsFromDb()
+    {
+        $word = $this->word;
 
-        $pattern = array_values(array_unique($pattern));
+        $sql = "SELECT `patterns` FROM `patterns`";
+        $db = ($this->connect()->query($sql)->fetchAll());
+        foreach ($db as $value) {
+            $needle = preg_replace('/[0-9\s.]+/', '', $value['patterns']);
+            $value = trim($value['patterns']);
+            if (preg_match('/^' . $needle . '/', $word) && preg_match('/^\./', $value)) {
 
-        $patternsFromFile['patternsFromFile'] = implode(' ', $pattern);
-        $this->logger->info('PatternsFromFile: {patternsFromFile}', $patternsFromFile);
+                $pattern[] = $value;
 
-        return $pattern;
+            } else if (preg_match('/' . $needle . '$/', $word) && preg_match('/\.$/', $value)) {
+
+                $pattern[] = $value;
+
+            } else if (preg_match('/' . $needle . '/', $word) && !preg_match('/\./', $value)) {
+
+                $pattern[] = $value;
+
+            }
+        }
+        return ($pattern);
+    }
+
+    public function insertSyllableWord($hyphenatedWord)
+    {
+        $word = $this->word;
+        $sql = "INSERT INTO `syllable_words` ( `syllable_word`,`hyphenated_word`, `created_date`, `updated_date`) VALUES ( ?, ?, NULL, NULL)";
+        $prepare = $this->connect()->prepare($sql);
+
+        $prepare->execute([$word, $hyphenatedWord]);
+
+        $stmt = "SELECT MAX(id) FROM `syllable_words`";
+        $this->id = $this->connect()->query($stmt)->fetch();
+
+    }
+    public function insertCorrectPatterns()
+    {
+        $id = (intval($this->id['MAX(id)']));
+        $string = (implode(' ', $this->getPatternsFromDb()));
+        $sql = "INSERT INTO `correct_patterns` ( `correct_pattern`, `sylable_word_id`,  `created_date`, `updated_date`) VALUES (?, ?, NULL,  NULL)";
+        $prepare = $this->connect()->prepare($sql);
+        $prepare->execute([$string, $id]);
+    }
+
+    public function checkForDublicates($word)
+    {
+        $sql = "SELECT `syllable_word`, `hyphenated_word` FROM `syllable_words` WHERE `syllable_word` = ?";
+        $prepare = $this->connect()->prepare($sql);
+        $prepare->execute([$word]);
+        $values = $prepare->fetch();
+        if (!empty($values)) {
+            if (count($values) > 0) {
+                return $values['hyphenated_word'];
+            }
+        }
+    }
+    public function outputPatternsFromDb($word)
+    {
+        $sql = "SELECT `id` FROM `syllable_words` WHERE `syllable_word` = ?";
+        $prepare = $this->connect()->prepare($sql);
+        $prepare->execute([$word]);
+        $values = $prepare->fetch();
+        if (!empty($values)) {
+            if (count($values) > 0) {
+                $id = $values['id'];
+            }
+        }
+        $patterns = "SELECT `correct_pattern` FROM `correct_patterns` WHERE `sylable_word_id` = $id";
+        $t = $this->connect()->query($patterns);
+        $correctPatterns = $t->fetch();
+        if (!empty($correctPatterns)) {
+            return $correctPatterns['correct_pattern'];
+        }
+
     }
 }
