@@ -2,11 +2,9 @@
 
 namespace Pattern;
 
-use Database\DatabaseConnection;
-use Database\Repository;
 use Log\Log;
 
-class PatternReader extends DatabaseConnection
+class PatternReader
 {
     /**
      * File with all patterns
@@ -23,12 +21,10 @@ class PatternReader extends DatabaseConnection
      * @return void
      */
 
-    public function __construct($word, Log $logger, Repository $repository)
+    public function __construct($word, Log $logger)
     {
         $this->word = $word;
         $this->logger = $logger;
-        $this->repository = $repository;
-
     }
 
     /**
@@ -38,7 +34,7 @@ class PatternReader extends DatabaseConnection
      * @return array $this->file
      */
 
-    protected function getDataFromFile()
+    protected function checkIfFileExists()
     {
         if (file_exists($this->file)) {
             return file($this->file);
@@ -55,30 +51,19 @@ class PatternReader extends DatabaseConnection
      * @return array $pattern
      */
 
-    public function getPatterns($source)
+    public function getPatternsFromFile()
     {
-        $word = $this->word;
-        if ($source === 'db') {
-            $values = $this->repository->getPatternsFromDb();
-        } else {
-            $values = $this->getDataFromFile();
-        }
+        $file = $this->checkIfFileExists();
+        foreach ($file as $value) {
 
-        foreach ($values as $value) {
+            $needle = preg_replace('/[0-9\s.]+/', '', $value);
+            $value = trim($value);
 
-            if ($source === 'db') {
-                $needle = preg_replace('/[0-9\s.]+/', '', $value['patterns']);
-                $value = trim($value['patterns']);
-            } else {
-                $needle = preg_replace('/[0-9\s.]+/', '', $value);
-                $value = trim($value);
-            }
-
-            if (preg_match('/^' . $needle . '/', $word) && preg_match('/^\./', $value)) {
+            if (preg_match('/^' . $needle . '/', $this->word) && preg_match('/^\./', $value)) {
                 $pattern[] = $value;
-            } else if (preg_match('/' . $needle . '$/', $word) && preg_match('/\.$/', $value)) {
+            } else if (preg_match('/' . $needle . '$/', $this->word) && preg_match('/\.$/', $value)) {
                 $pattern[] = $value;
-            } else if (preg_match('/' . $needle . '/', $word) && !preg_match('/\./', $value)) {
+            } else if (preg_match('/' . $needle . '/', $this->word) && !preg_match('/\./', $value)) {
                 $pattern[] = $value;
             }
         }
@@ -88,6 +73,7 @@ class PatternReader extends DatabaseConnection
             $pattern = array_values(array_unique($pattern));
             $patternsFromFile['patternsFromFile'] = implode(' ', $pattern);
             $this->logger->info('PatternsFromFile: {patternsFromFile}', $patternsFromFile);
+
             return $pattern;
         }
     }

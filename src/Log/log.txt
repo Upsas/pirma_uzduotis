@@ -1,141 +1,414 @@
+info Word: mis 
+info PatternsFromFile: {patternsFromFile} 
+info Word: pattern 
+info PatternsFromFile: at5te 1pa 4t3t2 
 info Word: mistranslate 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info Word: mistransalte 
+info PatternsFromFile: .mis1 a2n an2sa 4lt l1te m2is 2n1s2 sa2 sal4t st4r 4te. 1tra 
+info Word: mistrasnlate 
+info HyphenatedWord: mistrasnlate 
+info RunTime: It took 1.97 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord:  
+info RunTime: It took 2.73 seconds to run a code block
+ 
+info Word: mistranslate 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
 info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
 info HyphenatedWord: mis-trans-late 
-info RunTime: It took 3.87 seconds to run a code block
+info RunTime: It took 1.88 seconds to run a code block
  
 info Word: mistranslate 
 info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info Word: mistranslate 
 info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
 info HyphenatedWord: mis-trans-late 
-info RunTime: It took 2.38 seconds to run a code block
+info RunTime: It took 1.83 seconds to run a code block
+ 
+info Word: db 
+info Word: test 
+info HyphenatedWord: test 
+info RunTime: It took 103.46 seconds to run a code block
  
 info Word: mistranslate 
-info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info HyphenatedWord: mis-trans-late 
-info RunTime: It took 3.04 seconds to run a code block
- 
-info Word: encouraging 
-info PatternsFromFile: ag1i 1co ncour5a ou2 u1ra u4rag 
-info PatternsFromFile: ag1i 1co ncour5a ou2 u1ra u4rag 
-info HyphenatedWord: en-cour-ag-ing 
-info RunTime: It took 5.46 seconds to run a code block
- 
-info Word: mistranslate 
-info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info HyphenatedWord: mis-trans-late 
-info RunTime: It took 3.12 seconds to run a code block
- 
-info Word: mistranslate 
-info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info Word: mistranslate 
-info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info HyphenatedWord: mis-trans-late 
-info RunTime: It took 2.41 seconds to run a code block
- 
-info Word: mistranslate 
-info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
 info HyphenatedWord: mistranslate 
-info RunTime: It took 2.40 seconds to run a code block
+info RunTime: It took 18.05 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mistranslate 
+info RunTime: It took 34.16 seconds to run a code block
+ 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info HyphenatedWord: m-i-s-t-r-a-n-slate 
+info RunTime: It took 4.34 seconds to run a code block
  
 info Word: mistranslate 
 info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info HyphenatedWord: mistranslate 
+info Word: mistranslate 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info Word: mistranslate 
+info Word: mistranslate 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 3.81 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 3.27 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mis-trans-late 
 info RunTime: It took 3.24 seconds to run a code block
  
 info Word: mistranslate 
-info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info HyphenatedWord: mistranslate 
-info RunTime: It took 2.53 seconds to run a code block
+info Word: mistranslate 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 2.68 seconds to run a code block
+ 
+info Word: file 
+info PatternsFromFile: 1fi 
+info PatternsFromFile: 1fi 
+info HyphenatedWord: file 
+info RunTime: It took 3.78 seconds to run a code block
  
 info Word: mistranslate 
 info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info HyphenatedWord: mistranslate 
-info RunTime: It took 2.46 seconds to run a code block
- 
-info Word: mistranslate 
 info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
 info HyphenatedWord: mis-trans-late 
+info RunTime: It took 6.55 seconds to run a code block
+ 
+info Word: mistranslate 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 116.28 seconds to run a code block
+ 
+info Word: mistranskate 
+info HyphenatedWord: mistranskate 
+info RunTime: It took 14.35 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mistranslate 
+info RunTime: It took 28.58 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mistranslate 
+info RunTime: It took 4.07 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mistranslate 
+info RunTime: It took 3.51 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mistranslate 
+info RunTime: It took 12.34 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mistranslate 
+info RunTime: It took 3.49 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mistranslate 
+info RunTime: It took 2.87 seconds to run a code block
+ 
+info Word: mistranslate 
+info Word: mistranslate 
+info HyphenatedWord: mistranslate 
+info RunTime: It took 2.38 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mistranslate 
+info RunTime: It took 2.10 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mistranslate 
+info RunTime: It took 2.50 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mistranslate 
+info RunTime: It took 2.49 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mistranslate 
+info RunTime: It took 2.13 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mistranslate 
 info RunTime: It took 2.84 seconds to run a code block
  
 info Word: mistranslate 
-info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info Word: mistranslate 
-info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info Word: mistranslate 
-info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info Word: mistranslate 
-info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info HyphenatedWord: mis-trans-late 
-info RunTime: It took 9.41 seconds to run a code block
+info HyphenatedWord: mistranslate 
+info RunTime: It took 4.05 seconds to run a code block
  
 info Word: mistranslate 
 info HyphenatedWord: mistranslate 
-info RunTime: It took 31.24 seconds to run a code block
+info RunTime: It took 2.25 seconds to run a code block
  
 info Word: mistranslate 
 info HyphenatedWord: mistranslate 
-info RunTime: It took 17.07 seconds to run a code block
- 
-info Word: mistranslate 
-info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info HyphenatedWord: mis-trans-late 
-info RunTime: It took 3.62 seconds to run a code block
+info RunTime: It took 2.20 seconds to run a code block
  
 info Word: mistranslate 
 info HyphenatedWord: mistranslate 
-info RunTime: It took 21.57 seconds to run a code block
+info RunTime: It took 2.37 seconds to run a code block
  
 info Word: mistranslate 
 info HyphenatedWord: mistranslate 
-info RunTime: It took 9.90 seconds to run a code block
+info RunTime: It took 5.11 seconds to run a code block
  
 info Word: mistranslate 
 info HyphenatedWord: mistranslate 
-info RunTime: It took 12.09 seconds to run a code block
+info RunTime: It took 2.17 seconds to run a code block
  
 info Word: mistranslate 
 info HyphenatedWord: mistranslate 
-info RunTime: It took 20.82 seconds to run a code block
+info RunTime: It took 3.12 seconds to run a code block
  
 info Word: mistranslate 
-info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info HyphenatedWord: mis-trans-late 
-info RunTime: It took 8.06 seconds to run a code block
+info HyphenatedWord: mistranslate 
+info RunTime: It took 2.13 seconds to run a code block
  
 info Word: mistranslate 
-info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info HyphenatedWord: mis-trans-late 
-info RunTime: It took 8.17 seconds to run a code block
- 
 info Word: mistranslate 
 info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info HyphenatedWord: mis-trans-late 
-info RunTime: It took 26.73 seconds to run a code block
- 
-info Word: mistranslate 
 info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
 info HyphenatedWord: mis-trans-late 
-info RunTime: It took 12.01 seconds to run a code block
+info RunTime: It took 2.37 seconds to run a code block
+ 
+info Word: mistranslate 
+info Word: mistranslate 
+info HyphenatedWord: mistranslate 
+info RunTime: It took 2.34 seconds to run a code block
+ 
+info HyphenatedWord:  
+info RunTime: It took 1,613,025,552.98 seconds to run a code block
+ 
+info HyphenatedWord:  
+info RunTime: It took 1,613,025,612.90 seconds to run a code block
+ 
+info HyphenatedWord:  
+info RunTime: It took 1,613,025,621.09 seconds to run a code block
+ 
+info HyphenatedWord:  
+info RunTime: It took 1,613,025,631.84 seconds to run a code block
+ 
+info HyphenatedWord:  
+info RunTime: It took 1,613,025,686.64 seconds to run a code block
+ 
+info Word: test 
+info Word: test 
+info HyphenatedWord: test 
+info RunTime: It took 16.50 seconds to run a code block
+ 
+info Word: test 
+info HyphenatedWord: test 
+info RunTime: It took 1.53 seconds to run a code block
+ 
+info Word: test 
+info HyphenatedWord: test 
+info RunTime: It took 1.38 seconds to run a code block
+ 
+info Word: mst 
+info HyphenatedWord: mst 
+info RunTime: It took 1.44 seconds to run a code block
+ 
+info Word: mistranslate 
+info Word: s 
+info Word: ms 
+info HyphenatedWord: ms 
+info RunTime: It took 1.42 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mistranslate 
+info RunTime: It took 2.41 seconds to run a code block
+ 
+info Word: mistranslate 
+info Word: mistranslate 
+info HyphenatedWord: mistranslate 
+info RunTime: It took 2.83 seconds to run a code block
+ 
+info Word: mistra 
+info HyphenatedWord: mistra 
+info RunTime: It took 1.43 seconds to run a code block
+ 
+info Word: sa 
+info HyphenatedWord: sa 
+info RunTime: It took 1.21 seconds to run a code block
+ 
+info Word: mist 
+info HyphenatedWord: mist 
+info RunTime: It took 1.93 seconds to run a code block
+ 
+info Word: mis 
+info HyphenatedWord: mis 
+info RunTime: It took 1.19 seconds to run a code block
+ 
+info Word: sf 
+info HyphenatedWord: sf 
+info RunTime: It took 1.06 seconds to run a code block
+ 
+info Word: s 
+info Word: sf 
+info HyphenatedWord:  
+info RunTime: It took 1.56 seconds to run a code block
+ 
+info Word: sfa 
+info HyphenatedWord:  
+info RunTime: It took 0.99 seconds to run a code block
+ 
+info Word: masf 
+info HyphenatedWord:  
+info RunTime: It took 1.75 seconds to run a code block
  
 info Word: asf 
-info Word: mistranslate 
-info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info HyphenatedWord: mis-trans-late 
-info RunTime: It took 12.22 seconds to run a code block
+info HyphenatedWord:  
+info RunTime: It took 1.33 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.99 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.97 seconds to run a code block
+ 
+info Word: k 
+info HyphenatedWord:  
+info RunTime: It took 1.95 seconds to run a code block
+ 
+info Word: test 
+info HyphenatedWord:  
+info RunTime: It took 0.94 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.55 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.51 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.75 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.43 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 1.39 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.42 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.42 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.40 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.38 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.43 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.34 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.41 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.41 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.82 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.40 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.59 seconds to run a code block
+ 
+info Word: afs 
+info HyphenatedWord:  
+info RunTime: It took 0.87 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.42 seconds to run a code block
+ 
+info Word: saf 
+info HyphenatedWord:  
+info RunTime: It took 0.35 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.85 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 1.13 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 1.51 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.90 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.89 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.86 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.91 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord:  
+info RunTime: It took 0.94 seconds to run a code block
  
 info Word: mistranslate 
-info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info HyphenatedWord: mis-trans-late 
-info RunTime: It took 7.27 seconds to run a code block
+info HyphenatedWord:  
+info RunTime: It took 4.00 seconds to run a code block
  
 info Word: mistranslate 
-info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
-info HyphenatedWord: mis-trans-late 
-info RunTime: It took 2.69 seconds to run a code block
+info HyphenatedWord:  
+info RunTime: It took 2.62 seconds to run a code block
  
 info Word: mistranslate 
-info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info HyphenatedWord:  
+info RunTime: It took 2.50 seconds to run a code block
+ 
+info Word: mistranslate 
 info HyphenatedWord: mis-trans-late 
-info RunTime: It took 3.94 seconds to run a code block
+info RunTime: It took 2.29 seconds to run a code block
  

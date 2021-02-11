@@ -6,18 +6,6 @@ class Hyphenator
 {
 
     /**
-     * Create a new $numbersArray instance.
-     *
-     * @param array $numbersArray
-     * @return void
-     */
-
-    public function __construct($numbersArray)
-    {
-        $this->numbersArray = $numbersArray;
-    }
-
-    /**
      * Create a new merges numbers with word.
      *
      * Split imploded word and merge numbers with word using for loop.
@@ -28,17 +16,17 @@ class Hyphenator
      * @return array $newWord
      */
 
-    public function mergeNumbersWithWord($word)
+    public function mergeNumbersWithWord($word, $numbersArray)
     {
 
         // $words = explode(' ', $word);
         $newWord = implode(" ", str_split($word, 1));
         $newWord = str_split($newWord);
         for ($i = 0; $i < strlen($word); $i++) {
-            if (!empty($this->numbersArray[$i])) {
+            if (!empty($numbersArray[$i])) {
 
-                if (is_numeric($this->numbersArray[$i])) {
-                    $newWord[$i * 2 - 1] = $this->numbersArray[$i];
+                if (is_numeric($numbersArray[$i])) {
+                    $newWord[$i * 2 - 1] = $numbersArray[$i];
                 }
             }
 
@@ -55,10 +43,10 @@ class Hyphenator
      * @return string $word
      */
 
-    public function hyphenate($word)
+    public function hyphenate($word, $numbersArray)
     {
 
-        $word = implode('', $this->mergeNumbersWithWord($word));
+        $word = implode('', $this->mergeNumbersWithWord($word, $numbersArray));
         $word = str_replace(' ', '', $word);
 
         if (is_numeric(substr($word, -1, 1))) {

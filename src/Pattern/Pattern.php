@@ -105,12 +105,14 @@ class Pattern
 
     public function populatePositionWithNumber($word, $patterns)
     {
+        $this->numbersArray = [];
+        if (!empty($patterns)) {
+            foreach ($patterns as $pattern) {
+                $position = $this->getPositionOfPattern($word, $pattern);
 
-        foreach ($patterns as $pattern) {
-            $position = $this->getPositionOfPattern($word, $pattern);
-
-            if ($position > -1) {
-                $this->numbersArray = $this->populateNumbersArray($this->numbersArray, $position, $pattern);
+                if ($position > -1) {
+                    $this->numbersArray = $this->populateNumbersArray($this->numbersArray, $position, $pattern);
+                }
             }
         }
         return $this->numbersArray;
