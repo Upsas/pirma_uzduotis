@@ -412,3 +412,121 @@ info Word: mistranslate
 info HyphenatedWord: mis-trans-late 
 info RunTime: It took 2.29 seconds to run a code block
  
+info Word: mistranslate 
+info HyphenatedWord:  
+info RunTime: It took 3.47 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 2.57 seconds to run a code block
+ 
+info Word: mistranslate 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 4.29 seconds to run a code block
+ 
+info Word: mistranslate 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 30.09 seconds to run a code block
+ 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: asf 
+info Word: msaf 
+info Word: saf 
+info Word: saf 
+info Word: saf 
+info Word: af 
+info Word: asf 
+info Word: saf 
+info Word: asf 
+info Word: saf 
+info Word: mistranslate 
+info Word: asf 
+info Word: asf 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: asf 
+info Word: asf 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: vigorous 
+info Word: vigorous 
+info Word: vigorous 
+info Word: mistranslate 
+info Word: vigorous 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: system 
+info Word: system 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: test 
+info Word: saf 
+info Word: asf 
+info Word: asf 
+info Word: safasf 
+info Word: asd 
+info Word: asf 
+info Word: saf 
+info Word: test 
+info Word: test 
+info Word: test 
+info Word: test 
+info Word: test 
+info Word: test 
+info Word: db 
+info Word: mistranslate 
+info Word: db 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: testing 
+info HyphenatedWord: test-ing 
+info RunTime: It took 3.46 seconds to run a code block
+ 
+info Word: testing 
+info HyphenatedWord: test-ing 
+info RunTime: It took 4.74 seconds to run a code block
+ 
+info Word: testing 
+info HyphenatedWord: test-ing 
+info RunTime: It took 3.31 seconds to run a code block
+ 
+info Word: testing 
+info HyphenatedWord: test-ing 
+info RunTime: It took 2.99 seconds to run a code block
+ 

@@ -1,0 +1,80 @@
+<?php
+
+namespace Repositories;
+
+use Database\DatabaseConnection;
+use PDO;
+
+class WordsRepository extends DatabaseConnection
+{
+    public function checkIfFileExists($fileName)
+    {
+        if (file_exists($fileName)) {
+            return file($fileName);
+        } else {
+            return false;
+        }
+    }
+
+    // public function importWordsToDb($fileName)
+    // {
+    //     $file = $this->checkIfFileExists($fileName);
+    //     $sql = "INSERT INTO `words` (`word`, `hyphenated_word`) VALUES (?, '?')";
+    //     $prepares = $this->connect()->prepare($sql);
+    //     $this->connect()->exec("DELETE  FROM `words`");
+    //     foreach ($file as $word) {
+    //         $prepares->execute([$word]);
+    //     }
+    // }
+    public function checkForDuplicates($word)
+    {
+        $sql = "SELECT `word` FROM `words` WHERE `word` LIKE ?";
+        $prepare = $this->connect()->prepare($sql);
+        $word = '%' . $word . '%';
+        $prepare->execute([$word]);
+        $word = $prepare->fetch(PDO::FETCH_COLUMN);
+        if (!empty($word)) {
+            return $word;
+        }
+    }
+
+    public function addWordsFromFileToDb($word, $hyphenatedWord)
+    {
+        $sql = "INSERT INTO `words` (`word`, `hyphenated_word`) VALUES (?, ?)";
+        $prepares = $this->connect()->prepare($sql);
+        $prepares->execute([$word, $hyphenatedWord]);
+    }
+
+    public function deleteWordsFromDb()
+    {
+        $this->connect()->exec("DELETE  FROM `words`");
+
+    }
+
+    public function addWordFromCliToDb($word, $hyphenatedWord)
+    {
+        if (empty($this->checkForDuplicates($word, $hyphenatedWord))) {
+            $sql = "INSERT INTO `words` (`word`, `hyphenated_word`) VALUES (?, ?)";
+            $this->connect()->prepare($sql)->execute([$word, $hyphenatedWord]);
+        }
+    }
+
+    public function getWordId($word)
+    {
+        $sql = "SELECT `id` FROM `words` WHERE `word` LIKE ?";
+        $prepare = $this->connect()->prepare($sql);
+        $word = '%' . $word . '%';
+        $prepare->execute([$word]);
+        $id = $prepare->fetch(PDO::FETCH_COLUMN);
+        if (!empty($id)) {
+            return $id;
+        }
+    }
+
+    public function getAllWordsFromDb()
+    {
+        $sql = "SELECT `word` FROM `words`";
+        $words = ($this->connect()->query($sql)->fetchAll(PDO::FETCH_COLUMN));
+        return $words;
+    }
+}
