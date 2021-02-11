@@ -27,8 +27,9 @@ class App
         $this->source = trim(strtolower(readline('Enter a source (db or file): ')));
         if ($this->source === 'file') {
             $this->filetype = trim(readline('Enter filetype (local or new): '));
+            $this->addPatternsToDb();
+
         }
-        $this->addPatternsToDb();
         $this->output();
         // $this->addWordsFromFileToDb();
         $this->addWordToDb();
@@ -43,12 +44,13 @@ class App
 
     public function patternReader()
     {
-        $patternReader = new PatternReader($this->word, $this->log);
+        $patternReader = new PatternReader($this->log);
         if ($this->source === 'db') {
             $PatternsRepository = new PatternsRepository($this->log);
-            return ($PatternsRepository->getPatternsFromDb($this->word));
+            $patternsFromDb = $PatternsRepository->getPatternsFromDb($this->word);
+            return $patternReader->getSelectedPatterns($this->word, $patternsFromDb);
         } else {
-            return ($patternReader->getPatternsFromFile());
+            return ($patternReader->getSelectedPatterns($this->word, ''));
         }
     }
 
@@ -74,28 +76,33 @@ class App
     {
         if (!empty($this->filetype) && $this->filetype === 'new') {
             $url = trim(readline('Enter pattern file url: '));
+            $patterns = file($url);
             $PatternsRepository = new PatternsRepository($this->log);
-            $PatternsRepository->importPatternsToDb($url);
+            $wordsRepository = new WordsRepository();
+            $wordsRepository->deleteWordsFromDb();
+            $PatternsRepository->importPatternsToDb($patterns);
         }
+        // /opt/lampp/htdocs/praktika/src/Assets/tex-hyphenation-patterns.txt
     }
 
     public function addWordsFromFileToDb()
     {
-        // perdaryti si
         $wordsRepository = new WordsRepository();
         $url = trim(readline('Enter url: '));
 
-        $words = $wordsRepository->checkIfFileExists($url);
-        $PatternsRepository = new PatternsRepository($this->log);
+        $words = file($url);
+        $patternsRepository = new PatternsRepository($this->log);
         $hyphenator = new Hyphenator();
         $pattern = new Pattern($this->log);
-
+        $patternReader = new PatternReader($this->log);
         $wordsRepository->deleteWordsFromDb();
         foreach ($words as $word) {
 
-            $patterns = $PatternsRepository->getPatternsFromDb($word);
-            ($p = $pattern->populatePositionWithNumber($word, $patterns));
-            $wordsRepository->addWordsFromFileToDb($word, $hyphenator->hyphenate($word, $p));
+            $patternsFromDb = $patternsRepository->getPatternsFromDb($word);
+            $patterns = $patternReader->getSelectedPatterns($word, $patternsFromDb);
+
+            $p = $pattern->populatePositionWithNumber($word, $patterns);
+            $wordsRepository->addWords($word, $hyphenator->hyphenate($word, $p));
             $this->addRelationsToDb($word);
         }
 
@@ -106,7 +113,7 @@ class App
     {
         $wordsRepository = new WordsRepository();
         if (empty($wordsRepository->checkForDuplicates($this->word))) {
-            $wordsRepository->addWordFromCliToDb($this->word, $this->hyphanteWord());
+            $wordsRepository->addWords($this->word, $this->hyphanteWord());
             $this->addRelationsToDb($this->word);
         }
 
@@ -114,14 +121,16 @@ class App
     public function addRelationsToDb($word)
     {
         $wordsRepository = new WordsRepository();
-        $dub = $wordsRepository->checkForDuplicates($word);
         $relationRepository = new RelationsRepository();
 
-        $patternReader = new PatternsRepository($this->log);
-        $pa = ($patternReader->getPatternsFromDb($dub));
-        foreach ($pa as $p) {
+        $patternsRepository = new PatternsRepository($this->log);
+        $patternsFromDb = $patternsRepository->getPatternsFromDb($word);
+        $patternReader = new PatternReader($this->log);
+        $patterns = $patternReader->getSelectedPatterns($word, $patternsFromDb);
 
-            $patternId = $patternReader->getPatternId($p);
+        foreach ($patterns as $pattern) {
+
+            $patternId = $patternsRepository->getPatternId($pattern);
             $wordId = $wordsRepository->getWordId($word);
             $relationRepository->addRelationToDb($wordId, $patternId);
         }

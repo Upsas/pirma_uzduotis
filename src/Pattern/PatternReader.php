@@ -21,9 +21,8 @@ class PatternReader
      * @return void
      */
 
-    public function __construct($word, Log $logger)
+    public function __construct(Log $logger)
     {
-        $this->word = $word;
         $this->logger = $logger;
     }
 
@@ -34,14 +33,14 @@ class PatternReader
      * @return array $this->file
      */
 
-    protected function checkIfFileExists()
-    {
-        if (file_exists($this->file)) {
-            return file($this->file);
-        } else {
-            return false;
-        }
-    }
+    // protected function checkIfFileExists()
+    // {
+    //     if (file_exists($this->file)) {
+    //         return file($this->file);
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     /**
      * Get specific patterns using word
@@ -51,19 +50,21 @@ class PatternReader
      * @return array $pattern
      */
 
-    public function getPatternsFromFile()
+    public function getSelectedPatterns($word, $patterns)
     {
-        $file = $this->checkIfFileExists();
-        foreach ($file as $value) {
+        if (empty($patterns)) {
+            $patterns = file($this->file);
+        }
+        foreach ($patterns as $value) {
 
             $needle = preg_replace('/[0-9\s.]+/', '', $value);
             $value = trim($value);
 
-            if (preg_match('/^' . $needle . '/', $this->word) && preg_match('/^\./', $value)) {
+            if (preg_match('/^' . $needle . '/', $word) && preg_match('/^\./', $value)) {
                 $pattern[] = $value;
-            } else if (preg_match('/' . $needle . '$/', $this->word) && preg_match('/\.$/', $value)) {
+            } else if (preg_match('/' . $needle . '$/', $word) && preg_match('/\.$/', $value)) {
                 $pattern[] = $value;
-            } else if (preg_match('/' . $needle . '/', $this->word) && !preg_match('/\./', $value)) {
+            } else if (preg_match('/' . $needle . '/', $word) && !preg_match('/\./', $value)) {
                 $pattern[] = $value;
             }
         }

@@ -530,3 +530,156 @@ info Word: testing
 info HyphenatedWord: test-ing 
 info RunTime: It took 2.99 seconds to run a code block
  
+info Word: asfsaf 
+info Word: asdsa 
+info Word: mistranslate 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 4.72 seconds to run a code block
+ 
+info Word: testing 
+info HyphenatedWord: test-ing 
+info RunTime: It took 2.78 seconds to run a code block
+ 
+info Word: cat 
+info PatternsFromFile: .ca4t 1ca 
+info PatternsFromFile: .ca4t 1ca 
+info HyphenatedWord: cat 
+info RunTime: It took 5.69 seconds to run a code block
+ 
+info PatternsFromFile: .ca4t 1ca 
+info Word: mistranslate 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 11.62 seconds to run a code block
+ 
+info Word: mistranslate 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 18.61 seconds to run a code block
+ 
+info Word: mistranslate 
+info Word: mistranslate 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 25.17 seconds to run a code block
+ 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info Word: mistranslate 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 25.81 seconds to run a code block
+ 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info Word: mistranslate 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 20.10 seconds to run a code block
+ 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info Word: mistranslate 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 19.97 seconds to run a code block
+ 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info Word: testing 
+info PatternsFromFile: .te4 st2i st3ing 2t1in 
+info PatternsFromFile: .te4 st2i st3ing 2t1in 
+info HyphenatedWord: test-ing 
+info RunTime: It took 20.88 seconds to run a code block
+ 
+info PatternsFromFile: .te4 st2i st3ing 2t1in 
+info Word: mistranslate 
+info Word: mistranslate 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 5.48 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: m-i-s-t-r-a-n-slate 
+info RunTime: It took 3.20 seconds to run a code block
+ 
+info Word: mistranslate 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 2.48 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mistranslate 
+info RunTime: It took 8.47 seconds to run a code block
+ 
+info Word: mistranslate 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 5.36 seconds to run a code block
+ 
+info Word: mistranlsate 
+info PatternsFromFile: 1go gor5ou 2ig i2go ig3or ou2 2us 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info PatternsFromFile: .ch4 a2n 2ang 2ch 2ged han4g 
+info PatternsFromFile: .pi2t 2ch 4ch. 4tc t4ch 
+info PatternsFromFile: b2l2 b4le. 1co 2ig opy5 1ta 2tab 
+info PatternsFromFile: as1tr dis1 isas5 ou2 sa2 st4r 2us 
+info PatternsFromFile: fri2 ht1en 2ig n1in nin4g 
+info PatternsFromFile: ag1i 1co ncour5a ou2 u1ra u4rag 
+info Word: testing 
+info Word: testing 
+info PatternsFromFile: .te4 st2i st3ing 2t1in 
+info PatternsFromFile: .te4 st2i st3ing 2t1in 
+info HyphenatedWord: test-ing 
+info RunTime: It took 2.72 seconds to run a code block
+ 
+info PatternsFromFile: .te4 st2i st3ing 2t1in 
+info PatternsFromFile: .te4 st2i st3ing 2t1in 
+info Word: test 
+info Word: mist 
+info PatternsFromFile: 1go gor5ou 2ig i2go ig3or ou2 2us 
+info PatternsFromFile: 1go gor5ou 2ig i2go ig3or ou2 2us 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info PatternsFromFile: .ch4 a2n 2ang 2ch 2ged han4g 
+info PatternsFromFile: .ch4 a2n 2ang 2ch 2ged han4g 
+info PatternsFromFile: .pi2t 2ch 4ch. 4tc t4ch 
+info PatternsFromFile: .pi2t 2ch 4ch. 4tc t4ch 
+info PatternsFromFile: b2l2 b4le. 1co 2ig opy5 1ta 2tab 
+info PatternsFromFile: b2l2 b4le. 1co 2ig opy5 1ta 2tab 
+info PatternsFromFile: as1tr dis1 isas5 ou2 sa2 st4r 2us 
+info PatternsFromFile: as1tr dis1 isas5 ou2 sa2 st4r 2us 
+info PatternsFromFile: fri2 ht1en 2ig n1in nin4g 
+info PatternsFromFile: fri2 ht1en 2ig n1in nin4g 
+info PatternsFromFile: ag1i 1co ncour5a ou2 u1ra u4rag 
+info PatternsFromFile: ag1i 1co ncour5a ou2 u1ra u4rag 
+info Word: asf 
+info PatternsFromFile: 1go gor5ou 2ig i2go ig3or ou2 2us 
+info PatternsFromFile: 1go gor5ou 2ig i2go ig3or ou2 2us 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info PatternsFromFile: .mis1 a2n m2is 2n1s2 n2sl s1l2 s3lat st4r 4te. 1tra 
+info PatternsFromFile: .ch4 a2n 2ang 2ch 2ged han4g 
+info PatternsFromFile: .ch4 a2n 2ang 2ch 2ged han4g 
+info PatternsFromFile: .pi2t 2ch 4ch. 4tc t4ch 
+info PatternsFromFile: .pi2t 2ch 4ch. 4tc t4ch 
+info PatternsFromFile: b2l2 b4le. 1co 2ig opy5 1ta 2tab 
+info PatternsFromFile: b2l2 b4le. 1co 2ig opy5 1ta 2tab 
+info PatternsFromFile: as1tr dis1 isas5 ou2 sa2 st4r 2us 
+info PatternsFromFile: as1tr dis1 isas5 ou2 sa2 st4r 2us 
+info PatternsFromFile: fri2 ht1en 2ig n1in nin4g 
+info PatternsFromFile: fri2 ht1en 2ig n1in nin4g 
+info PatternsFromFile: ag1i 1co ncour5a ou2 u1ra u4rag 
+info PatternsFromFile: ag1i 1co ncour5a ou2 u1ra u4rag 
+info Word: testing 
+info PatternsFromFile: .te4 st2i st3ing 2t1in 
+info PatternsFromFile: .te4 st2i st3ing 2t1in 
+info HyphenatedWord: test-ing 
+info RunTime: It took 27.19 seconds to run a code block
+ 
+info PatternsFromFile: .te4 st2i st3ing 2t1in 
+info PatternsFromFile: .te4 st2i st3ing 2t1in 

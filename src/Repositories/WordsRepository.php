@@ -7,25 +7,7 @@ use PDO;
 
 class WordsRepository extends DatabaseConnection
 {
-    public function checkIfFileExists($fileName)
-    {
-        if (file_exists($fileName)) {
-            return file($fileName);
-        } else {
-            return false;
-        }
-    }
 
-    // public function importWordsToDb($fileName)
-    // {
-    //     $file = $this->checkIfFileExists($fileName);
-    //     $sql = "INSERT INTO `words` (`word`, `hyphenated_word`) VALUES (?, '?')";
-    //     $prepares = $this->connect()->prepare($sql);
-    //     $this->connect()->exec("DELETE  FROM `words`");
-    //     foreach ($file as $word) {
-    //         $prepares->execute([$word]);
-    //     }
-    // }
     public function checkForDuplicates($word)
     {
         $sql = "SELECT `word` FROM `words` WHERE `word` LIKE ?";
@@ -38,20 +20,12 @@ class WordsRepository extends DatabaseConnection
         }
     }
 
-    public function addWordsFromFileToDb($word, $hyphenatedWord)
-    {
-        $sql = "INSERT INTO `words` (`word`, `hyphenated_word`) VALUES (?, ?)";
-        $prepares = $this->connect()->prepare($sql);
-        $prepares->execute([$word, $hyphenatedWord]);
-    }
-
     public function deleteWordsFromDb()
     {
         $this->connect()->exec("DELETE  FROM `words`");
-
     }
 
-    public function addWordFromCliToDb($word, $hyphenatedWord)
+    public function addWords($word, $hyphenatedWord)
     {
         if (empty($this->checkForDuplicates($word, $hyphenatedWord))) {
             $sql = "INSERT INTO `words` (`word`, `hyphenated_word`) VALUES (?, ?)";
