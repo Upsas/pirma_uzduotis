@@ -12,6 +12,6 @@ class RelationsRepository extends DatabaseConnection
         $sql = "INSERT INTO `relations` (`word_id`, `pattern_id`) VALUES (?, ?)";
         $prepares = $this->connect()->prepare($sql);
         $prepares->execute([$wordId, $patternId]);
-
     }
+
 }

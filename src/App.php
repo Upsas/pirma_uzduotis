@@ -30,7 +30,9 @@ class App
             $this->addPatternsToDb();
 
         }
+
         $this->output();
+        $this->getPatterns($this->word);
         // $this->addWordsFromFileToDb();
         $this->addWordToDb();
 
@@ -46,6 +48,8 @@ class App
     {
         $patternReader = new PatternReader($this->log);
         if ($this->source === 'db') {
+            $this->getHyphenatedWord($this->word);
+
             $PatternsRepository = new PatternsRepository($this->log);
             $patternsFromDb = $PatternsRepository->getPatternsFromDb($this->word);
             return $patternReader->getSelectedPatterns($this->word, $patternsFromDb);
@@ -70,6 +74,27 @@ class App
     {
         $output = new Output($this->hyphanteWord(), $this->log);
         $output->outputResult($this->hyphanteWord());
+    }
+
+    public function getHyphenatedWord($word)
+    {
+
+        $wordsRepository = new WordsRepository();
+        if (!empty($wordsRepository->checkForDuplicates($word)) && $this->source === 'db') {
+            $wordsRepository->getHyphenatedWordFromDb($word);
+        }
+
+    }
+
+    public function getPatterns($word)
+    {
+        if ($this->source === 'db') {
+            $patternsRepository = new PatternsRepository($this->log);
+            $patternReader = new PatternReader($this->log);
+            $patternsFromDb = $patternsRepository->getPatternsFromDb($word);
+            $patterns = $patternReader->getSelectedPatterns($word, $patternsFromDb);
+            echo implode(' ', $patterns) . PHP_EOL;
+        }
     }
 
     public function addPatternsToDb()
@@ -118,6 +143,7 @@ class App
         }
 
     }
+
     public function addRelationsToDb($word)
     {
         $wordsRepository = new WordsRepository();
