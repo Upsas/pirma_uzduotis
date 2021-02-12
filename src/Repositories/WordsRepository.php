@@ -69,4 +69,12 @@ class WordsRepository extends DatabaseConnection
         $words = ($this->connect()->query($sql)->fetchAll(PDO::FETCH_COLUMN));
         return $words;
     }
+
+    public function updateWord($newWord, $id)
+    {
+        $sql = "UPDATE `words` SET `word` = ? WHERE `words`.`id` = ?";
+        $prepare = $this->connect()->prepare($sql);
+        $prepare->execute([$newWord, $id]);
+    }
+
 }

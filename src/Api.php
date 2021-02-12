@@ -20,13 +20,14 @@ class Api
 
         $this->getAllHyphenatedWords();
         $this->insertDataToDb();
+        $this->editData();
     }
 
     public function getAllHyphenatedWords()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_SERVER['REQUEST_URI'] === '/praktika/src/') {
             $wordsRepository = new WordsRepository();
-            echo json_encode($wordsRepository->getAllHyphenatedWordsFromDb());
+            echo json_encode($wordsRepository->getAllWordsFromDb());
         }
     }
 
@@ -74,5 +75,24 @@ class Api
             }
         }
         return $patterns;
+    }
+
+    public function editData()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'PUT' && $_SERVER['REQUEST_URI'] === '/praktika/src/') {
+            parse_str(file_get_contents("php://input"), $data);
+            $word = $data['word'];
+            $newWord = $data['newWord'];
+
+            $wordsRepository = new WordsRepository();
+            $duplicate = $wordsRepository->checkForDuplicates($word);
+            if ($duplicate) {
+                echo $newHyphenatedWord = $this->hyphenateWord($newWord);
+                echo $id = $wordsRepository->getWordId($word);
+                $wordsRepository->updateWord($newWord, $newHyphenatedWord, $id);
+
+            }
+        }
+
     }
 }

@@ -3,16 +3,11 @@
 namespace Repositories;
 
 use Database\DatabaseConnection;
-use Log\Log;
+use Pattern\Pattern;
 use PDO;
 
 class PatternsRepository extends DatabaseConnection
 {
-    protected $logger;
-    public function __construct(Log $logger)
-    {
-        $this->logger = $logger;
-    }
 
     public function importPatternsToDb($patterns)
     {
@@ -27,10 +22,13 @@ class PatternsRepository extends DatabaseConnection
     public function getPatternsFromDb()
     {
         $sql = "SELECT `pattern` FROM `patterns`";
-        $patterns = ($this->connect()->query($sql)->fetchAll(PDO::FETCH_COLUMN));
+        $patterns = ($this->connect()->query($sql)->fetchAll(PDO::FETCH_CLASS));
         if (!empty($patterns)) {
-            return $patterns;
+            foreach ($patterns as $pattern) {
+                $patter[] = new Pattern($pattern->pattern);
+            }
         }
+        return $patter;
     }
 
     public function getPatternId($pattern)
