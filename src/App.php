@@ -21,20 +21,27 @@ class App
         $this->log = new Log();
         $this->app();
     }
+
     public function app()
     {
-        $this->input();
-        $this->source = trim(strtolower(readline('Enter a source (db or file): ')));
-        if ($this->source === 'file') {
-            $this->filetype = trim(readline('Enter filetype (local or new): '));
-            $this->addPatternsToDb();
 
+        if (php_sapi_name() === 'cli') {
+
+            $this->input();
+            $this->source = trim(strtolower(readline('Enter a source (db or file): ')));
+            if ($this->source === 'file') {
+                $this->filetype = trim(readline('Enter filetype (local or new): '));
+                $this->addPatternsToDb();
+
+            }
+
+            $this->output();
+            $this->getPatterns($this->word);
+            // $this->addWordsFromFileToDb();
+            $this->addWordToDb();
+        } else {
+            $api = new Api($this->log);
         }
-
-        $this->output();
-        $this->getPatterns($this->word);
-        // $this->addWordsFromFileToDb();
-        $this->addWordToDb();
 
     }
 
@@ -51,7 +58,7 @@ class App
             $this->getHyphenatedWord($this->word);
 
             $PatternsRepository = new PatternsRepository($this->log);
-            $patternsFromDb = $PatternsRepository->getPatternsFromDb($this->word);
+            $patternsFromDb = $PatternsRepository->getPatternsFromDb();
             return $patternReader->getSelectedPatterns($this->word, $patternsFromDb);
         } else {
             return ($patternReader->getSelectedPatterns($this->word, ''));
@@ -78,12 +85,10 @@ class App
 
     public function getHyphenatedWord($word)
     {
-
         $wordsRepository = new WordsRepository();
         if (!empty($wordsRepository->checkForDuplicates($word)) && $this->source === 'db') {
             $wordsRepository->getHyphenatedWordFromDb($word);
         }
-
     }
 
     public function getPatterns($word)
@@ -113,13 +118,15 @@ class App
     public function addWordsFromFileToDb()
     {
         $wordsRepository = new WordsRepository();
-        $url = trim(readline('Enter url: '));
 
+        $url = trim(readline('Enter url: '));
         $words = file($url);
+
         $patternsRepository = new PatternsRepository($this->log);
         $hyphenator = new Hyphenator();
         $pattern = new Pattern($this->log);
         $patternReader = new PatternReader($this->log);
+
         $wordsRepository->deleteWordsFromDb();
         foreach ($words as $word) {
 
@@ -130,7 +137,6 @@ class App
             $wordsRepository->addWords($word, $hyphenator->hyphenate($word, $p));
             $this->addRelationsToDb($word);
         }
-
         // /opt/lampp/htdocs/praktika/src/Assets/words.txt
     }
 
@@ -141,17 +147,16 @@ class App
             $wordsRepository->addWords($this->word, $this->hyphanteWord());
             $this->addRelationsToDb($this->word);
         }
-
     }
 
     public function addRelationsToDb($word)
     {
         $wordsRepository = new WordsRepository();
         $relationRepository = new RelationsRepository();
-
         $patternsRepository = new PatternsRepository($this->log);
-        $patternsFromDb = $patternsRepository->getPatternsFromDb($word);
         $patternReader = new PatternReader($this->log);
+
+        $patternsFromDb = $patternsRepository->getPatternsFromDb($word);
         $patterns = $patternReader->getSelectedPatterns($word, $patternsFromDb);
 
         foreach ($patterns as $pattern) {

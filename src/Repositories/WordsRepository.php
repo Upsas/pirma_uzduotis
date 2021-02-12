@@ -31,6 +31,13 @@ class WordsRepository extends DatabaseConnection
         }
     }
 
+    public function getAllHyphenatedWordsFromDb()
+    {
+        $sql = "SELECT `hyphenated_word` FROM `words`";
+        $hyphenatedWords = ($this->connect()->query($sql)->fetchAll(PDO::FETCH_COLUMN));
+        return $hyphenatedWords;
+    }
+
     public function deleteWordsFromDb()
     {
         $this->connect()->exec("DELETE  FROM `words`");
