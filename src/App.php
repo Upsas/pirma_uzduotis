@@ -5,8 +5,8 @@ use InputOutput\Output;
 use Log\Log;
 use Pattern\Hyphenator;
 use Pattern\PatternReader;
-// use Repositories\RelationsRepository;
 use Repositories\PatternsRepository;
+use Repositories\RelationsRepository;
 use Repositories\WordsRepository;
 
 class App
@@ -14,7 +14,7 @@ class App
     public $input;
     public $log;
     public $word;
-
+    public $source;
     public function __construct()
     {
         $this->log = new Log();
@@ -34,17 +34,17 @@ class App
                 $this->addPatternsToDb();
             }
             if (!empty($this->getHyphenatedWord())) {
-                echo $this->getHyphenatedWord();
+                echo $this->getHyphenatedWord() . PHP_EOL;
             } else {
                 $this->output();
             }
 
             $this->getPatterns();
+            $this->addWordToDb();
 
             // $this->addWordsFromFileToDb();
-            // $this->addWordToDb();
-            // } else {
-            //     $api = new Api($this->log);
+        } else {
+            $api = new Api();
         }
 
     }
@@ -69,7 +69,7 @@ class App
     public function hyphanteWord()
     {
         $hyphenator = new Hyphenator($this->patternReader());
-        $hyphenator->hyphenate($this->word);
+        return $hyphenator->hyphenate($this->word);
     }
 
     public function output()
@@ -124,7 +124,7 @@ class App
         foreach ($words as $word) {
 
             $wordsRepository->addWords($word, $hyphenator->hyphenate($word));
-            // $this->addRelationsToDb($word);
+            $this->addRelationsToDb($word);
         }
         // /opt/lampp/htdocs/praktika/src/Assets/words.txt
     }
@@ -134,25 +134,26 @@ class App
         $wordsRepository = new WordsRepository();
         if (empty($wordsRepository->checkForDuplicates($this->word))) {
             $wordsRepository->addWords($this->word, $this->hyphanteWord());
-            // $this->addRelationsToDb($this->word);
+            $this->addRelationsToDb($this->word);
         }
     }
 
-    // public function addRelationsToDb($word)
-    // {
-    //     $wordsRepository = new WordsRepository();
-    //     $relationRepository = new RelationsRepository();
-    //     $patternsRepository = new PatternsRepository($this->log);
-    //     $patternReader = new PatternReader($this->log);
+    public function addRelationsToDb($word)
+    {
+        $wordsRepository = new WordsRepository();
+        $relationRepository = new RelationsRepository();
+        $patternsRepository = new PatternsRepository();
 
-    //     $patternsFromDb = $patternsRepository->getPatternsFromDb($word);
-    //     $patterns = $patternReader->getSelectedPatterns($word, $patternsFromDb);
+        $patternsFromDb = $patternsRepository->getPatternsFromDb($word);
+        $hyphenator = new Hyphenator($patternsFromDb);
 
-    //     foreach ($patterns as $pattern) {
+        $patt = $hyphenator->getSelectedPatterns($this->word);
 
-    //         $patternId = $patternsRepository->getPatternId($pattern);
-    //         $wordId = $wordsRepository->getWordId($word);
-    //         $relationRepository->addRelationToDb($wordId, $patternId);
-    //     }
-    // }
+        foreach ($patt as $pattern) {
+
+            $patternId = $patternsRepository->getPatternId($pattern);
+            $wordId = $wordsRepository->getWordId($word);
+            $relationRepository->addRelationToDb($wordId, $patternId);
+        }
+    }
 }

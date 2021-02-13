@@ -45,10 +45,9 @@ class WordsRepository extends DatabaseConnection
 
     public function addWords($word, $hyphenatedWord)
     {
-        if (empty($this->checkForDuplicates($word, $hyphenatedWord))) {
-            $sql = "INSERT INTO `words` (`word`, `hyphenated_word`) VALUES (?, ?)";
-            $this->connect()->prepare($sql)->execute([$word, $hyphenatedWord]);
-        }
+        $sql = "INSERT INTO `words` (`word`, `hyphenated_word`) VALUES (?, ?)";
+        $this->connect()->prepare($sql)->execute([$word, $hyphenatedWord]);
+
     }
 
     public function getWordId($word)
