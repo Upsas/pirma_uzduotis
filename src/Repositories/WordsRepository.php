@@ -43,6 +43,12 @@ class WordsRepository extends DatabaseConnection
         $this->connect()->exec("DELETE  FROM `words`");
     }
 
+    public function deleteWord($id)
+    {
+        $sql = "DELETE FROM `words` WHERE `words`.`id` = ?";
+        $this->connect()->prepare($sql)->execute([$id]);
+
+    }
     public function addWords($word, $hyphenatedWord)
     {
         $sql = "INSERT INTO `words` (`word`, `hyphenated_word`) VALUES (?, ?)";
@@ -69,11 +75,11 @@ class WordsRepository extends DatabaseConnection
         return $words;
     }
 
-    public function updateWord($newWord, $id)
+    public function updateWord($newWord, $newHyphenatedWord, $id)
     {
-        $sql = "UPDATE `words` SET `word` = ? WHERE `words`.`id` = ?";
+        $sql = "UPDATE `words` SET `word` = ?, `hyphenated_word` = ? WHERE `words`.`id` = ?";
         $prepare = $this->connect()->prepare($sql);
-        $prepare->execute([$newWord, $id]);
+        $prepare->execute([$newWord, $newHyphenatedWord, $id]);
     }
 
 }
