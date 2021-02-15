@@ -14,4 +14,9 @@ class RelationsRepository extends DatabaseConnection
         $prepares->execute([$wordId, $patternId]);
     }
 
+    public function deleteRelation($id)
+    {
+        $sql = "DELETE FROM `relations` WHERE `word_id` = ?";
+        $this->connect()->prepare($sql)->execute([$id]);
+    }
 }

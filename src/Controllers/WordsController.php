@@ -15,6 +15,7 @@ class WordsController
         $wordsRepository = new WordsRepository();
         header('Content-Type: application/json');
         echo json_encode($wordsRepository->getAllHyphenatedWordsFromDb());
+
     }
     public function insertDataToDb()
     {
@@ -39,15 +40,19 @@ class WordsController
         $newWord = $data['newWord'];
         $wordsRepository = new WordsRepository();
         $duplicate = $wordsRepository->checkForDuplicates($word);
-        if (isset($duplicate) && !empty($word) && !empty($newWord)) {
+        $newWordDuplicate = $wordsRepository->checkForDuplicates($newWord);
+        if (isset($duplicate) && !empty($word) && !empty($newWord) && empty($newWordDuplicate)) {
             $patternRepisotry = new PatternsRepository();
             $patterns = $patternRepisotry->getPatternsFromDb();
             $hyphenator = new Hyphenator($patterns);
             $newHyphenatedWord = $hyphenator->hyphenate($newWord);
             $id = $wordsRepository->getWordId($word);
+            $this->deleteRelationFromDb($word);
             $wordsRepository->updateWord($newWord, $newHyphenatedWord, $id);
             $this->addRelationsToDb($newWord);
-        } else {echo 'Wrong input';}
+        } else {
+            echo 'Wrong input';
+        }
     }
 
     public function deleteWordFromDb()
@@ -80,5 +85,14 @@ class WordsController
             $wordId = $wordsRepository->getWordId($word);
             $relationRepository->addRelationToDb($wordId, $patternId);
         }
+    }
+
+    protected function deleteRelationFromDb($word)
+    {
+        $wordsRepository = new WordsRepository();
+        $relationRepository = new RelationsRepository();
+        $wordId = $wordsRepository->getWordId($word);
+        $relationRepository->deleteRelation($wordId);
+
     }
 }

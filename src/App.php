@@ -40,9 +40,9 @@ class App
             }
 
             $this->getPatterns();
-            // $this->addWordToDb();
+            $this->addWordToDb();
 
-            $this->addWordsFromFileToDb();
+            // $this->addWordsFromFileToDb();
         } else {
             $api = new Api();
         }
@@ -123,7 +123,7 @@ class App
 
         $wordsRepository->deleteWordsFromDb();
         foreach ($words as $word) {
-
+            $word = trim($word);
             $wordsRepository->addWords($word, $hyphenator->hyphenate($word));
             $this->addRelationsToDb($word);
         }
@@ -148,10 +148,9 @@ class App
         $patternsFromDb = $patternsRepository->getPatternsFromDb($word);
         $hyphenator = new Hyphenator($patternsFromDb);
 
-        $patt = $hyphenator->getSelectedPatterns($this->word);
+        $patt = $hyphenator->getSelectedPatterns($word);
 
         foreach ($patt as $pattern) {
-
             $patternId = $patternsRepository->getPatternId($pattern);
             $wordId = $wordsRepository->getWordId($word);
             $relationRepository->addRelationToDb($wordId, $patternId);

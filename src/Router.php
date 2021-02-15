@@ -10,7 +10,7 @@ class Router
     }
     public function routes()
     {
-        switch ($_SERVER['REQUEST_URI'] === '/praktika/src/') {
+        switch ($_SERVER['REQUEST_URI'][-1] === '/') {
             case ($_SERVER['REQUEST_METHOD'] === 'GET'):
                 $this->controller->getAllHyphenatedWords();
                 break;
