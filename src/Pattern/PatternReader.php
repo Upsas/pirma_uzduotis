@@ -21,19 +21,19 @@ class PatternReader
      * @return array $this->file
      */
 
-    protected function checkIfFileExists()
+    protected function checkIfFileExists($file)
     {
-        if (file_exists($this->file)) {
-            return file($this->file);
+        if (file_exists($file)) {
+            return file($file);
         } else {
-            return false;
+            return file($this->file);
         }
     }
 
-    public function getPatterns()
+    public function getPatterns($file)
     {
         $patterns = [];
-        $patternStrings = $this->checkIfFileExists();
+        $patternStrings = $this->checkIfFileExists($file);
         foreach ($patternStrings as $patternString) {
             $patterns[] = new Pattern($patternString);
         }

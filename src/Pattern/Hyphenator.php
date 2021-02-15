@@ -8,8 +8,7 @@ class Hyphenator
     private $patterns = [];
     public function __construct(array $patterns)
     {
-        $this->objectsToArray($patterns);
-
+        $this->patterns = $patterns;
     }
 
     /**
@@ -19,13 +18,6 @@ class Hyphenator
      * @param array $pattern
      * @return int $position
      */
-
-    private function objectsToArray($patterns)
-    {
-        foreach ($patterns as $pattern) {
-            $this->patterns[] = $pattern->getPattern();
-        }
-    }
 
     private function getPositionOfPattern($word, $patterns)
     {
@@ -59,9 +51,9 @@ class Hyphenator
 
     public function getSelectedPatterns($word)
     {
-        foreach ($this->patterns as $value) {
-            $needle = preg_replace('/[0-9\s.]+/', '', $value);
-            $value = trim($value);
+        foreach ($this->patterns as $patterns) {
+            $needle = preg_replace('/[0-9\s.]+/', '', $patterns->getPattern());
+            $value = trim($patterns->getPattern());
 
             if (preg_match('/^' . $needle . '/', $word) && preg_match('/^\./', $value)) {
                 $pattern[] = $value;
@@ -166,11 +158,10 @@ class Hyphenator
      * @return string $word
      */
 
-    // $numbersArray
     public function hyphenate($word)
     {
 
-        $selectedPatterns = $this->getSelectedPatterns($word, $this->patterns);
+        $selectedPatterns = $this->getSelectedPatterns($word);
         $numbersArray = $this->populatePositionWithNumber($word, $selectedPatterns);
         $word = implode('', $this->mergeNumbersWithWord($word, $numbersArray));
         $word = str_replace(' ', '', $word);

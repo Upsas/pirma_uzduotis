@@ -40,13 +40,12 @@ class App
             }
 
             $this->getPatterns();
-            $this->addWordToDb();
+            // $this->addWordToDb();
 
-            // $this->addWordsFromFileToDb();
+            $this->addWordsFromFileToDb();
         } else {
             $api = new Api();
         }
-
     }
 
     public function input()
@@ -62,7 +61,7 @@ class App
             $PatternsRepository = new PatternsRepository();
             return $PatternsRepository->getPatternsFromDb();
         } else {
-            return $patternReader->getPatterns();
+            return $patternReader->getPatterns('local');
         }
     }
 
@@ -101,7 +100,9 @@ class App
     {
         if (!empty($this->filetype) && $this->filetype === 'new') {
             $url = trim(readline('Enter pattern file url: '));
-            $patterns = file($url);
+            $patternsReader = new PatternReader();
+            $patterns = $patternsReader->getPatterns($url);
+
             $PatternsRepository = new PatternsRepository($this->log);
             $wordsRepository = new WordsRepository();
             $wordsRepository->deleteWordsFromDb();

@@ -1,17 +1,20 @@
 <?php
 
+namespace Controllers;
+
 use Pattern\Hyphenator;
 use Repositories\PatternsRepository;
 use Repositories\RelationsRepository;
 use Repositories\WordsRepository;
 
-class Controller
+class WordsController
 {
 
     public function getAllHyphenatedWords()
     {
         $wordsRepository = new WordsRepository();
-        echo json_encode($wordsRepository->getAllWordsFromDb());
+        header('Content-Type: application/json');
+        echo json_encode($wordsRepository->getAllHyphenatedWordsFromDb());
     }
     public function insertDataToDb()
     {
@@ -24,8 +27,8 @@ class Controller
             if (empty($wordsRepository->checkForDuplicates($word))) {
                 $wordsRepository->addWords($word, $hyphenator->hyphenate($word));
                 $this->addRelationsToDb($word);
-            }
-        }
+            } else {echo 'Word already exists';}
+        } else {echo 'Empty data';}
     }
 
     public function editData()
@@ -36,7 +39,7 @@ class Controller
         $newWord = $data['newWord'];
         $wordsRepository = new WordsRepository();
         $duplicate = $wordsRepository->checkForDuplicates($word);
-        if (isset($duplicate)) {
+        if (isset($duplicate) && !empty($word) && !empty($newWord)) {
             $patternRepisotry = new PatternsRepository();
             $patterns = $patternRepisotry->getPatternsFromDb();
             $hyphenator = new Hyphenator($patterns);
@@ -44,7 +47,7 @@ class Controller
             $id = $wordsRepository->getWordId($word);
             $wordsRepository->updateWord($newWord, $newHyphenatedWord, $id);
             $this->addRelationsToDb($newWord);
-        }
+        } else {echo 'Wrong input';}
     }
 
     public function deleteWordFromDb()

@@ -32,25 +32,4 @@ class Output extends DatabaseConnection
         $this->logger->info('RunTime: {runTime}', $runTime);
         echo $word . PHP_EOL;
     }
-
-    public function outputPatternsFromDb($word)
-    {
-        $sql = "SELECT `id` FROM `syllable_words` WHERE `syllable_word` = ?";
-        $prepare = $this->connect()->prepare($sql);
-        $prepare->execute([$word]);
-        $values = $prepare->fetch();
-        if (!empty($values)) {
-            if (count($values) > 0) {
-                $id = $values['id'];
-            }
-        }
-
-        $patterns = "SELECT `correct_pattern` FROM `correct_patterns` WHERE `sylable_word_id` = $id";
-        $t = $this->connect()->query($patterns);
-        $correctPatterns = $t->fetch();
-        if (!empty($correctPatterns)) {
-            return $correctPatterns['correct_pattern'];
-        }
-
-    }
 }

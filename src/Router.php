@@ -1,12 +1,12 @@
 <?php
 
-use Controller;
+use Controllers\WordsController;
 
 class Router
 {
     public function __construct()
     {
-        $this->controller = new Controller();
+        $this->controller = new WordsController();
     }
     public function routes()
     {
@@ -23,6 +23,9 @@ class Router
             case ($_SERVER['REQUEST_METHOD'] === 'DELETE'):
                 $this->controller->deleteWordFromDb();
                 break;
+            default:
+                header('HTTP/1.1 405 Method Not Allowed');
+                header('Allow: GET, PUT, POST, DELETE');
         }
 
     }

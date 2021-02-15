@@ -15,7 +15,7 @@ class PatternsRepository extends DatabaseConnection
         $prepares = $this->connect()->prepare($sql);
         $this->connect()->exec("DELETE  FROM `patterns`");
         foreach ($patterns as $pattern) {
-            $prepares->execute([$pattern]);
+            $prepares->execute([$pattern->getPattern()]);
         }
     }
 
