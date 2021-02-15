@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use InputOutput\Input;
 use InputOutput\Output;
@@ -11,20 +12,19 @@ use Repositories\WordsRepository;
 
 class App
 {
-    public $input;
-    public $log;
-    public $word;
-    public $source;
     public function __construct()
     {
         $this->log = new Log();
         $this->app();
     }
-
-    public function app()
+    
+    /**
+     * @return void
+     */
+    
+    public function app():void
     {
         if (php_sapi_name() === 'cli') {
-
             $this->input();
             $this->source = trim(strtolower(readline('Enter a source (db or file): ')));
             $this->patternReader();
@@ -42,19 +42,27 @@ class App
             $this->getPatterns();
             $this->addWordToDb();
 
-            // $this->addWordsFromFileToDb();
+        // $this->addWordsFromFileToDb();
         } else {
             $api = new Api();
         }
     }
+    
+    /**
+     * @return void
+     */
 
-    public function input()
+    public function input():void
     {
         $input = new Input($this->log);
         $this->word = $input->getUserInput();
     }
-
-    public function patternReader()
+    
+    /**
+     * @return Pattern[]
+     */
+    
+    public function patternReader(): array
     {
         $patternReader = new PatternReader();
         if ($this->source === 'db') {
@@ -64,20 +72,32 @@ class App
             return $patternReader->getPatterns('local');
         }
     }
-
-    public function hyphanteWord()
+    
+    /**
+     * @return string
+     */
+    
+    public function hyphanteWord():string
     {
         $hyphenator = new Hyphenator($this->patternReader());
         return $hyphenator->hyphenate($this->word);
     }
+    
+    /**
+     * @return void
+     */
 
-    public function output()
+    public function output(): void
     {
         $output = new Output($this->hyphanteWord(), $this->log);
         $output->outputResult($this->hyphanteWord());
     }
+    
+    /**
+     * @return string
+     */
 
-    public function getHyphenatedWord()
+    public function getHyphenatedWord():string
     {
         $wordsRepository = new WordsRepository();
         if (!empty($wordsRepository->checkForDuplicates($this->word)) && $this->source === 'db' || $this->source === 'file') {
@@ -85,7 +105,7 @@ class App
         }
     }
 
-    public function getPatterns()
+    public function getPatterns(): void
     {
         if ($this->source === 'db') {
             $patternsRepository = new PatternsRepository($this->log);
@@ -95,8 +115,12 @@ class App
             echo implode(' ', $patt) . PHP_EOL;
         }
     }
+    
+    /**
+     * @return void
+     */
 
-    public function addPatternsToDb()
+    public function addPatternsToDb():void
     {
         if (!empty($this->filetype) && $this->filetype === 'new') {
             $url = trim(readline('Enter pattern file url: '));
@@ -110,8 +134,13 @@ class App
         }
         // /opt/lampp/htdocs/praktika/src/Assets/tex-hyphenation-patterns.txt
     }
+    
+    /**
+     *
+     * @return void
+     */
 
-    public function addWordsFromFileToDb()
+    public function addWordsFromFileToDb():void
     {
         $wordsRepository = new WordsRepository();
 
@@ -129,8 +158,12 @@ class App
         }
         // /opt/lampp/htdocs/praktika/src/Assets/words.txt
     }
+    
+    /**
+     * @return void
+     */
 
-    public function addWordToDb()
+    public function addWordToDb():void
     {
         $wordsRepository = new WordsRepository();
         if (empty($wordsRepository->checkForDuplicates($this->word))) {
@@ -138,8 +171,13 @@ class App
             $this->addRelationsToDb($this->word);
         }
     }
+    
+    /**
+     * @param  string $word
+     * @return void
+     */
 
-    public function addRelationsToDb($word)
+    public function addRelationsToDb(string $word):void
     {
         $wordsRepository = new WordsRepository();
         $relationRepository = new RelationsRepository();

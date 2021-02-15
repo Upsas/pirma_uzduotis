@@ -1,5 +1,5 @@
 <?php
-
+declare (strict_types = 1);
 namespace InputOutput;
 
 use Database\DatabaseConnection;
@@ -9,9 +9,15 @@ use Log\Log;
 class Output extends DatabaseConnection
 {
 
-    private $logger;
-    public $word;
-    public function __construct($word, Log $logger)
+    private log $logger;
+    public ?string $word;
+
+    /**
+     * @param  string $word
+     * @param  Log $logger
+     */
+
+    public function __construct(string $word, Log $logger)
     {
         $this->word = $word;
         $this->logger = $logger;
@@ -23,7 +29,7 @@ class Output extends DatabaseConnection
      * @return void
      */
 
-    public function outputResult($word)
+    public function outputResult(string $word): void
     {
         RunTime::timeEnd();
         $runTime['runTime'] = RunTime::getRunTime();

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace InputOutput;
 
@@ -7,8 +8,11 @@ use Log\Log;
 
 class Input
 {
+    private Log $log;
 
-    private $log;
+    /**
+     * @param  Log $log
+     */
 
     public function __construct(Log $log)
     {
@@ -21,26 +25,22 @@ class Input
      * Validate data from input (regex for matching letters && not empty)
      *
      * @param  string $word
-     * @return $word
+     * @return string $word
      */
 
-    public function getUserInput()
+    public function getUserInput(): string
     {
         RunTime::timeStart();
         $word = strtolower(readline('Enter a word: '));
         $word = strval(trim($word));
 
         if (preg_match_all('/[a-z]+/', $word) && !empty($word)) {
-
             $context['word'] = $word;
             $this->logger->info('Word: {word}', $context);
-            return $word;
-
+            return (string) $word;
         } else {
             echo 'wrong input' . PHP_EOL;
             exit;
         }
-
     }
-
 }

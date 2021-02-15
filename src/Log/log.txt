@@ -68,3 +68,90 @@ info Word: mistranslate
 info Word: tesat 
 info Word: afsafsaf 
 info Word: asfsaf 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: testi 
+info HyphenatedWord: testi 
+info RunTime: It took 8.65 seconds to run a code block
+ 
+info Word: mistranslate 
+info Word: safasfasf 
+info Word: asfasfasf 
+info Word: msafasfasfas 
+info HyphenatedWord: m-safas-fasfas 
+info RunTime: It took 3.19 seconds to run a code block
+ 
+info Word: safasfasf 
+info Word: safwqrqwrasasfasf 
+info HyphenatedWord: safwqrqwrasas-fasf 
+info RunTime: It took 2.92 seconds to run a code block
+ 
+info Word: asfwqrxzveq 
+info HyphenatedWord: as-fwqrxzve-q 
+info RunTime: It took 2.76 seconds to run a code block
+ 
+info Word: asfasfasf 
+info HyphenatedWord: as-fasfasf 
+info RunTime: It took 2.68 seconds to run a code block
+ 
+info Word: aswqrqwrxzbnut 
+info HyphenatedWord: aswqrqwrxzb-nut 
+info RunTime: It took 3.15 seconds to run a code block
+ 
+info Word: asfwqirpdgk 
+info HyphenatedWord: as-fwqir-pdgk 
+info RunTime: It took 4.43 seconds to run a code block
+ 
+info Word: wqrnmsdjgnsdjkgsdlgiew 
+info Word: wqoriqwpraok 
+info HyphenatedWord: wqoriqw-praok 
+info RunTime: It took 5.00 seconds to run a code block
+ 
+info Word: asfasmxcbmi 
+info HyphenatedWord: as-fas-mx-cb-mi 
+info RunTime: It took 20.07 seconds to run a code block
+ 
+info Word: wqoriqworkcb 
+info HyphenatedWord: wqoriq-workcb 
+info RunTime: It took 9.55 seconds to run a code block
+ 
+info Word: sakfasf 
+info Word: mistranslate 
+info Word: wqiruqwiroakv 
+info Word: ckxjvhfwqiuriusaf 
+info Word: asfjknsajfhsakjfhwquirhiuajv 
+info HyphenatedWord: as-fjkn-sajfh-sakjfh-wquirhi-uajv 
+info RunTime: It took 2.84 seconds to run a code block
+ 
+info Word: asfjoiqwroiqwrjaslnf 
+info HyphenatedWord: as-fjoiqwroiqwr-jasln-f 
+info RunTime: It took 2.76 seconds to run a code block
+ 
+info Word: askfjsaklfjaslkjflkasjflkasjf 
+info HyphenatedWord: ask-fjsaklf-jaslkjflka-sjflkasjf 
+info RunTime: It took 2.44 seconds to run a code block
+ 
+info Word: asnkfjaskfjwqiorjasfksajfklasf 
+info HyphenatedWord: asnk-f-jaskfjwqior-jas-fk-sajfk-lasf 
+info RunTime: It took 6.33 seconds to run a code block
+ 
+info Word: wqrjqwrwqr 
+info HyphenatedWord: wqr-jqwr-wqr 
+info RunTime: It took 1.89 seconds to run a code block
+ 
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: asfsa 
+info HyphenatedWord: as-f-sa 
+info RunTime: It took 1.37 seconds to run a code block
+ 
+info Word: mistranslate 
+info Word: aswqvcyre 
+info HyphenatedWord: aswqv-cyre 
+info RunTime: It took 3.51 seconds to run a code block
+ 
+info Word: mistranslate 

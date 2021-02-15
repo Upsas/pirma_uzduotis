@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pattern;
 
 class Pattern
@@ -7,30 +9,33 @@ class Pattern
     /**
      * A list of numbers
      *
-     * @var array
+     * @var string $pattern
      */
 
-    private $pattern;
+    private string $pattern;
 
     public function __construct(string $pattern)
     {
         $this->pattern = $pattern;
     }
 
-    public function getPattern()
+    /**
+     * @return string $this->pattern
+     */
+
+    public function getPattern(): string
     {
         return $this->pattern;
     }
     /**
      * Strip all numbers from pattern
      *
-     * @param array $pattern
-     * @return array $pattern
+     * @param string $pattern
+     * @return string $pattern
      */
 
-    public function stripNumbers($pattern)
+    public function stripNumbers(string $pattern): string
     {
         return preg_replace('/[0-9]+/', '', $pattern);
     }
-
 }

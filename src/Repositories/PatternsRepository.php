@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Repositories;
 
@@ -8,8 +9,12 @@ use PDO;
 
 class PatternsRepository extends DatabaseConnection
 {
-
-    public function importPatternsToDb($patterns)
+    /**
+     * @param  string[]
+     * @return void
+     */
+    
+    public function importPatternsToDb(array $patterns):void
     {
         $sql = "INSERT INTO `patterns` ( `pattern`) VALUES ( ?)";
         $prepares = $this->connect()->prepare($sql);
@@ -18,8 +23,12 @@ class PatternsRepository extends DatabaseConnection
             $prepares->execute([$pattern->getPattern()]);
         }
     }
-
-    public function getPatternsFromDb()
+    
+    /**
+     * @return Pattern[]
+     */
+    
+    public function getPatternsFromDb():array
     {
         $sql = "SELECT `pattern` FROM `patterns`";
         $patterns = ($this->connect()->query($sql)->fetchAll(PDO::FETCH_CLASS));
@@ -30,8 +39,13 @@ class PatternsRepository extends DatabaseConnection
         }
         return $patter;
     }
+    
+    /**
+     * @param  string $pattern
+     * @return int|null
+     */
 
-    public function getPatternId($pattern)
+    public function getPatternId(string $pattern):?int
     {
         $sql = "SELECT `id` FROM `patterns` WHERE `pattern` LIKE ?";
         $prepare = $this->connect()->prepare($sql);
@@ -39,9 +53,9 @@ class PatternsRepository extends DatabaseConnection
         $prepare->execute([$pattern]);
         $id = $prepare->fetch(PDO::FETCH_COLUMN);
         if (!empty($id)) {
-            return $id;
+            return intval($id);
+        } else {
+            return null;
         }
-
     }
-
 }

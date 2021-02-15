@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Database;
 
@@ -6,12 +7,16 @@ use PDO;
 
 class DatabaseConnection
 {
-    private $host = '127.0.0.1';
-    private $user = 'root';
-    private $password = '';
-    private $dbName = 'visma_praktika';
+    private string $host = '127.0.0.1';
+    private string $user = 'root';
+    private string $password = '';
+    private string $dbName = 'visma_praktika';
+    
+    /**
+     * @return object
+     */
 
-    protected function connect()
+    protected function connect():object
     {
         // Setting dsn
         $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbName;

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Controllers;
 
@@ -9,18 +10,24 @@ use Repositories\WordsRepository;
 
 class WordsController
 {
+    /**
+     * @return void
+     */
 
-    public function getAllHyphenatedWords()
+    public function getAllHyphenatedWords(): void
     {
         $wordsRepository = new WordsRepository();
         header('Content-Type: application/json');
         echo json_encode($wordsRepository->getAllHyphenatedWordsFromDb());
-
     }
-    public function insertDataToDb()
+
+    /**
+     * @return void
+     */
+
+    public function insertDataToDb():void
     {
         if (!empty($word = $_POST['word'])) {
-
             $wordsRepository = new WordsRepository();
             $patternRepisotry = new PatternsRepository();
             $patterns = $patternRepisotry->getPatternsFromDb();
@@ -28,13 +35,20 @@ class WordsController
             if (empty($wordsRepository->checkForDuplicates($word))) {
                 $wordsRepository->addWords($word, $hyphenator->hyphenate($word));
                 $this->addRelationsToDb($word);
-            } else {echo 'Word already exists';}
-        } else {echo 'Empty data';}
+            } else {
+                echo 'Word already exists';
+            }
+        } else {
+            echo 'Empty data';
+        }
     }
+    
+    /**
+     * @return void
+     */
 
-    public function editData()
+    public function editData():void
     {
-
         parse_str(file_get_contents("php://input"), $data);
         $word = $data['word'];
         $newWord = $data['newWord'];
@@ -54,8 +68,12 @@ class WordsController
             echo 'Wrong input';
         }
     }
+    
+    /**
+     * @return void
+     */
 
-    public function deleteWordFromDb()
+    public function deleteWordFromDb():void
     {
         $wordsRepository = new WordsRepository();
         parse_str(file_get_contents("php://input"), $data);
@@ -67,8 +85,13 @@ class WordsController
             echo 'Wrong value';
         }
     }
+    
+    /**
+     * @param  string $word
+     * @return void
+     */
 
-    protected function addRelationsToDb($word)
+    protected function addRelationsToDb(string $word):void
     {
         $wordsRepository = new WordsRepository();
         $relationRepository = new RelationsRepository();
@@ -80,19 +103,22 @@ class WordsController
         $patt = $hyphenator->getSelectedPatterns($word);
 
         foreach ($patt as $pattern) {
-
             $patternId = $patternsRepository->getPatternId($pattern);
             $wordId = $wordsRepository->getWordId($word);
             $relationRepository->addRelationToDb($wordId, $patternId);
         }
     }
+    
+    /**
+     * @param  string $word
+     * @return void
+     */
 
-    protected function deleteRelationFromDb($word)
+    protected function deleteRelationFromDb(string $word):void
     {
         $wordsRepository = new WordsRepository();
         $relationRepository = new RelationsRepository();
         $wordId = $wordsRepository->getWordId($word);
         $relationRepository->deleteRelation($wordId);
-
     }
 }

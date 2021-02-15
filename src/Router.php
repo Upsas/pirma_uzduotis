@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use Controllers\WordsController;
 
@@ -8,7 +9,12 @@ class Router
     {
         $this->controller = new WordsController();
     }
-    public function routes()
+        
+    /**
+     * @return void
+     */
+
+    public function routes():void
     {
         switch ($_SERVER['REQUEST_URI'][-1] === '/') {
             case ($_SERVER['REQUEST_METHOD'] === 'GET'):
@@ -27,6 +33,5 @@ class Router
                 header('HTTP/1.1 405 Method Not Allowed');
                 header('Allow: GET, PUT, POST, DELETE');
         }
-
     }
 }

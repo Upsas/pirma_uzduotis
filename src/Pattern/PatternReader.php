@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types = 1);
 namespace Pattern;
 
 use Pattern\Pattern;
@@ -7,21 +7,21 @@ use Pattern\Pattern;
 class PatternReader
 {
     /**
-     * File with all patterns
+     * Local file with all patterns
      *
-     * @var url
+     * @var string $file
      */
 
-    protected $file = "./Assets/tex-hyphenation-patterns.txt";
+    protected string $file = "./Assets/tex-hyphenation-patterns.txt";
 
     /**
      * Checks if file exists
      *
-     * @param $this->file
-     * @return array $this->file
+     * @param string $this->file
+     * @return string[]
      */
 
-    protected function checkIfFileExists($file)
+    protected function checkIfFileExists(string $file): array
     {
         if (file_exists($file)) {
             return file($file);
@@ -30,7 +30,12 @@ class PatternReader
         }
     }
 
-    public function getPatterns($file)
+    /**
+     * @param  string $file
+     * @return Pattern[]
+     */
+    
+    public function getPatterns(string $file): array
     {
         $patterns = [];
         $patternStrings = $this->checkIfFileExists($file);
