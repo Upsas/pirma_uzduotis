@@ -16,6 +16,7 @@ class App
     {
         $this->log = new Log();
         $this->app();
+        $this->input = new Input($this->log);
     }
     
     /**
@@ -54,8 +55,7 @@ class App
 
     public function input():void
     {
-        $input = new Input($this->log);
-        $this->word = $input->getUserInput();
+        $this->word = $this->input->getUserInput();
     }
     
     /**

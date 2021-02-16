@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use Router;
 
@@ -8,8 +9,13 @@ class Api
     {
         $this->api();
     }
-    
-    public function api()
+        
+    /**
+     *
+     * @return void
+     */
+
+    public function api(): void
     {
         $router = new Router();
         $router->routes();

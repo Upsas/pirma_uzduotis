@@ -10,40 +10,32 @@ class WordsRepository extends DatabaseConnection
     
     /**
      * @param  string $word
-     * @return string|null
+     * @return string $word
      */
 
-    public function checkForDuplicates(string $word): ?string
+    public function checkForDuplicates(string $word): string
     {
         $sql = "SELECT `word` FROM `words` WHERE `word` LIKE ?";
         $prepare = $this->connect()->prepare($sql);
         $word = '%' . $word . '%';
         $prepare->execute([$word]);
         $word = $prepare->fetch(PDO::FETCH_COLUMN);
-        if (!empty($word)) {
-            return $word;
-        } else {
-            return null;
-        }
+        return $word;
     }
     
     /**
      * @param  string $word
-     * @return string|null
+     * @return string $hyphenatedWord
      */
     
-    public function getHyphenatedWordFromDb(string $word): ?string
+    public function getHyphenatedWordFromDb(string $word): string
     {
         $sql = "SELECT `hyphenated_word` FROM `words` WHERE `word` LIKE ?";
         $prepare = $this->connect()->prepare($sql);
         $word = '%' . $word . '%';
         $prepare->execute([$word]);
         $hyphenatedWord = $prepare->fetch(PDO::FETCH_COLUMN);
-        if (!empty($hyphenatedWord)) {
-            return $hyphenatedWord;
-        } else {
-            return null;
-        }
+        return $hyphenatedWord;
     }
     
     /**
@@ -101,9 +93,7 @@ class WordsRepository extends DatabaseConnection
         $word = '%' . $word . '%';
         $prepare->execute([$word]);
         $id = $prepare->fetch(PDO::FETCH_COLUMN);
-        if (!empty($id)) {
-            return $id;
-        }
+        return $id;
     }
     
     /**
@@ -125,7 +115,7 @@ class WordsRepository extends DatabaseConnection
      * @return void
      */
 
-    public function updateWord(string $newWord, string $newHyphenatedWord, int $id)
+    public function updateWord(string $newWord, string $newHyphenatedWord, int $id): void
     {
         $sql = "UPDATE `words` SET `word` = ?, `hyphenated_word` = ? WHERE `words`.`id` = ?";
         $prepare = $this->connect()->prepare($sql);

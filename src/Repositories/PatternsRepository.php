@@ -32,30 +32,24 @@ class PatternsRepository extends DatabaseConnection
     {
         $sql = "SELECT `pattern` FROM `patterns`";
         $patterns = ($this->connect()->query($sql)->fetchAll(PDO::FETCH_CLASS));
-        if (!empty($patterns)) {
-            foreach ($patterns as $pattern) {
-                $patter[] = new Pattern($pattern->pattern);
-            }
+        foreach ($patterns as $pattern) {
+            $patter[] = new Pattern($pattern->pattern);
         }
         return $patter;
     }
     
     /**
      * @param  string $pattern
-     * @return int|null
+     * @return int $id
      */
 
-    public function getPatternId(string $pattern):?int
+    public function getPatternId(string $pattern):int
     {
         $sql = "SELECT `id` FROM `patterns` WHERE `pattern` LIKE ?";
         $prepare = $this->connect()->prepare($sql);
         $pattern = '%' . $pattern . '%';
         $prepare->execute([$pattern]);
         $id = $prepare->fetch(PDO::FETCH_COLUMN);
-        if (!empty($id)) {
-            return intval($id);
-        } else {
-            return null;
-        }
+        return intval($id);
     }
 }
