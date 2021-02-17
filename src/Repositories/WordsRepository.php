@@ -2,50 +2,59 @@
 
 namespace Repositories;
 
-use Database\DatabaseConnection;
 use PDO;
+use Repositories\QueryBuilder;
+use Database\DatabaseConnection;
 
 class WordsRepository extends DatabaseConnection
 {
-    
+    private $queryBuilder;
+
+    public function __construct()
+    {
+        $this->queryBuilder = new QueryBuilder();
+    }
     /**
      * @param  string $word
-     * @return string $word
+     * @return string|null
      */
 
-    public function checkForDuplicates(string $word): string
+    public function checkForDuplicates(string $word): ?string
     {
-        $sql = "SELECT `word` FROM `words` WHERE `word` LIKE ?";
-        $prepare = $this->connect()->prepare($sql);
-        $word = '%' . $word . '%';
-        $prepare->execute([$word]);
-        $word = $prepare->fetch(PDO::FETCH_COLUMN);
-        return $word;
+        $word = $this->queryBuilder
+        ->select('word')
+        ->from('words')
+        ->where(['word', $word])
+        ->get();
+        return ($word[0]->word ?? null);
     }
     
     /**
      * @param  string $word
-     * @return string $hyphenatedWord
+     * @return string|null
      */
     
-    public function getHyphenatedWordFromDb(string $word): string
+    public function getHyphenatedWordFromDb(string $word): ?string
     {
-        $sql = "SELECT `hyphenated_word` FROM `words` WHERE `word` LIKE ?";
-        $prepare = $this->connect()->prepare($sql);
-        $word = '%' . $word . '%';
-        $prepare->execute([$word]);
-        $hyphenatedWord = $prepare->fetch(PDO::FETCH_COLUMN);
-        return $hyphenatedWord;
+        $hyphenatedWord = $this->queryBuilder
+        ->select('hyphenated_word')
+        ->from('words')
+        ->where(['word', $word])
+        ->get();
+        return ($hyphenatedWord[0]->hyphenated_word ?? null);
     }
     
     /**
-     * @return string[]
+     * @return object[]
      */
 
     public function getAllHyphenatedWordsFromDb(): array
     {
-        $sql = "SELECT `hyphenated_word` FROM `words`";
-        $hyphenatedWords = ($this->connect()->query($sql)->fetchAll(PDO::FETCH_COLUMN));
+        $hyphenatedWords = $this->queryBuilder
+        ->select('hyphenated_word')
+        ->from('words')
+        ->get();
+
         return $hyphenatedWords;
     }
     
@@ -55,7 +64,9 @@ class WordsRepository extends DatabaseConnection
 
     public function deleteWordsFromDb():void
     {
-        $this->connect()->exec("DELETE  FROM `words`");
+        $this->queryBuilder
+        ->from('words')
+        ->deleteAll();
     }
     
     /**
@@ -65,8 +76,10 @@ class WordsRepository extends DatabaseConnection
 
     public function deleteWord(int $id): void
     {
-        $sql = "DELETE FROM `words` WHERE `words`.`id` = ?";
-        $this->connect()->prepare($sql)->execute([$id]);
+        $this->queryBuilder
+        ->from('words')
+        ->where(['id', $id])
+        ->delete();
     }
         
     /**
@@ -77,33 +90,38 @@ class WordsRepository extends DatabaseConnection
 
     public function addWords(string $word, string $hyphenatedWord): void
     {
-        $sql = "INSERT INTO `words` (`word`, `hyphenated_word`) VALUES (?, ?)";
-        $this->connect()->prepare($sql)->execute([$word, $hyphenatedWord]);
+        $this->queryBuilder
+        ->from('words')
+        ->where(['word', 'hyphenated_word'])
+        ->values('?, ?')
+        ->insert([$word, $hyphenatedWord]);
     }
     
     /**
      * @param  string $word
-     * @return int $id
+     * @return int|null
      */
 
-    public function getWordId(string $word): int
+    public function getWordId(string $word): ?int
     {
-        $sql = "SELECT `id` FROM `words` WHERE `word` LIKE ?";
-        $prepare = $this->connect()->prepare($sql);
-        $word = '%' . $word . '%';
-        $prepare->execute([$word]);
-        $id = $prepare->fetch(PDO::FETCH_COLUMN);
-        return $id;
+        $word = $this->queryBuilder
+        ->select('id')
+        ->from('words')
+        ->where(['word', $word])
+        ->get();
+        return $word[0]->id ?? null;
     }
     
     /**
-     * @return string[]
+     * @return object[]
      */
     
     public function getAllWordsFromDb(): array
     {
-        $sql = "SELECT `word` FROM `words`";
-        $words = ($this->connect()->query($sql)->fetchAll(PDO::FETCH_COLUMN));
+        $words = $this->queryBuilder
+        ->select('word')
+        ->from('words')
+        ->get();
         return $words;
     }
     
@@ -117,8 +135,10 @@ class WordsRepository extends DatabaseConnection
 
     public function updateWord(string $newWord, string $newHyphenatedWord, int $id): void
     {
-        $sql = "UPDATE `words` SET `word` = ?, `hyphenated_word` = ? WHERE `words`.`id` = ?";
-        $prepare = $this->connect()->prepare($sql);
-        $prepare->execute([$newWord, $newHyphenatedWord, $id]);
+        $this->queryBuilder
+        ->from('words')
+        ->set('`word` = ?, `hyphenated_word` = ?')
+        ->where(['id', $id])
+        ->update([$newWord, $newHyphenatedWord]);
     }
 }

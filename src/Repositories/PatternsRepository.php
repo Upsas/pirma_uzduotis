@@ -5,10 +5,18 @@ namespace Repositories;
 
 use Database\DatabaseConnection;
 use Pattern\Pattern;
+use Repositories\QueryBuilder;
 use PDO;
 
 class PatternsRepository extends DatabaseConnection
 {
+    private $queryBuilder;
+
+    public function __construct()
+    {
+        $this->queryBuilder = new QueryBuilder();
+    }
+    
     /**
      * @param  string[]
      * @return void
@@ -16,11 +24,16 @@ class PatternsRepository extends DatabaseConnection
     
     public function importPatternsToDb(array $patterns):void
     {
-        $sql = "INSERT INTO `patterns` ( `pattern`) VALUES ( ?)";
-        $prepares = $this->connect()->prepare($sql);
-        $this->connect()->exec("DELETE  FROM `patterns`");
+        $this->queryBuilder
+        ->from('patterns')
+        ->deleteAll();
+        
         foreach ($patterns as $pattern) {
-            $prepares->execute([$pattern->getPattern()]);
+            $this->queryBuilder
+        ->from('patterns')
+        ->where(['pattern'])
+        ->values('?')
+        ->insert([$pattern->getPattern()]);
         }
     }
     
@@ -30,8 +43,10 @@ class PatternsRepository extends DatabaseConnection
     
     public function getPatternsFromDb():array
     {
-        $sql = "SELECT `pattern` FROM `patterns`";
-        $patterns = ($this->connect()->query($sql)->fetchAll(PDO::FETCH_CLASS));
+        $patterns = $this->queryBuilder
+        ->from('patterns')
+        ->select('pattern')
+        ->get();
         foreach ($patterns as $pattern) {
             $patter[] = new Pattern($pattern->pattern);
         }
@@ -43,13 +58,15 @@ class PatternsRepository extends DatabaseConnection
      * @return int $id
      */
 
-    public function getPatternId(string $pattern):int
+    public function getPatternId(string $pattern)
     {
-        $sql = "SELECT `id` FROM `patterns` WHERE `pattern` LIKE ?";
-        $prepare = $this->connect()->prepare($sql);
-        $pattern = '%' . $pattern . '%';
-        $prepare->execute([$pattern]);
-        $id = $prepare->fetch(PDO::FETCH_COLUMN);
-        return intval($id);
+        $id = $this->queryBuilder
+        ->select('id')
+        ->from('patterns')
+        ->where(['pattern'])
+        ->like($pattern)
+        ->getLike();
+        
+        return ($id);
     }
 }

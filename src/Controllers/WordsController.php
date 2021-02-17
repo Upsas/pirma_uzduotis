@@ -19,6 +19,7 @@ class WordsController
     {
         $this->instanceAllClasses();
     }
+    
     /**
      * @return void
      */
@@ -26,7 +27,8 @@ class WordsController
     public function getAllHyphenatedWords(): void
     {
         header('Content-Type: application/json');
-        echo json_encode($this->wordsRepository->getAllHyphenatedWordsFromDb());
+        $hyphenatedWords = $this->wordsRepository->getAllHyphenatedWordsFromDb();
+        echo json_encode($hyphenatedWords);
     }
 
     /**

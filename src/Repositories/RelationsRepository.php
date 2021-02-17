@@ -2,11 +2,17 @@
 
 namespace Repositories;
 
-use Database\DatabaseConnection;
+use Repositories\QueryBuilder;
 
-class RelationsRepository extends DatabaseConnection
+class RelationsRepository
 {
-    
+    private $queryBuilder;
+
+    public function __construct()
+    {
+        $this->queryBuilder = new QueryBuilder();
+    }
+
     /**
      * @param  int $wordId
      * @param  int $patternId
@@ -15,9 +21,10 @@ class RelationsRepository extends DatabaseConnection
 
     public function addRelationToDb(int $wordId, int $patternId):void
     {
-        $sql = "INSERT INTO `relations` (`word_id`, `pattern_id`) VALUES (?, ?)";
-        $prepares = $this->connect()->prepare($sql);
-        $prepares->execute([$wordId, $patternId]);
+        $this->queryBuilder->from('relations')
+        ->where(['word_id', 'pattern_id'])
+        ->values('?, ?')
+        ->insert([$wordId, $patternId]);
     }
     
     /**
@@ -27,7 +34,9 @@ class RelationsRepository extends DatabaseConnection
 
     public function deleteRelation(int $id):void
     {
-        $sql = "DELETE FROM `relations` WHERE `word_id` = ?";
-        $this->connect()->prepare($sql)->execute([$id]);
+        $this->queryBuilder
+        ->from('relations')
+        ->where(['word_id', $id])
+        ->delete();
     }
 }
