@@ -1,7 +1,9 @@
 <?php
 declare(strict_types = 1);
+
 namespace App;
 
+use App\Api;
 use App\Log\Log;
 use App\InputOutput\Input;
 use App\InputOutput\Output;
@@ -18,9 +20,9 @@ class App
     private object $hyphenator;
     private object $relationsRepository;
     private object $patternReader;
-    
-    public function __construct()
+    public function __construct(Router $route)
     {
+        $this->router = $route;
         $this->log = new Log();
         $this->instancesOfClasses();
         $this->app();
@@ -52,7 +54,7 @@ class App
 
         // $this->addWordsFromFileToDb();
         } else {
-            $api = new Api();
+            $api = new Api($this->router);
         }
     }
     

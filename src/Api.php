@@ -3,21 +3,12 @@ declare(strict_types = 1);
 
 namespace App;
 
+use App\Router;
+
 class Api
 {
-    public function __construct()
+    public function __construct(Router $router)
     {
-        $this->api();
-    }
-        
-    /**
-     *
-     * @return void
-     */
-
-    public function api(): void
-    {
-        $router = new Router();
         $router->routes();
     }
 }

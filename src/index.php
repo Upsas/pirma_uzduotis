@@ -1,7 +1,9 @@
 <?php
+declare(strict_types = 1);
 
-use App\App;
+use App\Container\DIContainer;
 
-require_once("./vendor/autoload.php");
+require_once "./vendor/autoload.php";
 
-$app = new App();
+$DIconatienr = new DIContainer();
+$DIconatienr->get('App');
