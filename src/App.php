@@ -1,14 +1,15 @@
 <?php
 declare(strict_types = 1);
+namespace App;
 
-use Log\Log;
-use InputOutput\Input;
-use InputOutput\Output;
-use Pattern\Hyphenator;
-use Pattern\PatternReader;
-use Repositories\WordsRepository;
-use Repositories\PatternsRepository;
-use Repositories\RelationsRepository;
+use App\Log\Log;
+use App\InputOutput\Input;
+use App\InputOutput\Output;
+use App\Pattern\Hyphenator;
+use App\Pattern\PatternReader;
+use App\Repositories\WordsRepository;
+use App\Repositories\PatternsRepository;
+use App\Repositories\RelationsRepository;
 
 class App
 {

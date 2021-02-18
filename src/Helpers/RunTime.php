@@ -1,11 +1,11 @@
 <?php
 
-namespace Helpers;
+namespace App\Helpers;
 
 class RunTime
 {
-    static $start;
-    static $end;
+    public static $start;
+    public static $end;
 
     public static function timeStart()
     {
@@ -26,5 +26,4 @@ class RunTime
     {
         return ('It took ' . number_format(self::timeCalc(), 2) . ' seconds to run a code block') . PHP_EOL;
     }
-
 }

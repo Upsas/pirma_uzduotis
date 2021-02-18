@@ -1,12 +1,11 @@
 <?php
 declare(strict_types = 1);
 
-namespace Repositories;
+namespace App\Repositories;
 
-use Database\DatabaseConnection;
-use Pattern\Pattern;
-use Repositories\QueryBuilder;
-use PDO;
+use App\Database\DatabaseConnection;
+use App\Pattern\Pattern;
+use App\Repositories\QueryBuilder;
 
 class PatternsRepository extends DatabaseConnection
 {
@@ -58,7 +57,7 @@ class PatternsRepository extends DatabaseConnection
      * @return int $id
      */
 
-    public function getPatternId(string $pattern)
+    public function getPatternId(string $pattern):int
     {
         $id = $this->queryBuilder
         ->select('id')
@@ -66,7 +65,6 @@ class PatternsRepository extends DatabaseConnection
         ->where(['pattern'])
         ->like($pattern)
         ->getLike();
-        
-        return ($id);
+        return intval($id);
     }
 }

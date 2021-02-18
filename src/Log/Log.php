@@ -1,9 +1,9 @@
 <?php
 
-namespace Log;
+namespace App\Log;
 
-use Log\LoggerInterface;
-use Log\LogLevel;
+use App\Log\LoggerInterface;
+use App\Log\LogLevel;
 use SplFileObject;
 
 class Log implements LoggerInterface
@@ -12,7 +12,6 @@ class Log implements LoggerInterface
     {
         $replace = array();
         foreach ($context as $key => $val) {
-
             if (!is_array($val) && (!is_object($val) || method_exists($val, '__toString'))) {
                 $replace['{' . $key . '}'] = $val;
             }
@@ -30,7 +29,6 @@ class Log implements LoggerInterface
     public function emergency($message, array $context = array())
     {
         $this->log(LogLevel::INFO, $message, $context);
-
     }
 
     /**
@@ -105,7 +103,6 @@ class Log implements LoggerInterface
     public function notice($message, array $context = array())
     {
         $this->log(LogLevel::INFO, $message, $context);
-
     }
 
     /**
@@ -134,7 +131,6 @@ class Log implements LoggerInterface
 
     public function debug($message, array $context = array())
     {
-
         $this->log(LogLevel::INFO, $message, $context);
     }
 
@@ -155,5 +151,4 @@ class Log implements LoggerInterface
         $string = "%s %s \n";
         $file->fwrite(sprintf($string, $level, $this->interpolate($message, $context)));
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Log;
+namespace App\Log;
 
 /**
  * Describes log levels.

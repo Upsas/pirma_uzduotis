@@ -1,8 +1,9 @@
 <?php
 declare(strict_types = 1);
-namespace Pattern;
 
-use Pattern\Pattern;
+namespace App\Pattern;
+
+use App\Pattern\Pattern;
 
 class PatternReader
 {

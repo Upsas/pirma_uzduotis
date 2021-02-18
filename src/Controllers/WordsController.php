@@ -1,23 +1,20 @@
 <?php
 declare(strict_types = 1);
 
-namespace Controllers;
+namespace App\Controllers;
 
-use Pattern\Hyphenator;
-use Repositories\PatternsRepository;
-use Repositories\RelationsRepository;
-use Repositories\WordsRepository;
+use App\Pattern\Hyphenator;
+use App\Factories\RepositoryFactory;
 
 class WordsController
 {
-    private object $wordsRepository;
-    private object $patternsRepository;
+    private object $repositoriesFactory;
     private object $hyphenator;
-    private object $relationsRepository;
 
     public function __construct()
     {
-        $this->instanceAllClasses();
+        $this->repositoriesFactory = new RepositoryFactory();
+        $this->hyphenator = new Hyphenator($this->repositoriesFactory->createRepository('Patterns')->getPatternsFromDb());
     }
     
     /**
@@ -27,7 +24,7 @@ class WordsController
     public function getAllHyphenatedWords(): void
     {
         header('Content-Type: application/json');
-        $hyphenatedWords = $this->wordsRepository->getAllHyphenatedWordsFromDb();
+        $hyphenatedWords = $this->repositoriesFactory->createRepository('Words')->getAllHyphenatedWordsFromDb();
         echo json_encode($hyphenatedWords);
     }
 
@@ -38,8 +35,8 @@ class WordsController
     public function insertDataToDb():void
     {
         if (!empty($word = $_POST['word'])) {
-            if (empty($this->wordsRepository->checkForDuplicates($word))) {
-                $this->wordsRepository->addWords($word, $this->hyphenator->hyphenate($word));
+            if (empty($this->repositoriesFactory->createRepository('Words')->checkForDuplicates($word))) {
+                $this->repositoriesFactory->createRepository('Words')->addWords($word, $this->hyphenator->hyphenate($word));
                 $this->addRelationsToDb($word);
             } else {
                 echo 'Word already exists';
@@ -58,13 +55,13 @@ class WordsController
         parse_str(file_get_contents("php://input"), $data);
         $word = $data['word'];
         $newWord = $data['newWord'];
-        $duplicate = $this->wordsRepository->checkForDuplicates($word);
-        $newWordDuplicate = $this->wordsRepository->checkForDuplicates($newWord);
+        $duplicate = $this->repositoriesFactory->createRepository('Words')->checkForDuplicates($word);
+        $newWordDuplicate = $this->repositoriesFactory->createRepository('Words')->checkForDuplicates($newWord);
         if (isset($duplicate) && !empty($word) && !empty($newWord) && empty($newWordDuplicate)) {
             $newHyphenatedWord = $this->hyphenator->hyphenate($newWord);
-            $id = $this->wordsRepository->getWordId($word);
+            $id = $this->repositoriesFactory->createRepository('Words')->getWordId($word);
             $this->deleteRelationFromDb($word);
-            $this->wordsRepository->updateWord($newWord, $newHyphenatedWord, $id);
+            $this->repositoriesFactory->createRepository('Words')->updateWord($newWord, $newHyphenatedWord, $id);
             $this->addRelationsToDb($newWord);
         } else {
             echo 'Wrong input';
@@ -79,9 +76,9 @@ class WordsController
     {
         parse_str(file_get_contents("php://input"), $data);
         $word = $data['word'];
-        if (!empty($this->wordsRepository->checkForDuplicates($word))) {
-            $id = $this->wordsRepository->getWordId($word);
-            $this->wordsRepository->deleteWord($id);
+        if (!empty($this->repositoriesFactory->createRepository('Words')->checkForDuplicates($word))) {
+            $id = $this->repositoriesFactory->createRepository('Words')->getWordId($word);
+            $this->repositoriesFactory->createRepository('Words')->deleteWord($id);
         } else {
             echo 'Wrong value';
         }
@@ -94,12 +91,13 @@ class WordsController
 
     protected function addRelationsToDb(string $word):void
     {
-        $patterns = $this->hyphenator->getSelectedPatterns($word);
+        ($patterns = $this->hyphenator->getSelectedPatterns($word));
 
         foreach ($patterns as $pattern) {
-            $patternId = $this->patternsRepository->getPatternId($pattern);
-            $wordId = $this->wordsRepository->getWordId($word);
-            $this->relationsRepository->addRelationToDb($wordId, $patternId);
+            ($patternId = $this->repositoriesFactory->createRepository('Patterns')->getPatternId($pattern));
+            
+            $wordId = $this->repositoriesFactory->createRepository('Words')->getWordId($word);
+            $this->repositoriesFactory->createRepository('Relations')->addRelationToDb($wordId, $patternId);
         }
     }
     
@@ -110,19 +108,7 @@ class WordsController
 
     protected function deleteRelationFromDb(string $word):void
     {
-        $wordId = $this->wordsRepository->getWordId($word);
-        $this->relationsRepository->deleteRelation($wordId);
-    }
-    
-    /**
-     * @return void
-     */
-    
-    protected function instanceAllClasses():void
-    {
-        $this->wordsRepository = new WordsRepository();
-        $this->patternsRepository = new PatternsRepository();
-        $this->hyphenator = new Hyphenator($this->patternsRepository->getPatternsFromDb());
-        $this->relationsRepository = new RelationsRepository();
+        $wordId = $this->repositoriesFactory->createRepository('Words')->getWordId($word);
+        $this->repositoriesFactory->createRepository('Relations')->deleteRelation($wordId);
     }
 }

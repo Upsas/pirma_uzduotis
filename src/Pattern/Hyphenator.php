@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace Pattern;
+namespace App\Pattern;
 
 class Hyphenator
 {

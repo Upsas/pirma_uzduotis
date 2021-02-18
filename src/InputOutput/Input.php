@@ -1,10 +1,10 @@
 <?php
 declare(strict_types = 1);
 
-namespace InputOutput;
+namespace App\InputOutput;
 
-use Helpers\RunTime;
-use Log\Log;
+use App\Helpers\RunTime;
+use App\Log\Log;
 
 class Input
 {

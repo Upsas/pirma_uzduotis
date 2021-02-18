@@ -1,14 +1,13 @@
 <?php
-declare (strict_types = 1);
-namespace InputOutput;
+declare(strict_types = 1);
+namespace App\InputOutput;
 
-use Database\DatabaseConnection;
-use Helpers\RunTime;
-use Log\Log;
+use App\Database\DatabaseConnection;
+use App\Helpers\RunTime;
+use App\Log\Log;
 
 class Output extends DatabaseConnection
 {
-
     private log $logger;
     public ?string $word;
 

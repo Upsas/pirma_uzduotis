@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
-namespace Repositories;
+namespace App\Repositories;
 
-use Database\DatabaseConnection;
+use App\Database\DatabaseConnection;
 use PDO;
 
 class QueryBuilder extends DatabaseConnection
@@ -94,11 +94,13 @@ class QueryBuilder extends DatabaseConnection
         return $this->connect()->query($sql)->fetchAll(PDO::FETCH_CLASS);
     }
 
-    public function getLike():object
+    public function getLike():string
     {
-        $sql = "SELECT $this->select FROM $this->from WHERE $this->where LIKE $this->like";
+        $a = $this->where[0];
         $this->like = '%' . $this->like . '%';
-        return $this->connect()->prepare($sql)->execute([$this->like])->fetch(PDO::FETCH_COLUMN);
+
+        $sql = "SELECT $this->select FROM $this->from WHERE $a LIKE '$this->like'";
+        return $this->connect()->query($sql)->fetch(PDO::FETCH_COLUMN);
     }
 
     public function all():array

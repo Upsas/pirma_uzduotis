@@ -1,10 +1,9 @@
 <?php
 
-namespace Repositories;
+namespace App\Repositories;
 
-use PDO;
-use Repositories\QueryBuilder;
-use Database\DatabaseConnection;
+use App\Repositories\QueryBuilder;
+use App\Database\DatabaseConnection;
 
 class WordsRepository extends DatabaseConnection
 {

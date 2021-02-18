@@ -1,8 +1,8 @@
 <?php
 
-namespace Repositories;
+namespace App\Repositories;
 
-use Repositories\QueryBuilder;
+use App\Repositories\QueryBuilder;
 
 class RelationsRepository
 {
