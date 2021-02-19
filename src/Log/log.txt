@@ -33,3 +33,51 @@ info Word: mistransla
 info HyphenatedWord: mis-transla 
 info RunTime: It took 3.15 seconds to run a code block
  
+info Word: mistranslate 
+info Word: mistranslate 
+info Word: msaifaslfa 
+info HyphenatedWord: m-saifaslfa 
+info RunTime: It took 1.97 seconds to run a code block
+ 
+info Word: asmkfjaskf 
+info HyphenatedWord: asmk-f-jaskf 
+info RunTime: It took 1.62 seconds to run a code block
+ 
+info Word: safkljaslf 
+info HyphenatedWord: safkl-jaslf 
+info RunTime: It took 3.43 seconds to run a code block
+ 
+info Word: asasfasfasf 
+info Word: mistranslatasfas 
+info Word: misafasf 
+info HyphenatedWord: misafas-f 
+info RunTime: It took 1.89 seconds to run a code block
+ 
+info Word: asfasf 
+info HyphenatedWord: as-fasf 
+info RunTime: It took 1.33 seconds to run a code block
+ 
+info Word: asfasf 
+info HyphenatedWord: as-fasf 
+info RunTime: It took 1.20 seconds to run a code block
+ 
+info Word: mistranslate 
+info Word: asfsaf 
+info HyphenatedWord: as-f-saf 
+info RunTime: It took 1.50 seconds to run a code block
+ 
+info Word: safasflasf 
+info HyphenatedWord: safas-flasf 
+info RunTime: It took 85.73 seconds to run a code block
+ 
+info Word: asfkas 
+info Word: safas 
+info HyphenatedWord: safas 
+info RunTime: It took 3.40 seconds to run a code block
+ 
+info Word: mistranslate 
+info Word: safasf 
+info HyphenatedWord: safas-f 
+info RunTime: It took 2.30 seconds to run a code block
+ 
+info Word: mistranslate 

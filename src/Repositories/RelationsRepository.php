@@ -19,7 +19,7 @@ class RelationsRepository
      * @return void
      */
 
-    public function addRelationToDb(int $wordId, int $patternId):void
+    public function addRelationToDb(int $wordId, int $patternId): void
     {
         $this->queryBuilder->from('relations')
         ->where(['word_id', 'pattern_id'])
@@ -32,7 +32,7 @@ class RelationsRepository
      * @return void
      */
 
-    public function deleteRelation(int $id):void
+    public function deleteRelation(int $id): void
     {
         $this->queryBuilder
         ->from('relations')

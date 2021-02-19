@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Repositories;
 
@@ -21,7 +22,7 @@ class PatternsRepository extends DatabaseConnection
      * @return void
      */
     
-    public function importPatternsToDb(array $patterns):void
+    public function importPatternsToDb(array $patterns): void
     {
         $this->queryBuilder
         ->from('patterns')
@@ -40,7 +41,7 @@ class PatternsRepository extends DatabaseConnection
      * @return Pattern[]
      */
     
-    public function getPatternsFromDb():array
+    public function getPatternsFromDb(): array
     {
         $patterns = $this->queryBuilder
         ->from('patterns')
@@ -57,7 +58,7 @@ class PatternsRepository extends DatabaseConnection
      * @return int $id
      */
 
-    public function getPatternId(string $pattern):int
+    public function getPatternId(string $pattern): int
     {
         $id = $this->queryBuilder
         ->select('id')

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Git blame report for PHP_CodeSniffer.
  *
@@ -53,7 +54,6 @@ class Gitblame extends VersionControl
         $parts  = array_slice($parts, 0, (count($parts) - 2));
         $author = preg_replace('|\(|', '', implode(' ', $parts));
         return $author;
-
     }//end getAuthor()
 
 
@@ -70,10 +70,10 @@ class Gitblame extends VersionControl
         $cwd = getcwd();
 
         chdir(dirname($filename));
-        $command = 'git blame --date=short "'.$filename.'" 2>&1';
+        $command = 'git blame --date=short "' . $filename . '" 2>&1';
         $handle  = popen($command, 'r');
         if ($handle === false) {
-            $error = 'ERROR: Could not execute "'.$command.'"'.PHP_EOL.PHP_EOL;
+            $error = 'ERROR: Could not execute "' . $command . '"' . PHP_EOL . PHP_EOL;
             throw new DeepExitException($error, 3);
         }
 
@@ -84,8 +84,5 @@ class Gitblame extends VersionControl
         chdir($cwd);
 
         return $blames;
-
     }//end getBlameContent()
-
-
 }//end class

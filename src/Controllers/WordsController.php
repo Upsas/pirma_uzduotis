@@ -1,9 +1,9 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Factories\PatternFactory;
 use App\Pattern\Hyphenator;
 use App\Repositories\PatternsRepository;
 use App\Repositories\RelationsRepository;
@@ -39,7 +39,7 @@ class WordsController
      * @return void
      */
 
-    public function insertDataToDb():void
+    public function insertDataToDb(): void
     {
         if (!empty($word = $_POST['word'])) {
             if (empty($this->wordsRepository->checkForDuplicates($word))) {
@@ -57,7 +57,7 @@ class WordsController
      * @return void
      */
 
-    public function editData():void
+    public function editData(): void
     {
         parse_str(file_get_contents("php://input"), $data);
         $word = $data['word'];
@@ -79,7 +79,7 @@ class WordsController
      * @return void
      */
 
-    public function deleteWordFromDb():void
+    public function deleteWordFromDb(): void
     {
         parse_str(file_get_contents("php://input"), $data);
         $word = $data['word'];
@@ -96,7 +96,7 @@ class WordsController
      * @return void
      */
 
-    protected function addRelationsToDb(string $word):void
+    protected function addRelationsToDb(string $word): void
     {
         $patterns = $this->hyphenator->getSelectedPatterns($word);
 
@@ -112,7 +112,7 @@ class WordsController
      * @return void
      */
 
-    protected function deleteRelationFromDb(string $word):void
+    protected function deleteRelationFromDb(string $word): void
     {
         $wordId = $this->wordsRepository->getWordId($word);
         $this->relationsRepository->deleteRelation($wordId);

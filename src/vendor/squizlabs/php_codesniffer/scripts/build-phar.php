@@ -1,5 +1,6 @@
 #!/usr/bin/env php
 <?php
+
 /**
  * Build a PHPCS phar.
  *
@@ -17,7 +18,7 @@
 error_reporting(E_ALL | E_STRICT);
 
 if (ini_get('phar.readonly') === '1') {
-    echo 'Unable to build, phar.readonly in php.ini is set to read only.'.PHP_EOL;
+    echo 'Unable to build, phar.readonly in php.ini is set to read only.' . PHP_EOL;
     exit(1);
 }
 
@@ -27,13 +28,13 @@ $scripts = [
 ];
 
 foreach ($scripts as $script) {
-    echo "Building $script phar".PHP_EOL;
+    echo "Building $script phar" . PHP_EOL;
 
-    $pharName = $script.'.phar';
-    $pharFile = getcwd().'/'.$pharName;
-    echo "\t=> $pharFile".PHP_EOL;
+    $pharName = $script . '.phar';
+    $pharFile = getcwd() . '/' . $pharName;
+    echo "\t=> $pharFile" . PHP_EOL;
     if (file_exists($pharFile) === true) {
-        echo "\t** file exists, removing **".PHP_EOL;
+        echo "\t** file exists, removing **" . PHP_EOL;
         unlink($pharFile);
     }
 
@@ -45,7 +46,7 @@ foreach ($scripts as $script) {
 
     echo "\t=> adding files... ";
 
-    $srcDir    = realpath(__DIR__.'/../src');
+    $srcDir    = realpath(__DIR__ . '/../src');
     $srcDirLen = strlen($srcDir);
 
     $rdi = new \RecursiveDirectoryIterator($srcDir, \RecursiveDirectoryIterator::FOLLOW_SYMLINKS);
@@ -64,33 +65,33 @@ foreach ($scripts as $script) {
             continue;
         }
 
-        $path = 'src'.substr($fullpath, $srcDirLen);
+        $path = 'src' . substr($fullpath, $srcDirLen);
 
         $phar->addFromString($path, php_strip_whitespace($fullpath));
     }
 
     // Add autoloader.
-    $phar->addFromString('autoload.php', php_strip_whitespace(realpath(__DIR__.'/../autoload.php')));
+    $phar->addFromString('autoload.php', php_strip_whitespace(realpath(__DIR__ . '/../autoload.php')));
 
     // Add licence file.
-    $phar->addFromString('licence.txt', php_strip_whitespace(realpath(__DIR__.'/../licence.txt')));
+    $phar->addFromString('licence.txt', php_strip_whitespace(realpath(__DIR__ . '/../licence.txt')));
 
-    echo 'done'.PHP_EOL;
+    echo 'done' . PHP_EOL;
 
     /*
         Add the stub.
     */
 
     echo "\t=> adding stub... ";
-    $stub  = '#!/usr/bin/env php'."\n";
-    $stub .= '<?php'."\n";
-    $stub .= 'Phar::mapPhar(\''.$pharName.'\');'."\n";
-    $stub .= 'require_once "phar://'.$pharName.'/autoload.php";'."\n";
-    $stub .= '$runner = new PHP_CodeSniffer\Runner();'."\n";
-    $stub .= '$exitCode = $runner->run'.$script.'();'."\n";
-    $stub .= 'exit($exitCode);'."\n";
+    $stub  = '#!/usr/bin/env php' . "\n";
+    $stub .= '<?php' . "\n";
+    $stub .= 'Phar::mapPhar(\'' . $pharName . '\');' . "\n";
+    $stub .= 'require_once "phar://' . $pharName . '/autoload.php";' . "\n";
+    $stub .= '$runner = new PHP_CodeSniffer\Runner();' . "\n";
+    $stub .= '$exitCode = $runner->run' . $script . '();' . "\n";
+    $stub .= 'exit($exitCode);' . "\n";
     $stub .= '__HALT_COMPILER();';
     $phar->setStub($stub);
 
-    echo 'done'.PHP_EOL;
+    echo 'done' . PHP_EOL;
 }//end foreach

@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Factories;
 
@@ -13,7 +14,7 @@ class PatternFactory
         return new PatternReader();
     }
 
-    public function createHyphenatorClass(array $patterns):object
+    public function createHyphenatorClass(array $patterns): object
     {
         return new Hyphenator($patterns);
     }

@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Pattern;
 
@@ -73,7 +74,7 @@ class Hyphenator
      * @return string[]
      */
 
-    public function populateNumbersArray(array $numbersArray, int $position, string $pattern):array
+    public function populateNumbersArray(array $numbersArray, int $position, string $pattern): array
     {
         for ($i = 0; $i < strlen($pattern); $i++) {
             if (is_numeric($pattern[$i])) {
@@ -99,7 +100,7 @@ class Hyphenator
      * @return string[]
      */
 
-    public function populatePositionWithNumber(string $word, array $patterns):array
+    public function populatePositionWithNumber(string $word, array $patterns): array
     {
         $numbersArray = [];
         if (!empty($patterns)) {
@@ -150,7 +151,7 @@ class Hyphenator
      * @return string $word
      */
 
-    public function hyphenate(string $word):string
+    public function hyphenate(string $word): string
     {
         $selectedPatterns = $this->getSelectedPatterns($word);
         $numbersArray = $this->populatePositionWithNumber($word, $selectedPatterns);

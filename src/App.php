@@ -1,13 +1,14 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App;
 
 use App\Api;
+use App\Factories\PatternFactory;
 use App\Log\Log;
 use App\InputOutput\Input;
 use App\InputOutput\Output;
-use App\Pattern\Hyphenator;
 use App\Pattern\PatternReader;
 use App\Repositories\WordsRepository;
 use App\Repositories\PatternsRepository;
@@ -17,13 +18,14 @@ class App
 {
     private object $wordsRepository;
     private object $patternsRepository;
-    private object $hyphenator;
+    private object $patternFactory;
     private object $relationsRepository;
     private object $patternReader;
     public function __construct(Router $route)
     {
         $this->router = $route;
         $this->log = new Log();
+        $this->patternFactory = new PatternFactory();
         $this->instancesOfClasses();
         $this->app();
     }
@@ -32,7 +34,7 @@ class App
      * @return void
      */
     
-    public function app():void
+    public function app(): void
     {
         if (php_sapi_name() === 'cli') {
             $this->input();
@@ -62,7 +64,7 @@ class App
      * @return void
      */
 
-    public function input():void
+    public function input(): void
     {
         $this->input = new Input($this->log);
         $this->word = $this->input->getUserInput();
@@ -85,9 +87,9 @@ class App
      * @return string
      */
     
-    public function hyphanteWord():string
+    public function hyphanteWord(): string
     {
-        $hyphenator = new Hyphenator($this->patternReader());
+        $hyphenator = $this->patternFactory->createHyphenatorClass($this->patternReader());
         return $hyphenator->hyphenate($this->word);
     }
     
@@ -105,7 +107,7 @@ class App
      * @return null|string
      */
 
-    public function getHyphenatedWord():?string
+    public function getHyphenatedWord(): ?string
     {
         if (!empty($this->wordsRepository->checkForDuplicates($this->word))) {
             return $this->wordsRepository->getHyphenatedWordFromDb($this->word);
@@ -120,7 +122,9 @@ class App
     public function displayPatterns(): void
     {
         if ($this->source === 'db') {
-            $patt = $this->hyphenator->getSelectedPatterns($this->word);
+            $patterns = $this->patternsRepository->getPatternsFromDb();
+            $hyphenator = $this->patternFactory->createHyphenatorClass($patterns);
+            $patt = $hyphenator->getSelectedPatterns($this->word);
             echo implode(' ', $patt) . PHP_EOL;
         }
     }
@@ -129,7 +133,7 @@ class App
      * @return void
      */
 
-    protected function addPatternsToDb():void
+    protected function addPatternsToDb(): void
     {
         if (!empty($this->filetype) && $this->filetype === 'new') {
             $url = trim(readline('Enter pattern file url: '));
@@ -143,13 +147,13 @@ class App
      * @return void
      */
 
-    protected function addWordsFromFileToDb():void
+    protected function addWordsFromFileToDb(): void
     {
         $url = trim(readline('Enter url: '));
         $words = file($url);
 
         $patterns = $this->patternReader();
-        $hyphenator = new Hyphenator($patterns);
+        $hyphenator = $this->patternFactory->createHyphenatorClass($patterns);
 
         $this->wordsRepository->deleteWordsFromDb();
         foreach ($words as $word) {
@@ -163,7 +167,7 @@ class App
      * @return void
      */
 
-    public function addWordToDb():void
+    public function addWordToDb(): void
     {
         if (empty($this->wordsRepository->checkForDuplicates($this->word))) {
             $this->wordsRepository->addWords($this->word, $this->hyphanteWord());
@@ -176,9 +180,11 @@ class App
      * @return void
      */
 
-    protected function addRelationsToDb(string $word):void
+    protected function addRelationsToDb(string $word): void
     {
-        $patterns = $this->hyphenator->getSelectedPatterns($word);
+        $patterns = $this->patternReader();
+        $hyphenator = $this->patternFactory->createHyphenatorClass($patterns);
+        $patterns = $hyphenator->getSelectedPatterns($word);
 
         foreach ($patterns as $pattern) {
             ($patternId = $this->patternsRepository->getPatternId($pattern));
@@ -195,7 +201,6 @@ class App
     {
         $this->wordsRepository = new WordsRepository();
         $this->patternsRepository = new PatternsRepository();
-        $this->hyphenator = new Hyphenator($this->patternsRepository->getPatternsFromDb());
         $this->relationsRepository = new RelationsRepository();
         $this->patternReader = new PatternReader();
     }

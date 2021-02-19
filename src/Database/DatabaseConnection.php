@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Database;
 
@@ -16,7 +17,7 @@ class DatabaseConnection
      * @return object
      */
 
-    protected function connect():object
+    protected function connect(): object
     {
         // Setting dsn
         $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbName;

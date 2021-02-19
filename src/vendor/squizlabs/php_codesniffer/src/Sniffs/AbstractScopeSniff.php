@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Allows tests that extend this class to listen for tokens within a particular scope.
  *
@@ -71,7 +72,7 @@ abstract class AbstractScopeSniff implements Sniff
     public function __construct(
         array $scopeTokens,
         array $tokens,
-        $listenOutside=false
+        $listenOutside = false
     ) {
         if (empty($scopeTokens) === true) {
             $error = 'The scope tokens list cannot be empty';
@@ -93,7 +94,6 @@ abstract class AbstractScopeSniff implements Sniff
         $this->listenOutside = $listenOutside;
         $this->scopeTokens   = array_flip($scopeTokens);
         $this->tokens        = $tokens;
-
     }//end __construct()
 
 
@@ -110,7 +110,6 @@ abstract class AbstractScopeSniff implements Sniff
     final public function register()
     {
         return $this->tokens;
-
     }//end register()
 
 
@@ -149,7 +148,6 @@ abstract class AbstractScopeSniff implements Sniff
         }
 
         return;
-
     }//end process()
 
 
@@ -186,6 +184,4 @@ abstract class AbstractScopeSniff implements Sniff
      *                  the rest of the file.
      */
     abstract protected function processTokenOutsideScope(File $phpcsFile, $stackPtr);
-
-
 }//end class

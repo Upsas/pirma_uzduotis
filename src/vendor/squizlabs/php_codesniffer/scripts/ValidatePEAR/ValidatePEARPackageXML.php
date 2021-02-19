@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Validate the PHP_CodeSniffer PEAR package.xml file.
  *
@@ -71,12 +72,11 @@ class ValidatePEARPackageXML
      */
     public function __construct()
     {
-        $this->projectRoot = dirname(dirname(__DIR__)).'/';
-        $this->packageXML  = simplexml_load_file($this->projectRoot.'package.xml');
+        $this->projectRoot = dirname(dirname(__DIR__)) . '/';
+        $this->packageXML  = simplexml_load_file($this->projectRoot . 'package.xml');
 
         $allFiles       = (new FileList($this->projectRoot, $this->projectRoot))->getList();
         $this->allFiles = array_flip($allFiles);
-
     }//end __construct()
 
 
@@ -97,7 +97,6 @@ class ValidatePEARPackageXML
         }
 
         exit($exitCode);
-
     }//end validate()
 
 
@@ -108,8 +107,8 @@ class ValidatePEARPackageXML
      */
     protected function checkContents()
     {
-        echo PHP_EOL.'Checking Contents tag'.PHP_EOL;
-        echo '====================='.PHP_EOL;
+        echo PHP_EOL . 'Checking Contents tag' . PHP_EOL;
+        echo '=====================' . PHP_EOL;
 
         $valid = true;
 
@@ -121,7 +120,7 @@ class ValidatePEARPackageXML
 
         $valid = $this->walkDirTag($this->packageXML->contents);
         if ($valid === true) {
-            echo "Existing listings in the Contents tag are valid.".PHP_EOL;
+            echo "Existing listings in the Contents tag are valid." . PHP_EOL;
         }
 
         /*
@@ -129,12 +128,12 @@ class ValidatePEARPackageXML
          */
 
         $srcFiles   = (new FileList(
-            $this->projectRoot.'src/',
+            $this->projectRoot . 'src/',
             $this->projectRoot,
             '`\.(css|fixed|inc|js|php|xml)$`Di'
         ))->getList();
         $testsFiles = (new FileList(
-            $this->projectRoot.'tests/',
+            $this->projectRoot . 'tests/',
             $this->projectRoot,
             '`\.(css|inc|js|php|xml)$`Di'
         ))->getList();
@@ -145,16 +144,15 @@ class ValidatePEARPackageXML
                 continue;
             }
 
-            echo "- File '{$file}' is missing from Contents tag.".PHP_EOL;
+            echo "- File '{$file}' is missing from Contents tag." . PHP_EOL;
             $valid = false;
         }
 
         if ($valid === true) {
-            echo "No missing files in the Contents tag.".PHP_EOL;
+            echo "No missing files in the Contents tag." . PHP_EOL;
         }
 
         return $valid;
-
     }//end checkContents()
 
 
@@ -167,12 +165,12 @@ class ValidatePEARPackageXML
      *
      * @return bool
      */
-    protected function walkDirTag($tag, $currentDirectory='')
+    protected function walkDirTag($tag, $currentDirectory = '')
     {
         $valid = true;
         $name  = (string) $tag['name'];
         if ($name !== '/' && empty($name) === false) {
-            $currentDirectory .= $name.'/';
+            $currentDirectory .= $name . '/';
         }
 
         $children = $tag->children();
@@ -191,7 +189,6 @@ class ValidatePEARPackageXML
         }
 
         return $valid;
-
     }//end walkDirTag()
 
 
@@ -204,58 +201,59 @@ class ValidatePEARPackageXML
      *
      * @return bool
      */
-    protected function checkFileTag($tag, $currentDirectory='')
+    protected function checkFileTag($tag, $currentDirectory = '')
     {
         $valid          = true;
         $attributes     = $tag->attributes();
         $baseinstalldir = (string) $attributes['baseinstalldir'];
-        $name           = $currentDirectory.(string) $attributes['name'];
+        $name           = $currentDirectory . (string) $attributes['name'];
         $role           = (string) $attributes['role'];
 
         $this->listedContents[$name] = true;
 
         if (empty($name) === true) {
-            echo "- Name attribute missing.".PHP_EOL;
+            echo "- Name attribute missing." . PHP_EOL;
             $valid = false;
         } else {
             if (isset($this->allFiles[$name]) === false) {
-                echo "- File '{$name}' does not exist.".PHP_EOL;
+                echo "- File '{$name}' does not exist." . PHP_EOL;
                 $valid = false;
             }
 
             if (empty($role) === true) {
-                echo "- Role attribute missing for file '{$name}'.".PHP_EOL;
+                echo "- Role attribute missing for file '{$name}'." . PHP_EOL;
                 $valid = false;
             } else {
                 if (isset($this->validRoles[$role]) === false) {
-                    echo "- Role for file '{$name}' is invalid.".PHP_EOL;
+                    echo "- Role for file '{$name}' is invalid." . PHP_EOL;
                     $valid = false;
                 } else {
                     // Limited validation of the "role" tags.
                     if (strpos($name, 'Test.') !== false && $role !== 'test') {
-                        echo "- Test files should have the role 'test'. Found: '$role' for file '{$name}'.".PHP_EOL;
+                        echo "- Test files should have the role 'test'. Found: '$role' for file '{$name}'." . PHP_EOL;
                         $valid = false;
-                    } else if ((strpos($name, 'Standard.xml') !== false || strpos($name, 'Sniff.php') !== false)
+                    } elseif (
+                        (strpos($name, 'Standard.xml') !== false || strpos($name, 'Sniff.php') !== false)
                         && $role !== 'php'
                     ) {
-                        echo "- Sniff files, including sniff documentation files should have the role 'php'. Found: '$role' for file '{$name}'.".PHP_EOL;
+                        echo "- Sniff files, including sniff documentation files should have the role 'php'. Found: '$role' for file '{$name}'." . PHP_EOL;
                         $valid = false;
                     }
                 }
 
                 if (empty($baseinstalldir) === true) {
                     if ($role !== 'script' && strpos($name, 'tests/') !== 0) {
-                        echo "- Baseinstalldir attribute missing for file '{$name}'.".PHP_EOL;
+                        echo "- Baseinstalldir attribute missing for file '{$name}'." . PHP_EOL;
                         $valid = false;
                     }
                 } else {
                     if ($role === 'script' ||  strpos($name, 'tests/') === 0) {
-                        echo "- Baseinstalldir for file '{$name}' should be empty.".PHP_EOL;
+                        echo "- Baseinstalldir for file '{$name}' should be empty." . PHP_EOL;
                         $valid = false;
                     }
 
                     if ($role !== 'script' && $baseinstalldir !== 'PHP/CodeSniffer') {
-                        echo "- Baseinstalldir for file '{$name}' is invalid.".PHP_EOL;
+                        echo "- Baseinstalldir for file '{$name}' is invalid." . PHP_EOL;
                         $valid = false;
                     }
                 }
@@ -263,7 +261,6 @@ class ValidatePEARPackageXML
         }//end if
 
         return $valid;
-
     }//end checkFileTag()
 
 
@@ -274,8 +271,8 @@ class ValidatePEARPackageXML
      */
     protected function checkPHPRelease()
     {
-        echo PHP_EOL.'Checking PHPRelease tags'.PHP_EOL;
-        echo '========================'.PHP_EOL;
+        echo PHP_EOL . 'Checking PHPRelease tags' . PHP_EOL;
+        echo '========================' . PHP_EOL;
 
         $valid       = true;
         $listedFiles = [];
@@ -299,7 +296,7 @@ class ValidatePEARPackageXML
                 }
 
                 if (isset($this->allFiles[$name]) === false) {
-                    echo "- File '{$name}' does not exist.".PHP_EOL;
+                    echo "- File '{$name}' does not exist." . PHP_EOL;
                     $valid = false;
                 }
 
@@ -309,20 +306,22 @@ class ValidatePEARPackageXML
                 }
 
                 // Check validity of the tags for files in the tests root directory.
-                if (preg_match('`^tests/([^/]+\.php)$`', $name, $matches) === 1
+                if (
+                    preg_match('`^tests/([^/]+\.php)$`', $name, $matches) === 1
                     && ($as === $name || $as === $matches[1])
                 ) {
                     continue;
                 }
 
                 // Check validity of the tags for files in the tests root subdirectories.
-                if (preg_match('`^tests/.+\.(php|inc|js|css|xml)$`', $name) === 1
+                if (
+                    preg_match('`^tests/.+\.(php|inc|js|css|xml)$`', $name) === 1
                     && $as === str_replace('tests/', 'CodeSniffer/', $name)
                 ) {
                     continue;
                 }
 
-                echo "- Invalid 'as' attribute '{$as}' for test file '{$name}'.".PHP_EOL;
+                echo "- Invalid 'as' attribute '{$as}' for test file '{$name}'." . PHP_EOL;
                 $valid = false;
             }//end foreach
 
@@ -330,14 +329,14 @@ class ValidatePEARPackageXML
         }//end foreach
 
         if ($valid === true) {
-            echo "Existing PHPRelease tags are valid.".PHP_EOL;
+            echo "Existing PHPRelease tags are valid." . PHP_EOL;
         }
 
         /*
          * Verify that all files in the `tests` directory are listed in both `<phprelease>` tags.
          */
 
-        $testFiles = (new FileList($this->projectRoot.'tests/', $this->projectRoot, '`\.(inc|php|js|css|xml)$`Di'))->getList();
+        $testFiles = (new FileList($this->projectRoot . 'tests/', $this->projectRoot, '`\.(inc|php|js|css|xml)$`Di'))->getList();
 
         foreach ($testFiles as $file) {
             foreach ($listedFiles as $key => $listed) {
@@ -345,18 +344,15 @@ class ValidatePEARPackageXML
                     continue;
                 }
 
-                echo "- File '{$file}' is missing from PHPRelease tag [{$key}] .".PHP_EOL;
+                echo "- File '{$file}' is missing from PHPRelease tag [{$key}] ." . PHP_EOL;
                 $valid = false;
             }
         }
 
         if ($valid === true) {
-            echo "No missing PHPRelease tags.".PHP_EOL;
+            echo "No missing PHPRelease tags." . PHP_EOL;
         }
 
         return $valid;
-
     }//end checkPHPRelease()
-
-
 }//end class

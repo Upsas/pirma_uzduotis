@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App;
 
@@ -16,7 +17,7 @@ class Router
      * @return void
      */
 
-    public function routes():void
+    public function routes(): void
     {
         switch ($_SERVER['REQUEST_URI'][-1] === '/') {
             case ($_SERVER['REQUEST_METHOD'] === 'GET'):

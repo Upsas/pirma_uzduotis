@@ -61,7 +61,7 @@ class WordsRepository extends DatabaseConnection
      * @return void
      */
 
-    public function deleteWordsFromDb():void
+    public function deleteWordsFromDb(): void
     {
         $this->queryBuilder
         ->from('words')

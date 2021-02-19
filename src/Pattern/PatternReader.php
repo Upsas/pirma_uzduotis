@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace App\Pattern;
 
@@ -22,13 +23,9 @@ class PatternReader
      * @return string[]
      */
 
-    protected function checkIfFileExists(string $file): array
+    public function checkIfFileExists(string $file): array
     {
-        if (file_exists($file)) {
-            return file($file);
-        } else {
-            return file($this->file);
-        }
+        return file_exists($file) ? file($file) : file($this->file);
     }
 
     /**
@@ -38,9 +35,7 @@ class PatternReader
     
     public function getPatterns(string $file): array
     {
-        $patterns = [];
-        $patternStrings = $this->checkIfFileExists($file);
-        foreach ($patternStrings as $patternString) {
+        foreach ($this->checkIfFileExists($file) as $patternString) {
             $patterns[] = new Pattern($patternString);
         }
         return $patterns;

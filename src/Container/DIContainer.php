@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Container;
 
@@ -31,25 +31,25 @@ class DIContainer implements ContainerInterface
         $this->id = $id . 'Class';
         switch ($this->id) {
             case 'AppClass':
-            return $this->getClass();
+                return $this->getClass();
         }
     }
 
-    public function RouterClass():object
+    public function RouterClass(): object
     {
         return new Router();
     }
-    public function ApiClass():object
+    public function ApiClass(): object
     {
         return new Api($this->routerClass());
     }
 
-    public function AppClass():object
+    public function AppClass(): object
     {
         return new App($this->routerClass());
     }
 
-    public function getClass():object
+    public function getClass(): object
     {
         if (method_exists($this, $this->id)) {
             $method = $this->id;

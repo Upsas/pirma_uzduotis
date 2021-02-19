@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\InputOutput;
 
 use App\Database\DatabaseConnection;
@@ -9,7 +11,7 @@ use App\Log\Log;
 class Output extends DatabaseConnection
 {
     private log $logger;
-    public ?string $word;
+    public string $word;
 
     /**
      * @param  string $word
