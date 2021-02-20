@@ -36,6 +36,6 @@ class Pattern
 
     public function stripNumbers(string $pattern): string
     {
-        return preg_replace('/[0-9]+/', '', $pattern);
+        return  preg_replace('/[0-9]+/', '', $pattern);
     }
 }

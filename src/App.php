@@ -99,7 +99,7 @@ class App
 
     public function output(): void
     {
-        $output = new Output($this->hyphanteWord(), $this->log);
+        $output = new Output($this->log);
         $output->outputResult($this->hyphanteWord());
     }
     

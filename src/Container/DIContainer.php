@@ -30,21 +30,21 @@ class DIContainer implements ContainerInterface
     {
         $this->id = $id . 'Class';
         switch ($this->id) {
-            case 'AppClass':
+            case 'appClass':
                 return $this->getClass();
         }
     }
 
-    public function RouterClass(): object
+    public function routerClass(): object
     {
         return new Router();
     }
-    public function ApiClass(): object
+    public function apiClass(): object
     {
         return new Api($this->routerClass());
     }
 
-    public function AppClass(): object
+    public function appClass(): object
     {
         return new App($this->routerClass());
     }

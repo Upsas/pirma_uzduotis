@@ -81,3 +81,76 @@ info HyphenatedWord: safas-f
 info RunTime: It took 2.30 seconds to run a code block
  
 info Word: mistranslate 
+info Word: ,safsaf 
+info HyphenatedWord: -saf-saf 
+info RunTime: It took 2.24 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,817,931.54 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,817,956.09 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,817,996.15 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,818,004.08 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,818,697.71 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,818,722.94 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,825,026.85 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,825,051.17 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,825,078.86 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,825,097.75 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,825,100.40 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,825,105.51 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,825,139.01 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,825,149.78 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,825,154.77 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,825,180.83 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,825,209.95 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,825,265.20 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,825,285.24 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,825,299.56 seconds to run a code block
+ 
+info Word: maisfasf 
+info Word: askfsaklf 
+info HyphenatedWord: ask-f-saklf 
+info RunTime: It took 1.63 seconds to run a code block
+ 
+info Word: asfkasflasf 
+info HyphenatedWord: as-fkasflasf 
+info RunTime: It took 2.88 seconds to run a code block
+ 

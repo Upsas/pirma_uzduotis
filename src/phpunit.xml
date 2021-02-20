@@ -13,7 +13,7 @@
          verbose="true">
     <testsuites>
         <testsuite name="Tests">
-            <directory suffix=".php">../src</directory>
+            <directory suffix=".php">../src/Tests</directory>
         </testsuite>
     </testsuites>
 
@@ -21,8 +21,9 @@
     <coverage cacheDirectory="./TestCache/code-coverage"
               processUncoveredFiles="false">
         <include>
+            <file >../src/Pattern/PatternReader.php</file>
             <file >../src/Pattern/Pattern.php</file>
-
+            <file >../src/InputOutput/Output.php</file>
         </include>
     </coverage>
 </phpunit>

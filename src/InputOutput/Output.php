@@ -11,16 +11,13 @@ use App\Log\Log;
 class Output extends DatabaseConnection
 {
     private log $logger;
-    public string $word;
 
     /**
-     * @param  string $word
      * @param  Log $logger
      */
 
-    public function __construct(string $word, Log $logger)
+    public function __construct(Log $logger)
     {
-        $this->word = $word;
         $this->logger = $logger;
     }
     /**

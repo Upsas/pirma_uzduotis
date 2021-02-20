@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @coversDefaultClass App\Pattern\PatternReader
  */
-class TestPatternReader extends TestCase
+class PatternReaderTest extends TestCase
 {
         
     /**
@@ -25,7 +25,7 @@ class TestPatternReader extends TestCase
         // Praeina bet nera coverage
         // $stub = $this->createStub(PatternReader::class);
         // $stub->method('checkIfFileExists')->with($file)->willReturn(file($file));
-        // $this->assertSame(file($file), $patternReader->checkIfFileExists($file));
+        // $this->assertSame(file($file), $stub->checkIfFileExists($file));
 
         // praeina su coverage
         $patternReader = new PatternReader();
@@ -33,10 +33,17 @@ class TestPatternReader extends TestCase
     }
     /**
      * @covers ::getPatterns()
-     *
+     * @covers ::checkIfFileExists()
+     * @covers App\Pattern\Pattern::__construct()
      */
-    // Veliau paziureti
-    // public function testGetPatterns()
-    // {
-    // }
+    public function testGetPatterns()
+    {
+        // praeina su coverage
+        $patternReader = new PatternReader();
+        $file = './Assets/test.txt';
+        foreach (file($file) as $patternString) {
+            $patterns[] = new Pattern($patternString);
+        }
+        $this->assertEquals($patternReader->getPatterns($file), $patterns);
+    }
 }
