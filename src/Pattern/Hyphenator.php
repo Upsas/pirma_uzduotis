@@ -21,14 +21,13 @@ class Hyphenator
      * Checks if pattern sub-string mathces word
      *
      * @param string $word
-     * @param string $pattern
+     * @param Pattern $pattern
      * @return int $position
      */
 
-    public function getPositionOfPattern(string $word, string $pattern): int
+    private function getPositionOfPattern(string $word, Pattern $patterns): int
     {
-        $pattern = preg_replace('/[0-9]+/', '', $pattern);
-
+        $pattern = trim($patterns->stripNumbers());
         if (strpos($pattern, ' .') === 0) {
             return intval(strpos($word, trim($pattern)));
         } elseif ((substr($pattern, -1) === '.')) {
@@ -45,36 +44,35 @@ class Hyphenator
      * Get specific patterns using word
      *
      * @param string $word
-     * @return string[]
+     * @return Pattern[]
      */
 
     public function getSelectedPatterns(string $word): array
     {
-        foreach ($this->patterns as $patterns) {
-            $needle = preg_replace('/[0-9\s.]+/', '', $patterns->getPattern());
-            $value = trim($patterns->getPattern());
-
+        foreach ($this->patterns as $pattern) {
+            $needle = preg_replace('/[0-9\s.]+/', '', $pattern->getPattern());
+            $value = trim($pattern->getPattern());
             if (preg_match('/^' . $needle . '/', $word) && preg_match('/^\./', $value)) {
-                $pattern[] = $value;
+                $selectedPatterns[] = $pattern;
             } elseif (preg_match('/' . $needle . '$/', $word) && preg_match('/\.$/', $value)) {
-                $pattern[] = $value;
+                $selectedPatterns[] = $pattern;
             } elseif (preg_match('/' . $needle . '/', $word) && !preg_match('/\./', $value)) {
-                $pattern[] = $value;
+                $selectedPatterns[] = $pattern;
             }
         }
-        return $pattern;
+        return $selectedPatterns;
     }
 
     /**
      * Get array of numbers
      *
      * @param array $numbersArray
-     * @param string $pattern
+     * @param  $pattern
      * @param int $position
      * @return string[]
      */
 
-    public function populateNumbersArray(array $numbersArray, int $position, string $pattern): array
+    private function populateNumbersArray(array $numbersArray, int $position, string $pattern): array
     {
         for ($i = 0; $i < strlen($pattern); $i++) {
             if (is_numeric($pattern[$i])) {
@@ -96,19 +94,18 @@ class Hyphenator
      * Get array [position] => number
      *
      * @param string $word
-     * @param array $patterns
+     * @param Pattern[] $patterns
      * @return string[]
      */
 
-    public function populatePositionWithNumber(string $word, array $patterns): array
+    private function populatePositionWithNumber(string $word, array $patterns): array
     {
         $numbersArray = [];
         if (!empty($patterns)) {
             foreach ($patterns as $pattern) {
                 $position = $this->getPositionOfPattern($word, $pattern);
-
                 if ($position > -1) {
-                    $numbersArray = $this->populateNumbersArray($numbersArray, $position, $pattern);
+                    $numbersArray = $this->populateNumbersArray($numbersArray, $position, $pattern->getPattern());
                 }
             }
         }
@@ -125,10 +122,8 @@ class Hyphenator
      * @return string[]
      */
 
-    public function mergeNumbersWithWord(string $word, array $numbersArray): array
+    private function mergeNumbersWithWord(string $word, array $numbersArray): array
     {
-
-        // $words = explode(' ', $word);
         $newWord = implode(" ", str_split($word, 1));
         $newWord = str_split($newWord);
         for ($i = 0; $i < strlen($word); $i++) {

@@ -13,7 +13,7 @@
          verbose="true">
     <testsuites>
         <testsuite name="Tests">
-            <directory suffix=".php">../src/Tests</directory>
+            <directory suffix=".php">../praktika/Tests</directory>
         </testsuite>
     </testsuites>
 
@@ -21,10 +21,10 @@
     <coverage cacheDirectory="./TestCache/code-coverage"
               processUncoveredFiles="false">
         <include>
-            <file >../src/Pattern/PatternReader.php</file>
-            <file >../src/Pattern/Hyphenator.php</file>
-            <file >../src/Pattern/Pattern.php</file>
-            <file >../src/InputOutput/Output.php</file>
+            <file >../praktika/src/Pattern/PatternReader.php</file>
+            <file >../praktika/src/Pattern/Hyphenator.php</file>
+            <file >../praktika/src/Pattern/Pattern.php</file>
+            <file >../praktika/src/InputOutput/Output.php</file>
         </include>
     </coverage>
 </phpunit>

@@ -16,20 +16,11 @@ class PatternTest extends TestCase
     {
         $this->patternClass = new Pattern('string');
     }
-        
-    /**
-     * @covers ::getPattern()
-     * @covers ::__construct()
-     */
-
-    public function testGetPattern(): void
-    {
-        $this->assertEquals('string', $this->patternClass->getPattern());
-    }
 
     /**
      * @covers ::stripNumbers()
      * @covers ::__construct()
+     * @covers ::getPattern()
      */
     
     public function testStripNumbers()

@@ -169,3 +169,88 @@ info RunTime: It took 1,613,980,173.18 seconds to run a code block
 info HyphenatedWord: string 
 info RunTime: It took 1,613,980,626.38 seconds to run a code block
  
+info Word: misafasf 
+info HyphenatedWord: misafas-f 
+info RunTime: It took 3.89 seconds to run a code block
+ 
+info Word: asfasf 
+info Word: asfasfas 
+info Word: afsaf 
+info Word: asfsaf 
+info Word: asfasf 
+info Word: masifsafasf 
+info HyphenatedWord: masif-safas-f 
+info RunTime: It took 2.45 seconds to run a code block
+ 
+info Word: asfasf 
+info Word: asfasf 
+info Word: safasf 
+info Word: asfasf 
+info Word: asfasf 
+info Word: asfasf 
+info Word: asfasf 
+info Word: afasf 
+info HyphenatedWord: afas-f 
+info RunTime: It took 1.60 seconds to run a code block
+ 
+info Word: asfasf 
+info Word: asfasf 
+info Word: asfas 
+info HyphenatedWord: as-fas 
+info RunTime: It took 1.25 seconds to run a code block
+ 
+info Word: asfasfd 
+info HyphenatedWord: as-fasfd 
+info RunTime: It took 2.15 seconds to run a code block
+ 
+info Word: asfasf 
+info Word: afas 
+info HyphenatedWord: afas 
+info RunTime: It took 1.78 seconds to run a code block
+ 
+info Word: asfasf 
+info Word: asfasf 
+info Word: safasf 
+info Word: asdasf 
+info HyphenatedWord: as-das-f 
+info RunTime: It took 1.27 seconds to run a code block
+ 
+info Word: asfas 
+info Word: asfasf 
+info Word: mistranslate 
+info Word: fasfas 
+info HyphenatedWord: fas-fas 
+info RunTime: It took 3.52 seconds to run a code block
+ 
+info Word: asfasfasf 
+info HyphenatedWord: as-fasfasf 
+info RunTime: It took 2.30 seconds to run a code block
+ 
+info Word: safasf 
+info Word: safasf 
+info Word: fasfas 
+info Word: asfasf 
+info Word: asfasf 
+info Word: asfas 
+info Word: safasf 
+info Word: safasf 
+info Word: asfasf 
+info Word: asfas 
+info Word: fasfasf 
+info Word: asfasfas 
+info HyphenatedWord: as-fasfas 
+info RunTime: It took 2.69 seconds to run a code block
+ 
+info Word: safasf 
+info Word: asfasfasf 
+info Word: asfasf 
+info Word: safasf 
+info Word: mistransaltae 
+info HyphenatedWord: mis-transaltae 
+info RunTime: It took 5.22 seconds to run a code block
+ 
+info Word: asfasfasf 
+info Word: asfasfasff 
+info HyphenatedWord: as-fasfasf-f 
+info RunTime: It took 3.88 seconds to run a code block
+ 

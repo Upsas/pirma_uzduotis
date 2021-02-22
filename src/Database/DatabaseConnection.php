@@ -14,10 +14,10 @@ class DatabaseConnection
     private string $dbName = 'visma_praktika';
     
     /**
-     * @return object
+     * @return PDO $pdo
      */
 
-    protected function connect(): object
+    protected function connect(): PDO
     {
         // Setting dsn
         $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbName;

@@ -124,8 +124,11 @@ class App
         if ($this->source === 'db') {
             $patterns = $this->patternsRepository->getPatternsFromDb();
             $hyphenator = $this->patternFactory->createHyphenatorClass($patterns);
-            $patt = $hyphenator->getSelectedPatterns($this->word);
-            echo implode(' ', $patt) . PHP_EOL;
+            $selectedPatterns = $hyphenator->getSelectedPatterns($this->word);
+            foreach ($selectedPatterns as $pattern) {
+                $selectedPattern[] = trim($pattern->getPattern());
+            }
+            echo implode(' ', $selectedPattern) . PHP_EOL;
         }
     }
     
@@ -187,8 +190,8 @@ class App
         $patterns = $hyphenator->getSelectedPatterns($word);
 
         foreach ($patterns as $pattern) {
-            ($patternId = $this->patternsRepository->getPatternId($pattern));
-            ($wordId = $this->wordsRepository->getWordId($word));
+            $patternId = $this->patternsRepository->getPatternId($pattern->getPattern());
+            $wordId = $this->wordsRepository->getWordId($word);
             $this->relationsRepository->addRelationToDb($wordId, $patternId);
         }
     }

@@ -16,11 +16,11 @@ class PatternReaderTest extends TestCase
     protected function setUp(): void
     {
         $this->patternReaderClass = new PatternReader();
-        $this->file = './Assets/test.txt';
+        $this->file = './src/Assets/test.txt';
     }
     /**
      * @covers ::checkIfFileExists()
-     *
+     * @covers ::__construct
      */
     public function testIfFileExists()
     {
@@ -30,6 +30,7 @@ class PatternReaderTest extends TestCase
     }
     /**
      * @covers ::getPatterns()
+     * @covers ::__construct
      * @covers ::checkIfFileExists()
      * @covers App\Pattern\Pattern::__construct()
      */

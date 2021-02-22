@@ -21,8 +21,6 @@ class OutputTest extends TestCase
 
     public function testOutputResult(): void
     {
-  
-        // praeina su 100% coverage
         $mock = $this->createMock(Log::class);
         $output = new Output($mock);
         $this->expectOutputString($output->outputResult('string') . "string\n");

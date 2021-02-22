@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace App\Pattern;
 
+use App\Factories\PatternFactory;
 use App\Pattern\Pattern;
 
 class PatternReader
 {
+    private PatternFactory $patternFactory;
     /**
      * Local file with all patterns
      *
      * @var string $file
      */
 
-    protected string $file = "./Assets/tex-hyphenation-patterns.txt";
+    private string $file = "./src/Assets/tex-hyphenation-patterns.txt";
 
     /**
      * Checks if file exists
@@ -22,6 +24,11 @@ class PatternReader
      * @param string $this->file
      * @return string[]
      */
+
+    public function __construct()
+    {
+        $this->patternFactory = new PatternFactory();
+    }
 
     public function checkIfFileExists(string $file): array
     {
@@ -36,7 +43,7 @@ class PatternReader
     public function getPatterns(string $file): array
     {
         foreach ($this->checkIfFileExists($file) as $patternString) {
-            $patterns[] = new Pattern($patternString);
+            $patterns[] = $this->patternFactory->createPatternClass($patternString);
         }
         return $patterns;
     }

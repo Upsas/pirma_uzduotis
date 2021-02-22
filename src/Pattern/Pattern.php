@@ -34,8 +34,8 @@ class Pattern
      * @return string $pattern
      */
 
-    public function stripNumbers(string $pattern): string
+    public function stripNumbers(): string
     {
-        return  preg_replace('/[0-9]+/', '', $pattern);
+        return  preg_replace('/[0-9]+/', '', $this->getPattern());
     }
 }

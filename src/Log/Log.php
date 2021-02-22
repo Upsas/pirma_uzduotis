@@ -147,7 +147,7 @@ class Log implements LoggerInterface
      */
     public function log($level, $message, array $context = array())
     {
-        $file = new SplFileObject('./Log/log.txt', 'a+');
+        $file = new SplFileObject('./src/Log/log.txt', 'a+');
         $string = "%s %s \n";
         $file->fwrite(sprintf($string, $level, $this->interpolate($message, $context)));
     }
