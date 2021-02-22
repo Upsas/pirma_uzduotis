@@ -13,23 +13,20 @@ use PHPUnit\Framework\TestCase;
  */
 class PatternReaderTest extends TestCase
 {
-        
+    protected function setUp(): void
+    {
+        $this->patternReaderClass = new PatternReader();
+        $this->file = './Assets/test.txt';
+    }
     /**
      * @covers ::checkIfFileExists()
      *
      */
     public function testIfFileExists()
     {
-        $file = './Assets/test.txt';
-
-        // Praeina bet nera coverage
-        // $stub = $this->createStub(PatternReader::class);
-        // $stub->method('checkIfFileExists')->with($file)->willReturn(file($file));
-        // $this->assertSame(file($file), $stub->checkIfFileExists($file));
-
-        // praeina su coverage
-        $patternReader = new PatternReader();
-        $this->assertSame(file($file), $patternReader->checkIfFileExists($file));
+        $file = file($this->file);
+        $checkIfFileExists = $this->patternReaderClass->checkIfFileExists($this->file);
+        $this->assertSame($file, $checkIfFileExists);
     }
     /**
      * @covers ::getPatterns()
@@ -38,12 +35,10 @@ class PatternReaderTest extends TestCase
      */
     public function testGetPatterns()
     {
-        // praeina su coverage
-        $patternReader = new PatternReader();
-        $file = './Assets/test.txt';
-        foreach (file($file) as $patternString) {
+        foreach (file($this->file) as $patternString) {
             $patterns[] = new Pattern($patternString);
         }
-        $this->assertEquals($patternReader->getPatterns($file), $patterns);
+        $patternsFromFile = $this->patternReaderClass->getPatterns($this->file);
+        $this->assertEquals($patternsFromFile, $patterns);
     }
 }

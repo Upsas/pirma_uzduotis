@@ -22,6 +22,7 @@
               processUncoveredFiles="false">
         <include>
             <file >../src/Pattern/PatternReader.php</file>
+            <file >../src/Pattern/Hyphenator.php</file>
             <file >../src/Pattern/Pattern.php</file>
             <file >../src/InputOutput/Output.php</file>
         </include>

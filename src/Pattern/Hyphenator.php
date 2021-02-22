@@ -25,7 +25,7 @@ class Hyphenator
      * @return int $position
      */
 
-    private function getPositionOfPattern(string $word, string $pattern): int
+    public function getPositionOfPattern(string $word, string $pattern): int
     {
         $pattern = preg_replace('/[0-9]+/', '', $pattern);
 

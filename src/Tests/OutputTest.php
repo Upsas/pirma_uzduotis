@@ -21,14 +21,10 @@ class OutputTest extends TestCase
 
     public function testOutputResult(): void
     {
-        // $mock = $this->createMock(Output::class);
-        // $mock->expects($this->any())
-        //          ->method('outputResult')
-        //          ->with(('string'));
-        // $this->expectOutputString($mock->outputResult('string') . "string\n");
-
+  
         // praeina su 100% coverage
-        $output = new Output(new log());
+        $mock = $this->createMock(Log::class);
+        $output = new Output($mock);
         $this->expectOutputString($output->outputResult('string') . "string\n");
     }
 }

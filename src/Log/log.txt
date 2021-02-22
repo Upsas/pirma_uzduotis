@@ -154,3 +154,18 @@ info Word: asfkasflasf
 info HyphenatedWord: as-fkasflasf 
 info RunTime: It took 2.88 seconds to run a code block
  
+info HyphenatedWord: string 
+info RunTime: It took 1,613,979,765.84 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,979,789.46 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,979,858.16 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,980,173.18 seconds to run a code block
+ 
+info HyphenatedWord: string 
+info RunTime: It took 1,613,980,626.38 seconds to run a code block
+ 
