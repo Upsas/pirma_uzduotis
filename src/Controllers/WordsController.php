@@ -39,9 +39,9 @@ class WordsController
      * @return void
      */
 
-    public function insertDataToDb(): void
+    public function insertDataToDb($word): void
     {
-        if (!empty($word = $_POST['word'])) {
+        if (!empty($word)) {
             if (empty($this->wordsRepository->checkForDuplicates($word))) {
                 $this->wordsRepository->addWords($word, $this->hyphenator->hyphenate($word));
                 $this->addRelationsToDb($word);
@@ -57,17 +57,14 @@ class WordsController
      * @return void
      */
 
-    public function editData(): void
+    public function editData($oldWord, $newWord): void
     {
-        parse_str(file_get_contents("php://input"), $data);
-        $word = $data['word'];
-        $newWord = $data['newWord'];
-        $duplicate = $this->wordsRepository->checkForDuplicates($word);
+        $duplicate = $this->wordsRepository->checkForDuplicates($oldWord);
         $newWordDuplicate = $this->wordsRepository->checkForDuplicates($newWord);
-        if (isset($duplicate) && !empty($word) && !empty($newWord) && empty($newWordDuplicate)) {
+        if (isset($duplicate) && !empty($oldWord) && !empty($newWord) && empty($newWordDuplicate)) {
             $newHyphenatedWord = $this->hyphenator->hyphenate($newWord);
-            $id = $this->wordsRepository->getWordId($word);
-            $this->deleteRelationFromDb($word);
+            $id = $this->wordsRepository->getWordId($oldWord);
+            $this->deleteRelationFromDb($oldWord);
             $this->wordsRepository->updateWord($newWord, $newHyphenatedWord, $id);
             $this->addRelationsToDb($newWord);
         } else {
@@ -79,10 +76,10 @@ class WordsController
      * @return void
      */
 
-    public function deleteWordFromDb(): void
+    public function deleteWordFromDb($word): void
     {
-        parse_str(file_get_contents("php://input"), $data);
-        $word = $data['word'];
+        // parse_str(file_get_contents("php://input"), $data);
+        // $word = $data['word'];
         if (!empty($this->wordsRepository->checkForDuplicates($word))) {
             $id = $this->wordsRepository->getWordId($word);
             $this->wordsRepository->deleteWord($id);

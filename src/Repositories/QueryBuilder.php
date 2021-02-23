@@ -48,6 +48,17 @@ class QueryBuilder extends DatabaseConnection
         $this->like = $like;
         return $this;
     }
+
+    public function limitStart(int $start): QueryBuilder
+    {
+        $this->limitStart = $start;
+        return $this;
+    }
+    public function limitEnd(int $end): QueryBuilder
+    {
+        $this->limitEnd = $end;
+        return $this;
+    }
     
     /**
      * "INSERT INTO $this->from ($values) VALUES ($this->setValues)";
@@ -146,7 +157,25 @@ class QueryBuilder extends DatabaseConnection
     
     public function all(): array
     {
-        $sql = "SELECT * FROM $this->from";
+        if (empty($this->where)) {
+            $sql = "SELECT * FROM $this->from";
+        } else {
+            $whereValue = $this->where[0];
+            $whereEqualsTo = $this->where[1];
+            $sql = "SELECT * FROM $this->from WHERE $whereValue =  '$whereEqualsTo'";
+        }
+        return $this->connect()->query($sql)->fetchAll(PDO::FETCH_CLASS);
+    }
+    
+    /**
+     * SELECT * FROM $this->from  LIMIT $this->limitStart, $this->limitEnd
+     *
+     * @return array
+     */
+    
+    public function getLimitedData(): array
+    {
+        $sql = "SELECT * FROM $this->from  LIMIT $this->limitStart, $this->limitEnd";
         return $this->connect()->query($sql)->fetchAll(PDO::FETCH_CLASS);
     }
 }

@@ -47,7 +47,7 @@ class Hyphenator
      * @return Pattern[]
      */
 
-    public function getSelectedPatterns(string $word): array
+    public function getSelectedPatterns(string $word): ?array
     {
         foreach ($this->patterns as $pattern) {
             $needle = preg_replace('/[0-9\s.]+/', '', $pattern->getPattern());

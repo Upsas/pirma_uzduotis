@@ -52,7 +52,7 @@ class App
             }
 
             $this->displayPatterns();
-            $this->addWordToDb();
+            $this->addWordToDb($this->word);
 
         // $this->addWordsFromFileToDb();
         } else {
@@ -170,11 +170,11 @@ class App
      * @return void
      */
 
-    public function addWordToDb(): void
+    public function addWordToDb(string $word): void
     {
-        if (empty($this->wordsRepository->checkForDuplicates($this->word))) {
-            $this->wordsRepository->addWords($this->word, $this->hyphanteWord());
-            $this->addRelationsToDb($this->word);
+        if (empty($this->wordsRepository->checkForDuplicates($word))) {
+            $this->wordsRepository->addWords($word, $this->hyphanteWord());
+            $this->addRelationsToDb($word);
         }
     }
     
@@ -190,7 +190,7 @@ class App
         $patterns = $hyphenator->getSelectedPatterns($word);
 
         foreach ($patterns as $pattern) {
-            $patternId = $this->patternsRepository->getPatternId($pattern->getPattern());
+            $patternId = $this->patternsRepository->getPatternId($pattern);
             $wordId = $this->wordsRepository->getWordId($word);
             $this->relationsRepository->addRelationToDb($wordId, $patternId);
         }

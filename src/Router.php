@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Controllers\IndexController;
 use App\Controllers\WordsController;
 
 class Router
@@ -11,6 +12,7 @@ class Router
     public function __construct()
     {
         $this->controller = new WordsController();
+        $this->indexController = new IndexController();
     }
         
     /**
@@ -19,22 +21,51 @@ class Router
 
     public function routes(): void
     {
-        switch ($_SERVER['REQUEST_URI'][-1] === '/') {
+        // pakeisti veliau url
+        switch ($_SERVER['REQUEST_URI'] === '/praktika/src/main.php') {
             case ($_SERVER['REQUEST_METHOD'] === 'GET'):
                 $this->controller->getAllHyphenatedWords();
                 break;
             case ($_SERVER['REQUEST_METHOD'] === 'POST'):
-                $this->controller->insertDataToDb();
+                $this->controller->insertDataToDb($_POST['word']);
                 break;
             case ($_SERVER['REQUEST_METHOD'] === 'PUT'):
-                $this->controller->editData();
+                parse_str(file_get_contents("php://input"), $data);
+                $oldWord = $data['word'];
+                $newWord = $data['newWord'];
+                $this->controller->editData($oldWord, $newWord);
                 break;
             case ($_SERVER['REQUEST_METHOD'] === 'DELETE'):
-                $this->controller->deleteWordFromDb();
+                parse_str(file_get_contents("php://input"), $data);
+                $this->controller->deleteWordFromDb($data['word']);
                 break;
             default:
                 header('HTTP/1.1 405 Method Not Allowed');
                 header('Allow: GET, PUT, POST, DELETE');
+        }
+    }
+
+    public function indexRoutes(): void
+    {
+        switch ($_SERVER['REQUEST_URI'][-1] === '/') {
+            case (isset($_POST['delete'])):
+                $this->indexController->deleteWord($_POST['id']);
+                break;
+            case (isset($_POST['addWord'])):
+                    $this->indexController->addWord($_POST['word']);
+                break;
+            case (isset($_POST['editWord'])):
+                $this->indexController->updateWord(
+                    $_POST['oldWord'],
+                    $_POST['word']
+                );
+                break;
+                case (isset($_POST['searchWord'])):
+                $this->indexController->searchWord($_POST['word']);
+                break;
+            default:
+            header('HTTP/1.1 405 Method Not Allowed');
+            header('Allow: GET, PUT, POST, DELETE');
         }
     }
 }

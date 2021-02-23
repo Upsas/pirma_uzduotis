@@ -54,17 +54,17 @@ class PatternsRepository extends DatabaseConnection
     }
     
     /**
-     * @param  string $pattern
+     * @param  pattern $pattern
      * @return int $id
      */
 
-    public function getPatternId(string $pattern): int
+    public function getPatternId(pattern $pattern): int
     {
         $id = $this->queryBuilder
         ->select('id')
         ->from('patterns')
         ->where(['pattern'])
-        ->like($pattern)
+        ->like($pattern->getPattern())
         ->getLike();
         return intval($id);
     }

@@ -50,6 +50,8 @@ class HyphenatorTest extends TestCase
     * @covers App\Pattern\Pattern::getPattern
     * @covers App\Pattern\PatternReader::checkIfFileExists
     * @covers App\Pattern\PatternReader::getPatterns
+    * @covers App\Pattern\Pattern::stripNumbers
+    * @covers App\Pattern\PatternReader::__construct
     */
        
     public function testHyphenate()

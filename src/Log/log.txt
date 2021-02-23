@@ -254,3 +254,68 @@ info Word: asfasfasff
 info HyphenatedWord: as-fasfasf-f 
 info RunTime: It took 3.88 seconds to run a code block
  
+info Word: asfasf 
+info Word: filas 
+info HyphenatedWord: fi-las 
+info RunTime: It took 4.61 seconds to run a code block
+ 
+info Word: mistranslate 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 7.03 seconds to run a code block
+ 
+info Word: vigorous 
+info HyphenatedWord: vig-or-ous 
+info RunTime: It took 8.54 seconds to run a code block
+ 
+info Word: changed 
+info HyphenatedWord: changed 
+info RunTime: It took 2.28 seconds to run a code block
+ 
+info Word: pitch 
+info HyphenatedWord: pitch 
+info RunTime: It took 3.03 seconds to run a code block
+ 
+info Word: walk 
+info Word: walk 
+info Word: walk 
+info Word: walk 
+info Word: walk 
+info Word: walk 
+info Word: walk 
+info Word: db 
+info HyphenatedWord: d-b 
+info RunTime: It took 1.81 seconds to run a code block
+ 
+info Word: walk 
+info Word: db 
+info Word: walk 
+info Word: walks 
+info HyphenatedWord: walk-s 
+info RunTime: It took 3.25 seconds to run a code block
+ 
+info Word: walk 
+info Word: waslfk 
+info HyphenatedWord: waslfk 
+info RunTime: It took 3.12 seconds to run a code block
+ 
+info Word: walk 
+info Word: walk 
+info Word: walk 
+info Word: safas 
+info HyphenatedWord: safas 
+info RunTime: It took 3.03 seconds to run a code block
+ 
+info Word: walk 
+info Word: walk 
+info Word: safasf 
+info Word: asfasf 
+info HyphenatedWord: as-fasf 
+info RunTime: It took 1.32 seconds to run a code block
+ 
+info Word: asfasf 
+info Word: walk 
+info Word: walking 
+info HyphenatedWord: walk-ing 
+info RunTime: It took 3.11 seconds to run a code block
+ 
+info Word: walk 

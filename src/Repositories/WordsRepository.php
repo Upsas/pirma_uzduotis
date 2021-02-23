@@ -18,7 +18,7 @@ class WordsRepository extends DatabaseConnection
      * @return string|null
      */
 
-    public function checkForDuplicates(string $word): ?string
+    public function checkForDuplicates(?string $word): ?string
     {
         $word = $this->queryBuilder
         ->select('word')
@@ -139,5 +139,42 @@ class WordsRepository extends DatabaseConnection
         ->set('`word` = ?, `hyphenated_word` = ?')
         ->where(['id', $id])
         ->update([$newWord, $newHyphenatedWord]);
+    }
+    
+    /**
+     * get all data from words table
+     *
+     * @return array
+     */
+    public function getAllDataFromWordsDb(): array
+    {
+        $words = $this->queryBuilder
+        ->from('words')
+        ->all();
+        return $words;
+    }
+    
+    /**
+     * getWordDataFromDb
+     *
+     * @param  string $word
+     * @return array
+     */
+    public function getWordDataFromDb(string $word): array
+    {
+        $words = $this->queryBuilder
+        ->from('words')
+        ->where(['word', $word])
+        ->all();
+        return $words;
+    }
+    public function getLimitedDataFromDb(int $start, int $end): array
+    {
+        $words = $this->queryBuilder
+        ->from('words')
+        ->limitStart($start)
+        ->limitEnd($end)->getLimitedData();
+        
+        return $words;
     }
 }

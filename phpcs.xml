@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="pcsg-generated-ruleset" xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
     <description>Created with the PHP Coding Standard Generator. http://edorian.github.com/php-coding-standard-generator/</description>
-    <file>../src</file>
+    <file>../praktika/src</file>
     <rule ref="Generic.ControlStructures.InlineControlStructure"/>
     <rule ref="Generic.Files.LineLength">
         <properties>
