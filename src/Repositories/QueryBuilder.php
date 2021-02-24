@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Database\DatabaseConnection;
 use PDO;
+use PDOStatement;
 
 class QueryBuilder extends DatabaseConnection
 {
@@ -15,45 +16,93 @@ class QueryBuilder extends DatabaseConnection
     private string $set;
     private string $setValues;
     private string $like;
-
+    
+    /**
+     * select
+     *
+     * @param  string $select
+     * @return QueryBuilder
+     */
     public function select(string $select): QueryBuilder
     {
         $this->select = $select;
         return $this;
     }
+    /**
+     * from
+     *
+     * @param  string $from
+     * @return QueryBuilder
+     */
     public function from(string $from): QueryBuilder
     {
         $this->from = $from;
         return $this;
     }
+    /**
+     * where WHERE $this->where[0] = $this->where[1]
+     *
+     * @param  array $where
+     * @return QueryBuilder
+     */
     public function where(array $where): QueryBuilder
     {
         $this->where = $where;
         return $this;
     }
+    /**
+     * values
+     *
+     * @param  string $values
+     * @return QueryBuilder
+     */
     public function values(string $values): QueryBuilder
     {
-        $this->setValues = $values;
+        $this->values = $values;
         return $this;
     }
-
+    
+    /**
+     * set
+     *
+     * @param  string $set
+     * @return QueryBuilder
+     */
     public function set(string $set): QueryBuilder
     {
         $this->set = $set;
         return $this;
     }
-
+    
+    /**
+     * like
+     *
+     * @param  string $like
+     * @return QueryBuilder
+     */
     public function like(string $like): QueryBuilder
     {
         $this->like = $like;
         return $this;
     }
-
+    
+    /**
+     * limitStart
+     *
+     * @param  int $start
+     * @return QueryBuilder
+     */
     public function limitStart(int $start): QueryBuilder
     {
         $this->limitStart = $start;
         return $this;
     }
+    /**
+     * limitEnd
+     *
+     * @param  int $end
+     * @return QueryBuilder
+     */
     public function limitEnd(int $end): QueryBuilder
     {
         $this->limitEnd = $end;
@@ -61,7 +110,7 @@ class QueryBuilder extends DatabaseConnection
     }
     
     /**
-     * "INSERT INTO $this->from ($values) VALUES ($this->setValues)";
+     * "INSERT INTO $this->from ($values) VALUES ($this->values)";
      *
      * @param  array $values
      * @return void
@@ -69,9 +118,9 @@ class QueryBuilder extends DatabaseConnection
     public function insert(array $values): void
     {
         $value = implode(', ', $this->where);
-        $sql = "INSERT INTO $this->from ($value) VALUES ($this->setValues)";
-        $prepares = $this->connect()->prepare($sql);
-        $prepares->execute($values);
+        $sql = "INSERT INTO $this->from ($value) VALUES ($this->values)";
+        ($prepares = $this->connect()->prepare($sql));
+        ($prepares->execute($values));
     }
     
     /**
@@ -130,6 +179,7 @@ class QueryBuilder extends DatabaseConnection
         } else {
             $whereValue = $this->where[0];
             $whereEqualsTo = $this->where[1];
+
             $sql = "SELECT $this->select FROM $this->from WHERE $whereValue =  '$whereEqualsTo'";
         }
 

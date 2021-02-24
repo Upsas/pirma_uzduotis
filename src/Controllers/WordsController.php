@@ -11,10 +11,10 @@ use App\Repositories\WordsRepository;
 
 class WordsController
 {
-    private object $wordsRepository;
-    private object $patternsRepository;
-    private object $hyphenator;
-    private object $relationsRepository;
+    private WordsRepository $wordsRepository;
+    private PatternsRepository $patternsRepository;
+    private Hyphenator $hyphenator;
+    private RelationsRepository $relationsRepository;
 
     public function __construct()
     {
@@ -34,11 +34,13 @@ class WordsController
         $hyphenatedWords = $this->wordsRepository->getAllHyphenatedWordsFromDb();
         echo json_encode($hyphenatedWords);
     }
-
+    
     /**
+     * insertDataToDb
+     *
+     * @param  string $word
      * @return void
      */
-
     public function insertDataToDb($word): void
     {
         if (!empty($word)) {
@@ -52,12 +54,14 @@ class WordsController
             echo 'Empty data';
         }
     }
-    
     /**
+     * editData
+     *
+     * @param  string $oldWord
+     * @param  string $newWord
      * @return void
      */
-
-    public function editData($oldWord, $newWord): void
+    public function editData(string $oldWord, string $newWord): void
     {
         $duplicate = $this->wordsRepository->checkForDuplicates($oldWord);
         $newWordDuplicate = $this->wordsRepository->checkForDuplicates($newWord);
@@ -73,10 +77,12 @@ class WordsController
     }
     
     /**
+     * deleteWordFromDb
+     *
+     * @param  string $word
      * @return void
      */
-
-    public function deleteWordFromDb($word): void
+    public function deleteWordFromDb(string $word): void
     {
         // parse_str(file_get_contents("php://input"), $data);
         // $word = $data['word'];

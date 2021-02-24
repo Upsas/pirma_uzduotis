@@ -10,7 +10,7 @@ use App\Repositories\QueryBuilder;
 
 class PatternsRepository extends DatabaseConnection
 {
-    private $queryBuilder;
+    private QueryBuilder $queryBuilder;
 
     public function __construct()
     {
@@ -43,14 +43,14 @@ class PatternsRepository extends DatabaseConnection
     
     public function getPatternsFromDb(): array
     {
-        $patterns = $this->queryBuilder
+        $patternsFromDb = $this->queryBuilder
         ->from('patterns')
         ->select('pattern')
         ->get();
-        foreach ($patterns as $pattern) {
-            $patter[] = new Pattern($pattern->pattern);
+        foreach ($patternsFromDb as $patterns) {
+            $pattern[] = new Pattern($patterns->pattern);
         }
-        return $patter;
+        return $pattern;
     }
     
     /**
@@ -67,5 +67,64 @@ class PatternsRepository extends DatabaseConnection
         ->like($pattern->getPattern())
         ->getLike();
         return intval($id);
+    }
+
+    /**
+    * getLimitedDataFromDb
+    *
+    * @param  int $start
+    * @param  int $end
+    * @return array
+    */
+    public function getLimitedDataFromDb(int $start, int $end): array
+    {
+        $patternsFromDb = $this->queryBuilder
+        ->from('patterns')
+        ->limitStart($start)
+        ->limitEnd($end)
+        ->getLimitedData();
+        return $patternsFromDb;
+    }
+    
+    /**
+     * @param  string $pattern
+     * @return void
+     */
+
+    public function addPattern(string $pattern): void
+    {
+        $this->queryBuilder
+        ->from('patterns')
+        ->where(['pattern'])
+        ->values('?')
+        ->insert([$pattern]);
+    }
+    
+    /**
+     * deletePattern
+     *
+     * @param  int $id
+     */
+    public function deletePattern(int $id): void
+    {
+        $this->queryBuilder
+        ->from('patterns')
+        ->where(['id', $id])
+        ->delete();
+    }
+
+    /**
+    * getWordDataFromDb
+    *
+    * @param  int $id
+    * @return array
+    */
+    public function getPatternFromDb(int $id): array
+    {
+        $patterns = $this->queryBuilder
+        ->from('patterns')
+        ->where(['id',$id])
+        ->all();
+        return $patterns;
     }
 }

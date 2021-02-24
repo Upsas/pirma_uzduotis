@@ -319,3 +319,183 @@ info HyphenatedWord: walk-ing
 info RunTime: It took 3.11 seconds to run a code block
  
 info Word: walk 
+info Word: mistranslate 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 3.92 seconds to run a code block
+ 
+info Word: testas 
+info HyphenatedWord: testas 
+info RunTime: It took 3.46 seconds to run a code block
+ 
+info Word: testas 
+info Word: test 
+info HyphenatedWord: test 
+info RunTime: It took 6.58 seconds to run a code block
+ 
+info Word: mistranslate 
+info Word: mistranslat 
+info HyphenatedWord: mis-trans-lat 
+info RunTime: It took 4.63 seconds to run a code block
+ 
+info Word: mistranslate 
+info Word: testas 
+info HyphenatedWord: testas 
+info RunTime: It took 31.98 seconds to run a code block
+ 
+info Word: testas 
+info HyphenatedWord: testas 
+info RunTime: It took 5.36 seconds to run a code block
+ 
+info Word: testas 
+info HyphenatedWord: testas 
+info RunTime: It took 3.99 seconds to run a code block
+ 
+info Word: testauskas 
+info HyphenatedWord: testauskas 
+info RunTime: It took 4.54 seconds to run a code block
+ 
+info Word: testas 
+info Word: $this->addwordsfromfiletodb(); 
+info HyphenatedWord: $this->ad-dwords-from-file-tod-b(); 
+info RunTime: It took 12.47 seconds to run a code block
+ 
+info Word: test 
+info HyphenatedWord: test 
+info RunTime: It took 2.80 seconds to run a code block
+ 
+info Word: asf 
+info HyphenatedWord: as-f 
+info RunTime: It took 3.28 seconds to run a code block
+ 
+info Word: mistranslate 
+info Word: ($patterns = $this->patternreader()); 
+info HyphenatedWord: ($-pat-tern-s=$this->pattern-read-er()); 
+info RunTime: It took 1.14 seconds to run a code block
+ 
+info Word: src/assets/words.txt 
+info HyphenatedWord: s-r-c/as-set-s/-word-s.tx-t 
+info RunTime: It took 6.42 seconds to run a code block
+ 
+info Word: nesvarbu 
+info HyphenatedWord: nes-var-bu 
+info RunTime: It took 5.31 seconds to run a code block
+ 
+info Word: ttestas 
+info HyphenatedWord: ttes-tas 
+info RunTime: It took 3.89 seconds to run a code block
+ 
+info Word: jup 
+info Word: nesvarbu 
+info Word: safasfasf 
+info HyphenatedWord: safas-fasf 
+info RunTime: It took 3.25 seconds to run a code block
+ 
+info Word: yeah 
+info HyphenatedWord: yeah 
+info RunTime: It took 3.30 seconds to run a code block
+ 
+info Word: yeah 
+info Word: tvarka 
+info HyphenatedWord: t-var-ka 
+info RunTime: It took 3.32 seconds to run a code block
+ 
+info Word: tvarkauskas 
+info HyphenatedWord: t-varkauskas 
+info RunTime: It took 4.26 seconds to run a code block
+ 
+info Word: safasfasf 
+info Word: asfasf 
+info HyphenatedWord: as-fasf 
+info RunTime: It took 1.19 seconds to run a code block
+ 
+info Word: luipkas 
+info HyphenatedWord: luip-kas 
+info RunTime: It took 3.85 seconds to run a code block
+ 
+info Word: asfasfasf 
+info HyphenatedWord: as-fasfasf 
+info RunTime: It took 1.91 seconds to run a code block
+ 
+info Word: asfsafasfasfsaf 
+info HyphenatedWord: as-f-safasfasfsaf 
+info RunTime: It took 2.16 seconds to run a code block
+ 
+info Word: asfaqw 
+info HyphenatedWord: as-faqw 
+info RunTime: It took 2.38 seconds to run a code block
+ 
+info Word: safasfsafasf 
+info HyphenatedWord: safas-f-safasf 
+info RunTime: It took 2.98 seconds to run a code block
+ 
+info Word: asfasfsaf 
+info HyphenatedWord: as-fasf-saf 
+info RunTime: It took 1.96 seconds to run a code block
+ 
+info Word: asfqqwrwqr 
+info HyphenatedWord: as-fqqwr-wqr 
+info RunTime: It took 2.17 seconds to run a code block
+ 
+info Word: safasf 
+info HyphenatedWord: safas-f 
+info RunTime: It took 5.27 seconds to run a code block
+ 
+info Word: asfasfsafsaf 
+info HyphenatedWord: as-fasf-safsaf 
+info RunTime: It took 2.25 seconds to run a code block
+ 
+info Word: asfasfqrqw 
+info HyphenatedWord: as-fasfqrqw 
+info RunTime: It took 1.85 seconds to run a code block
+ 
+info Word: asfqwrqwr 
+info HyphenatedWord: as-fqwrqwr 
+info RunTime: It took 1.91 seconds to run a code block
+ 
+info Word: qwrqwrsafzxv 
+info HyphenatedWord: qwrqwr-safzxv 
+info RunTime: It took 1.94 seconds to run a code block
+ 
+info Word: asfzxvasrqw 
+info HyphenatedWord: as-fzx-vas-rqw 
+info RunTime: It took 1.98 seconds to run a code block
+ 
+info Word: safqwrqwrxzb 
+info HyphenatedWord: safqwrqwrxzb 
+info RunTime: It took 2.65 seconds to run a code block
+ 
+info Word: qwrqwrbl 
+info HyphenatedWord: qwrqwr-bl 
+info RunTime: It took 2.29 seconds to run a code block
+ 
+info Word: aqwrwqr 
+info Word: qwrqwrasvdasd 
+info Word: wqrqwr 
+info Word: safasfas 
+info Word: asfasfasf 
+info Word: afsafqwr 
+info Word: qwrqwr 
+info Word: src/assets/words.txt 
+info Word: asfas 
+info Word: src/assets/words.txt 
+info Word: wqerqwrwq 
+info Word: qrqwr 
+info Word: asdfqwrf 
+info Word: qrqwr 
+info Word: db 
+info HyphenatedWord: d-b 
+info RunTime: It took 3.88 seconds to run a code block
+ 
+info Word: tqwrqwr 
+info Word: asfwqr 
+info HyphenatedWord: as-fwqr 
+info RunTime: It took 3.25 seconds to run a code block
+ 
+info Word: red 
+info HyphenatedWord: red 
+info RunTime: It took 9.23 seconds to run a code block
+ 
+info Word: green 
+info HyphenatedWord: green 
+info RunTime: It took 4.74 seconds to run a code block
+ 

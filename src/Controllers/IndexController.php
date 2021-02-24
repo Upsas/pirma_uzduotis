@@ -1,69 +1,109 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers;
 
-use App\App;
 use App\Repositories\WordsRepository;
 use App\Controllers\WordsController;
-use App\Router;
 
 class IndexController
 {
+    private int $resultsPerPage;
+    private WordsRepository $wordsRepository;
+    private WordsController $wordsController;
     public function __construct()
     {
+        $this->resultsPerPage = 2;
         $this->wordsRepository = new WordsRepository();
         $this->wordsController = new WordsController();
     }
-
-    public function getAllData()
+    
+    /**
+     * getAllData
+     *
+     * @return Pattern[]
+     */
+    public function getAllData(): array
     {
         return  $this->wordsRepository->getAllDataFromWordsDb();
     }
-
-    public function deleteWord($word)
+    
+    /**
+     * deleteWord
+     *
+     * @param  string $word
+     * @return void
+     */
+    public function deleteWord(string $word): void
     {
         $this->wordsController->deleteWordFromDb($word);
-        // $id = (intval(trim($_POST['id'])));
-        // $this->wordsRepository->deleteWord($id);
         header('location: /praktika/src/Views/');
     }
-
-    public function addWord($word)
+    
+    /**
+     * addWord
+     *
+     * @param  string $word
+     * @return void
+     */
+    public function addWord(string $word): void
     {
-        // $routers = new Router();
-        // $app = new App($routers);
-        // $app->addWordToDb($_POST['word']);
         $this->wordsController->insertDataToDb($word);
         header('location: /praktika/src/Views/');
     }
-
-    public function updateWord($oldWord, $newWord)
+    
+    /**
+     * updateWord
+     *
+     * @param  string $oldWord
+     * @param  string $newWord
+     * @return void
+     */
+    public function updateWord(string $oldWord, string $newWord): void
     {
         $this->wordsController->editData($oldWord, $newWord);
         header('location: /praktika/src/Views/');
     }
-
-    public function searchWord($word)
+    
+    /**
+     * searchWord
+     *
+     * @param  string $word
+     * @return Pattern[]
+     */
+    public function searchWord(string $word): array
     {
-        $this->wordsRepository->getWordDataFromDb($word);
+        return $this->wordsRepository->getWordDataFromDb($word);
     }
-
-    public function pagination()
+    
+    /**
+     * numberOfPages
+     *
+     * @param  int|null $page
+     * @return array|null
+     */
+    public function numberOfPages(?int $page): array
     {
-        $resultsPerPage = 2;
-        $numberOfPages = ceil(count($this->getAllData()) / $resultsPerPage);
-
-        if (!isset($_GET['page'])) {
-            $page = 1;
-        } else {
-            $page = $_GET['page'];
-        }
-        $thisPageFirstResult = ($page - 1) * $resultsPerPage;
-
-
+        $numberOfPages = ceil(count($this->getAllData()) / $this->resultsPerPage);
         for ($page = 1; $page <= $numberOfPages; $page++) {
-            echo '<a href="index.php?page=' . $page . '">' . $page . '</a>';
+            $pages[] = $page;
         }
-        return  $this->wordsRepository->getLimitedDataFromDb($thisPageFirstResult, $resultsPerPage);
+        return $pages ?? null;
+    }
+    
+    /**
+     * getPaginationData
+     *
+     * @param  int|null $page
+     * @return Pattern[]
+     */
+    public function getPaginationData(?int $page): array
+    {
+        if (!isset($page)) {
+            $page = 1;
+        }
+        $thisPageFirstResult = ($page - 1) * $this->resultsPerPage;
+        return  $this->wordsRepository->getLimitedDataFromDb($thisPageFirstResult, $this->resultsPerPage);
     }
 }

@@ -3,10 +3,11 @@
 namespace App\Repositories;
 
 use App\Repositories\QueryBuilder;
+use App\Database\DatabaseConnection;
 
-class RelationsRepository
+class RelationsRepository extends DatabaseConnection
 {
-    private $queryBuilder;
+    private QueryBuilder $queryBuilder;
 
     public function __construct()
     {
@@ -21,7 +22,8 @@ class RelationsRepository
 
     public function addRelationToDb(int $wordId, int $patternId): void
     {
-        $this->queryBuilder->from('relations')
+        $this->queryBuilder
+        ->from('relations')
         ->where(['word_id', 'pattern_id'])
         ->values('?, ?')
         ->insert([$wordId, $patternId]);
@@ -38,5 +40,42 @@ class RelationsRepository
         ->from('relations')
         ->where(['word_id', $id])
         ->delete();
+    }
+    
+    /**
+     * getRelations
+     *
+     * @return array
+     */
+    public function getRelations(): array
+    {
+        return $this->queryBuilder
+        ->from('relations')
+        ->all();
+    }
+
+    /**
+    * getLimitedDataFromDb
+    *
+    * @param  int $start
+    * @param  int $end
+    * @return array
+    */
+    public function getLimitedDataFromDb(int $start, int $end): array
+    {
+        $relations = $this->queryBuilder
+        ->from('relations')
+        ->limitStart($start)
+        ->limitEnd($end)
+        ->getLimitedData();
+        return $relations;
+    }
+
+    public function getAllRelationsByWordId(int $id): array
+    {
+        return $this->queryBuilder
+        ->from('relations')
+        ->where(['word_id', $id])
+        ->all();
     }
 }

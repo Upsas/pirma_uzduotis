@@ -168,13 +168,30 @@ class WordsRepository extends DatabaseConnection
         ->all();
         return $words;
     }
+    /**
+     * getLimitedDataFromDb
+     *
+     * @param  int $start
+     * @param  int $end
+     * @return array
+     */
     public function getLimitedDataFromDb(int $start, int $end): array
     {
         $words = $this->queryBuilder
         ->from('words')
         ->limitStart($start)
-        ->limitEnd($end)->getLimitedData();
+        ->limitEnd($end)
+        ->getLimitedData();
         
         return $words;
+    }
+
+    public function getWordsById($id)
+    {
+        $word = $this->queryBuilder
+        ->from('words')
+        ->where(['id', $id])
+        ->all();
+        return $word;
     }
 }

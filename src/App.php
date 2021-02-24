@@ -16,11 +16,11 @@ use App\Repositories\RelationsRepository;
 
 class App
 {
-    private object $wordsRepository;
-    private object $patternsRepository;
-    private object $patternFactory;
-    private object $relationsRepository;
-    private object $patternReader;
+    private WordsRepository $wordsRepository;
+    private PatternsRepository $patternsRepository;
+    private PatternFactory $patternFactory;
+    private RelationsRepository $relationsRepository;
+    private PatternReader $patternReader;
     public function __construct(Router $route)
     {
         $this->router = $route;
@@ -36,8 +36,14 @@ class App
     
     public function app(): void
     {
+        // pataisyti veliau source (nereikia dinamiskumo)
         if (php_sapi_name() === 'cli') {
+            $wordsFromFile = trim(strtolower(readline('Enter a word (cli or file): ')));
+            if ($wordsFromFile === 'file') {
+                $this->addWordsFromFileToDb();
+            }
             $this->input();
+
             $this->source = trim(strtolower(readline('Enter a source (db or file): ')));
             $this->patternReader();
 
@@ -50,11 +56,8 @@ class App
             } else {
                 $this->output();
             }
-
             $this->displayPatterns();
             $this->addWordToDb($this->word);
-
-        // $this->addWordsFromFileToDb();
         } else {
             $api = new Api($this->router);
         }
@@ -152,9 +155,10 @@ class App
 
     protected function addWordsFromFileToDb(): void
     {
+        $this->source = 'db';
+
         $url = trim(readline('Enter url: '));
         $words = file($url);
-
         $patterns = $this->patternReader();
         $hyphenator = $this->patternFactory->createHyphenatorClass($patterns);
 
@@ -162,8 +166,15 @@ class App
         foreach ($words as $word) {
             $word = trim($word);
             $this->wordsRepository->addWords($word, $hyphenator->hyphenate($word));
-            $this->addRelationsToDb($word);
+            $selectedPattern = $hyphenator->getSelectedPatterns($word);
+            foreach ($selectedPattern as $pattern) {
+                $patternId = $this->patternsRepository->getPatternId($pattern);
+                $wordId = $this->wordsRepository->getWordId($word);
+                $this->relationsRepository->addRelationToDb($wordId, $patternId);
+            }
         }
+        echo 'Words was succesffuly added' . PHP_EOL;
+        exit;
     }
     
     /**
@@ -187,9 +198,8 @@ class App
     {
         $patterns = $this->patternReader();
         $hyphenator = $this->patternFactory->createHyphenatorClass($patterns);
-        $patterns = $hyphenator->getSelectedPatterns($word);
-
-        foreach ($patterns as $pattern) {
+        $selectedPattern = $hyphenator->getSelectedPatterns($word);
+        foreach ($selectedPattern as $pattern) {
             $patternId = $this->patternsRepository->getPatternId($pattern);
             $wordId = $this->wordsRepository->getWordId($word);
             $this->relationsRepository->addRelationToDb($wordId, $patternId);
