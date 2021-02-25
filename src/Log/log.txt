@@ -499,3 +499,16 @@ info Word: green
 info HyphenatedWord: green 
 info RunTime: It took 4.74 seconds to run a code block
  
+info Word: mistranslate 
+info HyphenatedWord: mis-trans-late 
+info RunTime: It took 6.73 seconds to run a code block
+ 
+info Word: lowkey 
+info HyphenatedWord: lowkey 
+info RunTime: It took 6.60 seconds to run a code block
+ 
+info Word: mistranslate 
+info Word: vigorous 
+info HyphenatedWord: vig-or-ous 
+info RunTime: It took 9.56 seconds to run a code block
+ 

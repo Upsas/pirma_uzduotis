@@ -8,10 +8,11 @@ use PDO;
 
 class DatabaseConnection
 {
-    private string $host = '127.0.0.1';
+    private string $host = 'mysql';
     private string $user = 'root';
-    private string $password = '';
+    private string $password = 'root';
     private string $dbName = 'visma_praktika';
+
     
     /**
      * @return PDO $pdo
