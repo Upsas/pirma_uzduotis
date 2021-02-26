@@ -1,5 +1,4 @@
 version: "3.1"
-
 services:
   php:
     build:
@@ -8,16 +7,15 @@ services:
     ports:
       - 100:80
     volumes:
-      - ../praktika/:/var/www/html/
+      - ../:/var/www/html/
+    links:
+      - db
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
+    volumes:
+      - ./src/data:/docker-entrypoint-initdb.d
     environment:
       MYSQL_ROOT_PASSWORD: root
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
+      MYSQL_DATABASE: visma_praktika

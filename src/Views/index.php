@@ -1,7 +1,6 @@
 <?php
 
 include "../../vendor/autoload.php";
-include '../Controllers/IndexController.php';
 
 use App\Controllers\IndexController;
 use App\Router;
